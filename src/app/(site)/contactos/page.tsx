@@ -7,12 +7,11 @@ export default function ministerio() {
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]">
-           
+
             <Image
                 src={fundo}
                 alt="Fundo Sobre Nós"
-                layout="fill" // Faz com que a imagem ocupe todo o espaço do container
-                objectFit="cover" // Garante que a imagem se ajuste ao container
+                fill className="object-cover"
                 quality={100}
             />
             <div
@@ -28,7 +27,7 @@ export default function ministerio() {
           <div className="col-span-2">
             <ContactUs/>
           </div>
-        </div> 
+        </div>
     </div>
   );
 }

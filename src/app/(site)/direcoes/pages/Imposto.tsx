@@ -4,9 +4,9 @@ import imposto from '@/assets/imposto.png';
 export default function Imposto() {
     return (
         <div>
-            <Image src={imposto} alt="Brasão" width={350} height={150} objectFit="contain" />
+            <Image src={imposto} alt="Brasão" width={350} height={150}  className="object-contain" />
             <br />
-            
+
             <p className="font-light text-justify leading-loose mb-8 text-sm ">
                 A <b>Direcção dos Impostos</b> é o órgão da Administração Central do Estado, hierarquicamente dependente do Ministério do Plano e Finanças, incumbido de proceder à execução da política fiscal e à administração fiscal do Estado.
                     <br /> <br />
@@ -15,7 +15,7 @@ export default function Imposto() {
             <h3 className="text-md font-semibold text-light my-6">A Direcção dos Impostos tem como missão: </h3>
             <p className="font-light text-justify leading-loose mb-8 text-sm pl-5">
                 * Executar a política fiscal do Estado estabelecida pelo Ministério do Plano e Finanças, numa contínua avaliação da sua repercussão na ordem financeira, económica e social;
-                
+
                 <br /> <br /> *Realizar a administração fiscal do Estado, através do controle e acompanhamento da aplicação das leis fiscais, e promover a reintegração ou defesa dos respectivos interesses violados.
             </p>
             <h3 className="text-md font-semibold text-light my-6">Para a realização da sua missão, tem as seguintes atribuições: </h3>
@@ -30,9 +30,8 @@ export default function Imposto() {
             * Estudar e propor medidas fiscais de carácter normativo;<br />
             * Informar sobre os resultados e as circunstâncias ou factos observados na execução das leis;<br />
             * Participar na elaboração do Orçamento Geral do Estado<br />
-            
+
             </p>
         </div>
     );
 }
-        

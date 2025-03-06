@@ -40,7 +40,7 @@ export const HomeCarousel = () => {
   const itemTemplate = (imageData: any) => {
     return (
       <div className="relative w-full h-[500px] md:mt-32">
-        <Image src={imageData.src} alt={imageData.title} layout="fill" objectFit="cover" className="w-full h-full object-cover"/>
+        <Image src={imageData.src} alt={imageData.title} fill className="w-full h-full object-cover"/>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 gradient"></div>
         {/* Text Content */}

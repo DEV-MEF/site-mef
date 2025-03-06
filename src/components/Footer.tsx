@@ -6,10 +6,10 @@ const Footer = () => {
   return (
     <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 py-8">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start">
-        
+
         {/* Seção da Logo e Informações */}
         <div className="flex flex-col mb-8 md:mb-0">
-          <Image src={Logo} alt="Brasão" width={80} height={80} objectFit="contain" />
+          <Image src={Logo} alt="Brasão" width={80} height={80} className="object-contain" />
           <p className="mt-4 leading-8 text-xs font-light">
             Copyright © 2024 Ministério da Economia e Finanças<br />
             Largo das Alfândegas, Água Grande, São Tomé<br />
@@ -17,7 +17,7 @@ const Footer = () => {
             São Tomé e Príncipe<br />
             Todos direitos Reservados
           </p>
-          
+
           {/* Ícones de Redes Sociais */}
           <div className="flex space-x-4 mt-4">
            {/*<a href="#" aria-label="Instagram"><FaInstagram className="text-xl hover:text-gray-400" /></a>
@@ -32,7 +32,7 @@ const Footer = () => {
           <h2 className="text-lg font-semibold">FALE CONNOSCO</h2>
           <p className="mt-2 leading-8 gap-4 text-xs font-light">
             Par qualquer informação ou solicitação dos nossos serviços.<br /> <br />
-            Fale connosco aqui:<br /> 
+            Fale connosco aqui:<br />
             Liga-nos +239 2221083 / 2224172<br />
             Email: mfcea@financas.gov.st
           </p>

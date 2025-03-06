@@ -41,7 +41,7 @@ export function Header(){
         {
             label: 'PUBLICAÇÕES',
             items: [
-                { label: 'Notícia', command: () => router.push("/notice") },
+                { label: 'Notícia', command: () => router.push("/noticias") },
                 { label: 'Comunicado de imprensa', command: () => console.log('Menu item 1 clicked') },
                 { label: 'Anúncios', command: () => console.log('Menu item 1 clicked') },
                 { label: 'Entrevistas', command: () => console.log('Menu item 1 clicked') },

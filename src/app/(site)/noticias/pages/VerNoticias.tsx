@@ -82,19 +82,19 @@ export default function VerNoticias() {
               <a href="#"><li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
                 Comunicado De Imprensa <span className="text-gray-500">(2)</span>
               </li></a>
-              
+
             <a href="#"><li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
                 Anúncios <span className="text-gray-500">(5)</span>
               </li></a>
-              
+
               <a href="#"><li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
                 Entrevistas <span className="text-gray-500">(4)</span>
               </li></a>
               <a href="#"><li className="flex justify-between py-2 efects hover:pl-5">
                 Eventos <span className="text-gray-500">(4)</span>
               </li></a>
-              
-              
+
+
             </ul>
           </div>
 
@@ -107,7 +107,7 @@ export default function VerNoticias() {
                   <Image
                     src={Notices1}
                     alt="Notícia 1"
-                    layout="fill"
+                    fill
                     className="rounded-lg object-cover"
                   />
                 </div>
@@ -125,7 +125,7 @@ export default function VerNoticias() {
                   <Image
                     src={Notices1}
                     alt="Notícia 1"
-                    layout="fill"
+                    fill
                     className="rounded-lg object-cover"
                   />
                 </div>
@@ -143,7 +143,7 @@ export default function VerNoticias() {
                   <Image
                     src={Notices1}
                     alt="Notícia 1"
-                    layout="fill"
+                    fill
                     className="rounded-lg object-cover"
                   />
                 </div>
@@ -157,7 +157,7 @@ export default function VerNoticias() {
                 </div>
               </div>
             </div>
-            
+
           </div>
 
           {/* Card de Tags Populares */}

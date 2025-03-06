@@ -11,8 +11,7 @@ export default function Noticias() {
             <Image
                 src={fundo}
                 alt="Fundo Sobre Nós"
-                layout="fill" // Faz com que a imagem ocupe todo o espaço do container
-                objectFit="cover" // Garante que a imagem se ajuste ao container
+                fill className="object-cover"
                 quality={100}
             />
             <div

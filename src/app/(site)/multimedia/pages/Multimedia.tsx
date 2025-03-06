@@ -5,7 +5,7 @@ export default function Multimedia() {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8">
             <div className="relative w-full h-72 md:h-72 lg:h-80 rounded overflow-hidden shadow-md">
-                <Image src={Notices} alt="Vídeo Principal" layout="fill" objectFit="cover" className="rounded" />
+                <Image src={Notices} alt="Vídeo Principal" fill className="rounded object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center">
                     <button className="bg-white rounded-full shadow-lg hover:bg-gray-100 transition">
                     <svg className="w-16 h-16 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ export default function Multimedia() {
                 </div>
             </div>
             <div className="relative w-full h-72 md:h-72 lg:h-80 rounded overflow-hidden shadow-md">
-                <Image src={Notices} alt="Vídeo Principal" layout="fill" objectFit="cover" className="rounded" />
+                <Image src={Notices} alt="Vídeo Principal" fill className="rounded object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center">
                     <button className="bg-white rounded-full shadow-lg hover:bg-gray-100 transition">
                     <svg className="w-16 h-16 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
