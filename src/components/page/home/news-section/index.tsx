@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Title from "@/components/layout/title";
 
 export default function NewsSection() {
   const newsItems = [
@@ -30,9 +31,7 @@ export default function NewsSection() {
     <section className="w-full container px-4  py-11 md:gap-3 lg:gap-11">
       <div className="flex justify-between py-5 items-center">
         <div className="flex flex-col mb-6 gap-2">
-          <h2 className="font-bold text-[16px] text-primary-blue">
-            ÚLTIMAS NOTÍCIAS
-          </h2>
+          <Title text="ÚLTIMAS NOTÍCIAS" />
           <p className="text-text-second font-light">
             Acompanhe as últimas notícias e fique sempre atualizado com as
             novidades em tempo real!
