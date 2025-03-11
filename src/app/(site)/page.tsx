@@ -3,7 +3,7 @@
 import AboutSection from "@/components/about-section";
 import PartnerLogos from "@/components/LinksArea";
 import MultimediaSection from "@/components/MultimediaArea";
-import NoticeArea from "@/components/NoticeArea";
+import NewsSection from "@/components/news-section";
 import { HeroSection } from "@/components/page/home/hero-section";
 
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
     <main className="w-full flex flex-col items-center justify-center">
       <HeroSection />
       <AboutSection />
+      <NewsSection />
       <div className="md:px-10 sm:px-10 lg:px:20 xl:px-44 px-5">
-        <NoticeArea />
         <MultimediaSection />
         <PartnerLogos />
       </div>
