@@ -6,6 +6,7 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function Header() {
   const router = useRouter();
@@ -98,7 +99,7 @@ export function Header() {
         </span>
       </div>
       <div className="w-full container mx-auto h-24 flex items-center justify-between px-4">
-        <div className="">
+        <Link href="/" className="">
           <Image
             src="/images/ministry-logo.png"
             width={1000}
@@ -106,7 +107,7 @@ export function Header() {
             alt="Logo"
             className="w-20 h-20 md:w-24 md:h-24"
           />
-        </div>
+        </Link>
         <div className="">
           <Menubar
             model={menuItems}
