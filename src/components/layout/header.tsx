@@ -20,6 +20,10 @@ export function Header() {
         { label: "Sobre Nós", command: () => router.push("/AboutUs") },
         { label: "O que fazemos", command: () => router.push("/HowToDo") },
         { label: "Nossa Equipa", command: () => router.push("/OurTeam") },
+        {
+          label: "O Ministro",
+          command: () => router.push("/ministry/minister"),
+        },
       ],
     },
     {
