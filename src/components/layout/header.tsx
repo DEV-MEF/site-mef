@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { Menubar } from "primereact/menubar";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -12,7 +11,7 @@ export function Header() {
   const router = useRouter();
   const menuItems = [
     {
-      label: "HOME",
+      label: "INÍCIO",
       command: () => router.push("/"),
     },
     {
