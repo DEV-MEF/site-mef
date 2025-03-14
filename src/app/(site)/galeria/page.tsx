@@ -2,7 +2,6 @@ import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
 
-import GaleryImages from './pages/GaleryImages';
 import AllGalery from './pages/AllGalery';
 
 export default function Galeria() {

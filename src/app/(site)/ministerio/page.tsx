@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
-import AboutUs from './pages/aboutus';
-import OurTeam from './pages/OurTeam';
 import HowToDo from './pages/HowToDo';
 
 export default function ministerio() {
