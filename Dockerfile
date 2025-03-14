@@ -13,4 +13,4 @@ RUN chmod +x bin/*.sh
 
 # RUN npm run build
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "bin/start.sh" ]

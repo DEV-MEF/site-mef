@@ -1,3 +1,3 @@
 cd $(dirname "$0")/..
 
-next dev
+npm run dev
