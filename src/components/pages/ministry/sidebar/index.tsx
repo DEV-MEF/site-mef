@@ -36,9 +36,9 @@ export default function MinistrySidebar() {
           <li>
             <Link
               href="/ministerio/sobre-nos"
-              //   className="hover:underline font-light"
               className={
-                pathname.includes("/ministerio/sobre-nos")
+                pathname.includes("/ministerio/sobre-nos") ||
+                pathname.includes("/ministerio")
                   ? "hover:underline font-semibold"
                   : "hover:underline font-light"
               }
@@ -49,7 +49,6 @@ export default function MinistrySidebar() {
           <li>
             <Link
               href="/ministerio/o-que-fazemos"
-              //   className="hover:underline font-light"
               className={
                 pathname.includes("/ministerio/o-que-fazemos")
                   ? "hover:underline font-semibold"
@@ -62,7 +61,6 @@ export default function MinistrySidebar() {
           <li>
             <Link
               href="/ministerio/nossa-equipa"
-              //   className="hover:underline font-semibold"
               className={
                 pathname.includes("/ministerio/nossa-equipa")
                   ? "hover:underline font-semibold"
