@@ -1,6 +1,6 @@
 export default function Minister() {
   return (
-    <main>
+    <main className="h-screen">
       <section>
         <h1>O Ministro</h1>
       </section>

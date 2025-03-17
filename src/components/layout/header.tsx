@@ -17,12 +17,21 @@ export function Header() {
     {
       label: "MINISTÉRIO",
       items: [
-        { label: "Sobre Nós", command: () => router.push("/AboutUs") },
-        { label: "O que fazemos", command: () => router.push("/HowToDo") },
-        { label: "Nossa Equipa", command: () => router.push("/OurTeam") },
+        {
+          label: "Sobre Nós",
+          command: () => router.push("/ministerio/sobre-nos"),
+        },
+        {
+          label: "O que fazemos",
+          command: () => router.push("/ministerio/o-que-fazemos"),
+        },
+        {
+          label: "Nossa Equipa",
+          command: () => router.push("/ministerio/nossa-equipa"),
+        },
         {
           label: "O Ministro",
-          command: () => router.push("/ministry/minister"),
+          command: () => router.push("/ministerio/o-ministro"),
         },
       ],
     },

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
 import OurTeam from '../pages/OurTeam';
+import OurteamSection from '@/components/pages/ministry/out-team-section';
 
 export default function ministerio() {
   return (
@@ -27,7 +28,7 @@ export default function ministerio() {
       <div className="grid grid-cols-3 gap-12">
 
         <div className="col-span-2">
-          <OurTeam/>
+          <OurteamSection/>
         </div>
         <div className="col-span-1 flex flex-col space-y-8">
 

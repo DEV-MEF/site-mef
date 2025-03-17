@@ -1,14 +1,16 @@
 import Image from "next/image";
 import fundo from "@/assets/fundoPages.png";
 import "primeicons/primeicons.css";
-import AboutUs from "../pages/AboutUs";
+import AboutUs from "./pages/aboutus";
+import OurTeam from "./pages/OurTeam";
+import HowToDo from "./pages/HowToDo";
 
 export default function ministerio() {
   return (
     <div className="mb-20">
       <div className="relative w-full h-[300px]">
         <Image
-          src={fundo}
+          src="/images/background-pages.png"
           alt="Fundo Sobre Nós"
           fill
           className="object-cover"
@@ -26,7 +28,7 @@ export default function ministerio() {
       <div className="container mx-auto px-44 py-20">
         <div className="grid grid-cols-3 gap-12">
           <div className="col-span-2">
-            <AboutUs />
+            <HowToDo />
           </div>
           <div className="col-span-1 flex flex-col space-y-8">
             <div className="p-8 rounded-lg shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] flex flex-col items-start space-y-4">

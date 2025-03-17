@@ -2,74 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   overflow-x: hidden;
 }
 
 .clip-diagonal {
-    clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
-  }
-.active{
-    color: #3A3B7B;
-    border-bottom: 2.5px solid #3A3B7B;
-    padding: 1rem 0;
+  clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
+}
+.active {
+  color: #3a3b7b;
+  border-bottom: 2.5px solid #3a3b7b;
+  padding: 1rem 0;
 }
 
 /* Menu */
 
-.p-menuitem .p-menuitem-content{
+.p-menuitem .p-menuitem-content {
   font-size: 13px;
   font-weight: bold;
-  color: #252A34;
+  color: #252a34;
 }
-.p-menuitem .p-menuitem-content:hover{
+.p-menuitem .p-menuitem-content:hover {
   background-color: #ffffff;
 }
-.p-focus .p-menuitem-content{
+.p-focus .p-menuitem-content {
   background-color: #ffffff;
   color: red !important;
 }
-.p-submenu-list{
-  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-  transition: all .2s ease;
+.p-submenu-list {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  transition: all 0.2s ease;
   z-index: 99;
   width: 250px;
   transform: translate(0, 10px);
-  transition: opacity 200ms ease-in, transform 200ms ease-in, visibility 200ms ease-in;
+  transition: opacity 200ms ease-in, transform 200ms ease-in,
+    visibility 200ms ease-in;
 }
-.p-submenu-list .p-menuitem-content:hover{
+.p-submenu-list .p-menuitem-content:hover {
   color: red !important;
   padding-left: 1rem;
   content: "-";
-
 }
-.p-submenu-list .p-menuitem-content{
+.p-submenu-list .p-menuitem-content {
   border-bottom: 1px solid transparent;
   border-bottom-color: rgba(0, 0, 0, 0.04);
   transform: transition(0, 10px);
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.p-menubar-root-list{
+.p-menubar-root-list {
   min-width: 10rem;
   left: -7rem;
 }
 
-.efects{
-  transition: all .3s;
+.efects {
+  transition: all 0.3s;
 }
-.menu-hover-efects{
+.menu-hover-efects {
   padding-left: 2rem;
   transform: transition(0, 10px);
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-
-.gradient{
-  background: linear-gradient(30.85deg, #3A3B7B 0%, rgba(52, 54, 67, 0) 80%);
+.gradient {
+  background: linear-gradient(30.85deg, #3a3b7b 0%, rgba(52, 54, 67, 0) 80%);
 }
 
 /* Estilos personalizados para o Carousel */
-.p-carousel-prev, .p-carousel-next{
+.p-carousel-prev,
+.p-carousel-next {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
@@ -80,10 +80,10 @@ body{
   margin-top: 5rem;
 }
 
-.p-carousel-prev{
+.p-carousel-prev {
   left: 3rem;
 }
-.p-carousel-next{
+.p-carousel-next {
   right: 3rem;
 }
 
@@ -97,24 +97,29 @@ body{
 }
 
 .custom-carousel .p-carousel-indicator {
-  width: 30px;  /* Indicador retangular */
+  width: 30px; /* Indicador retangular */
   height: 4px;
   background-color: #cccccc; /* Cor dos indicadores inativos */
   border-radius: 4px;
-  
+
   transition: background-color 0.3s ease, opacity 0.3s ease;
   cursor: pointer; /* Adiciona cursor de ponteiro */
 }
 
 .custom-carousel .p-carousel-indicator-active {
-  background-color: #3A3B7B; /* Cor do indicador ativo */
+  background-color: #3a3b7b; /* Cor do indicador ativo */
   opacity: 1;
 }
 
-
+.banner-page {
+  background-color: red;
+  background: linear-gradient(#3a3b7ba8, #3a3b7b5c), url("../../public/images/background-pages.png") center center /
+  cover no-repeat;;
+}
 
 @media screen and (max-width: 800px) {
-  .p-carousel-prev, .p-carousel-next {
+  .p-carousel-prev,
+  .p-carousel-next {
     display: none;
   }
 }

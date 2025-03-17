@@ -1,14 +1,12 @@
+import OurteamSection from "@/components/pages/ministry/out-team-section";
 import Image from "next/image";
-import fundo from "@/assets/fundoPages.png";
-import "primeicons/primeicons.css";
-import AboutUs from "../pages/AboutUs";
 
-export default function ministerio() {
-  return (
-    <div className="mb-20">
+export default function OurTeam() {
+  <main className="w-full min-h-screen">
+    <section className="w-full h-full container px-4">
       <div className="relative w-full h-[300px]">
         <Image
-          src={fundo}
+          src="/images/background-pages.png"
           alt="Fundo Sobre Nós"
           fill
           className="object-cover"
@@ -18,15 +16,15 @@ export default function ministerio() {
           className="absolute inset-0 bg-[#3A3B7B] opacity-50"
           aria-hidden="true"
         ></div>
-        <div className="absolute inset-0 flex items-center px-44 py-56">
+        <div className="absolute inset-0 flex items-center py-56">
           <h1 className="text-white text-3xl font-bold">SOBRE NÓS</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-44 py-20">
+      <div className=" py-20">
         <div className="grid grid-cols-3 gap-12">
           <div className="col-span-2">
-            <AboutUs />
+            <OurteamSection />
           </div>
           <div className="col-span-1 flex flex-col space-y-8">
             <div className="p-8 rounded-lg shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] flex flex-col items-start space-y-4">
@@ -57,7 +55,7 @@ export default function ministerio() {
               <h4 className="text-lg font-semibold">O Ministério</h4>
               <ul className="text-sm space-y-2">
                 <li>
-                  <a href="#" className="hover:underline font-semibold">
+                  <a href="#" className="hover:underline font-light">
                     » Sobre nós
                   </a>
                 </li>
@@ -67,7 +65,7 @@ export default function ministerio() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline font-light">
+                  <a href="#" className="hover:underline font-semibold">
                     » Nossa Equipa
                   </a>
                 </li>
@@ -76,6 +74,6 @@ export default function ministerio() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </section>
+  </main>;
 }

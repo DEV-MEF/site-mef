@@ -1,6 +1,6 @@
 export default function OurTeam() {
     return (
-        <div>
+        <section>
             <h1 className="text-md font-semibold text-light mb-6">Nossa Equipa</h1>
             <p className="text-light mb-4">Estrutura Orgânica</p>
             <h2 className="text-md font-semibold text-light mb-6">
@@ -51,6 +51,6 @@ export default function OurTeam() {
                 f.	Projecto de Apoio a Gestão Económica (PAGEP)<br />
             </p> <br />
             <p className="font-light text-justify leading-loose text-sm">Todos os projectos de caris financeira ficam sob a alçada do Ministério da Economia e Finanças (MEF).</p>
-        </div>
+        </section>
     );
 }
