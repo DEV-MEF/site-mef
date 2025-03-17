@@ -1,14 +1,7 @@
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
-import Tesouro from './pages/Tesouro';
-import Orcamento from './pages/Orcamento';
-import Patrimonio from './pages/Patrimonio';
-import Alfandega from './pages/Alfandega';
-import Contabilidade from './pages/Contabilidade';
 import DITEI from './pages/DITEI';
-import Planeamento from './pages/Planeamento';
-import Imposto from './pages/Imposto';
 
 export default function ministerio() {
   return (

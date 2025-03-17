@@ -7,8 +7,9 @@ import 'primeicons/primeicons.css';
 import { Galleria } from 'primereact/galleria';
 import Notices from '@/assets/notice.png';
 import Notices1 from '@/assets/notice1.jpg';
+import Image from "next/image";
 
-//type Image = { source: Notices, alt: 'Imagem 1', title: 'Imagem 1' },
+type TImage = { source: string, alt: string, title: string };
 
 const GaleryImages = () => {
   const images = [
@@ -18,16 +19,16 @@ const GaleryImages = () => {
     { source: Notices1, alt: 'Imagem 4', title: 'Imagem 4' },
   ];
 
-  const itemTemplate = (item: any) => (
-    <img
+  const itemTemplate = (item: TImage) => (
+    <Image
       src={item.source}
       alt={item.alt}
       className="w-full h-auto object-cover"
     />
   );
 
-  const thumbnailTemplate = (item : any) => (
-    <img
+  const thumbnailTemplate = (item: TImage) => (
+    <Image
       src={item.source}
       alt={item.alt}
       className="w-20 h-20 object-cover rounded-md"
