@@ -1,5 +1,7 @@
 import Image from "next/image";
 import ContactMap from "../map";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 export default function MainSection() {
   return (
     <section className="w-full flex flex-col gap-28 py-32">
@@ -14,10 +16,10 @@ export default function MainSection() {
           <form className="w-full space-y-6 pt-5 ">
             <div className="w-full flex flex-col lg:flex-row gap-6">
               <div className="w-full">
-                <label className="block text-sm mb-2 text-zinc-700">
+                <Label className="block text-sm mb-2 text-zinc-700">
                   Primeiro Nome
-                </label>
-                <input
+                </Label>
+                <Input
                   type="text"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
                   placeholder="Your"

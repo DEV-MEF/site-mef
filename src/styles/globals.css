@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@import "tailwindcss";
+/*---break---*/
+@plugin "tailwindcss-animate";
+
+@import "primereact/resources/themes/saga-blue/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
 
 body {
   overflow-x: hidden;
@@ -27,7 +32,6 @@ body {
 }
 .p-focus .p-menuitem-content {
   background-color: #ffffff;
-  color: red !important;
 }
 .p-submenu-list {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -39,7 +43,6 @@ body {
     visibility 200ms ease-in;
 }
 .p-submenu-list .p-menuitem-content:hover {
-  color: red !important;
   padding-left: 1rem;
   content: "-";
 }
@@ -113,8 +116,9 @@ body {
 
 .banner-page {
   background-color: red;
-  background: linear-gradient(#3a3b7ba8, #3a3b7b5c), url("../../public/images/background-pages.png") center center /
-  cover no-repeat;;
+  background: linear-gradient(#3a3b7ba8, #3a3b7b5c),
+    url("../../public/images/background-pages.png") center center / cover
+      no-repeat;
 }
 
 @media screen and (max-width: 800px) {
@@ -123,8 +127,6 @@ body {
     display: none;
   }
 }
-
-
 
 @layer base {
   :root {
@@ -179,16 +181,5 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  }
-}
-
-
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

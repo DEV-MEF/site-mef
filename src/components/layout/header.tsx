@@ -1,9 +1,6 @@
 "use client";
 import Image from "next/image";
 import { Menubar } from "primereact/menubar";
-import "primereact/resources/themes/saga-blue/theme.css";
-import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

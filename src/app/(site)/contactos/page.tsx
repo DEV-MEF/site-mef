@@ -1,4 +1,3 @@
-// import "primeicons/primeicons.css";
 import MainSection from "@/components/pages/contacts/main-section";
 import Banner from "@/components/pages/banner";
 
