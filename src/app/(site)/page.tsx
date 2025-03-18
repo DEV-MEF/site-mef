@@ -5,17 +5,16 @@ import PartnerLogos from "@/components/LinksArea";
 import DocumentsSection from "@/components/pages/home/documents-section";
 import NewsSection from "@/components/pages/home/news-section";
 import { HeroSection } from "@/components/pages/home/hero-section";
+import OnlineServicesSection from "@/components/pages/home/online-services-section";
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col items-center justify-center">
+    <main className="w-full min-h-screen flex flex-col items-center justify-center pb-28 gap-10">
       <HeroSection />
       <AboutSection />
       <NewsSection />
       <DocumentsSection />
-      <div className="md:px-10 sm:px-10 lg:px:20 xl:px-44 px-5">
-        <PartnerLogos />
-      </div>
+      <OnlineServicesSection />
     </main>
   );
 }

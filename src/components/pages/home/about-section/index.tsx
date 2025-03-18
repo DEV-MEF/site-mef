@@ -44,9 +44,7 @@ export default function AboutSection() {
           alt="Logo"
           className="w-[10rem] mb-5"
         />
-        <h3 className="text-xl mb-3 text-[16px] font-medium">
-          Rede de Serviços
-        </h3>
+        <h3 className="text-xl mb-3 text-[16px] font-medium">Nossa equipa</h3>
         <p className="text-text-light text-[13px] font-light">
           Conheça a nossa Rede de Serviços Públicos: As Direções e Empresas
           Públicas. Saiba onde estão e o que fazem.
