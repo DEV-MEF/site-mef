@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
-import AllFolders from '../pages/AllFolders';
+import AllFiles from '../pages/AllFiles';
 
 export default function ministerio() {
   return (
@@ -24,7 +24,7 @@ export default function ministerio() {
         </div>
 
         <div className="container mx-auto px-44 py-10">
-          <AllFolders/>
+          <AllFiles/>
         </div>
 
     </div>
