@@ -5,19 +5,13 @@ import Banner from "@/components/pages/banner";
 export default function AboutUs() {
   return (
     <main className="w-full">
-      <section className="w-full">
-        <div className="w-full mb-20">
-          <Banner text_1="Ministério" text_2="Sobre nós" />
-          <div className="container mx-auto px-44 py-20">
-            <div className="grid grid-cols-3 gap-12">
-              <div className="col-span-2">
-                <AboutUsSection />
-              </div>
-              <MinistrySidebar />
-            </div>
-          </div>
+      <div className="w-full mb-20">
+        <Banner text_1="Ministério" text_2="Sobre nós" />
+        <div className="w-full container mx-auto px-4 py-28 flex flex-col lg:flex-row gap-12">
+          <AboutUsSection />
+          <MinistrySidebar />
         </div>
-      </section>
+      </div>
     </main>
   );
 }
