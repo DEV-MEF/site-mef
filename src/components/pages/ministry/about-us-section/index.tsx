@@ -5,7 +5,7 @@ export default function AboutUsSection() {
     <section className="w-full">
       <SectionTitle text="SOBRE NÓS" />
       {/* <h1 className="text-md font-semibold text-light mb-6">SOBRE NÓS</h1> */}
-      <p className="text-light mb-4">Natureza</p>
+      {/* <p className="text-light mb-4">Natureza</p>
       <h2 className="text-md font-semibold text-light mb-6">
         Ministério da Economia e Finanças
       </h2>
@@ -35,7 +35,7 @@ export default function AboutUsSection() {
         Descentralização, Assessoria e Apoio às Autarquias. A estrutura da
         Direção disposta no número 1 deste artigo é definida no respectivo
         Estatuto Orgânico.
-      </p>
+      </p> */}
     </section>
   );
 }
