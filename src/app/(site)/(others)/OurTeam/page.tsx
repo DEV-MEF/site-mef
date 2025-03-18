@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
-import OurTeam from '../pages/OurTeam';
+// import OurTeam from '../pages/OurTeam';
 import OurteamSection from '@/components/pages/ministry/out-team-section';
 
 export default function ministerio() {
