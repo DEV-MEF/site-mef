@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Image from "next/image";
 import Title from "@/components/layout/title";
+import {AxiosHttpClient} from "@/settings/axios";
 
 export default function NewsSection() {
   const newsItems = [
@@ -26,6 +27,12 @@ export default function NewsSection() {
       imageUrl: "/images/news/news-2.png",
     },
   ];
+
+  useEffect(() => {
+    AxiosHttpClient.get("/noticias?populate=*").then((value) => {
+      console.log(value)
+    })
+  }, []);
 
   return (
     <section className="w-full container px-4  py-11 md:gap-3 lg:gap-11">
