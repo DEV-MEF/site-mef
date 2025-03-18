@@ -4,9 +4,9 @@
  * date: 04/04/2024
  * authors: Vicente Borges & Yuri Shikabala
  */
-import Axios from 'axios'
+import axios from "axios"
 
-export const AxiosHttpClient = Axios.create({
+export const AxiosHttpClient = axios.create({
     baseURL: process.env.BASE_SERVER_API
 })
 
