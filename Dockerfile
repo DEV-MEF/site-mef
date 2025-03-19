@@ -1,6 +1,6 @@
 FROM node:20-alpine AS builder
 
-WORKDIR /app
+WORKDIR /opt/app
 EXPOSE 3000
 COPY package.json ./
 RUN yarn install
@@ -12,11 +12,11 @@ RUN npm run build
 
 FROM node:20-alpine AS final
 
-WORKDIR /app
+WORKDIR /opt/app
 
 # Copia somente os arquivos necessários da etapa anterior
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/.next /app/.next
+COPY --from=builder /opt/app/node_modules /opt/app/node_modules
+COPY --from=builder /opt/app/.next /opt/app/.next
 # Copiar o restante dos arquivos necessários
 COPY . .
-CMD ["/bin/sh", "/app/bin/start.sh"]
+CMD ["/bin/sh", "/opt/app/bin/start.sh"]
