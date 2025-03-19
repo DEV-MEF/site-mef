@@ -1,9 +1,24 @@
+"use client"
 import SectionTitle from "@/components/layout/title";
+import ContentRenderer from "@/lib/utils";
+import {useEffect, useState} from "react";
+import {AxiosHttpClient} from "@/settings/axios";
 
 export default function AboutUsSection() {
+    const [aboutUsData, setAboutUsData] = useState([]);
+    useEffect(() => {
+        AxiosHttpClient.get("/sobres?populate=*").then(({data}) => {
+            setAboutUsData(data)
+        })
+    }, []);
   return (
     <section className="w-full">
       <SectionTitle text="SOBRE NÓS" />
+        {
+            aboutUsData.map(({Conteudo, id}) => {
+                return <ContentRenderer key={id} content={Conteudo} type={"markdown"} />
+            })
+        }
       {/* <h1 className="text-md font-semibold text-light mb-6">SOBRE NÓS</h1> */}
       {/* <p className="text-light mb-4">Natureza</p>
       <h2 className="text-md font-semibold text-light mb-6">
