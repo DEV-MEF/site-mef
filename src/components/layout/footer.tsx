@@ -5,7 +5,7 @@ import Logo from "@/assets/brasao1.png";
 const Footer = () => {
   return (
     <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 py-8">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start">
+      <div className="container mx-auto px-4 lg:px-8  flex flex-col md:flex-row justify-between items-start">
         {/* Seção da Logo e Informações */}
         <div className="flex flex-col mb-8 md:mb-0">
           <Image

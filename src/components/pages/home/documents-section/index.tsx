@@ -5,7 +5,7 @@ import Title from "@/components/layout/title";
 export default function DocumentsSection() {
   return (
     <section className="w-full py-6">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:px-8 ">
         <div className="flex items-center justify-between mb-6">
           <Title text="Documentos" />
           <Link

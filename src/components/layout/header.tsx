@@ -107,7 +107,7 @@ export function Header() {
           e Príncipe
         </span>
       </div>
-      <div className="w-full container mx-auto h-24 flex items-center justify-between px-4">
+      <div className="w-full container mx-auto h-24 flex items-center justify-between px-4 lg:px-8 ">
         <Link href="/" className="">
           <Image
             src="/images/ministry-logo.png"
