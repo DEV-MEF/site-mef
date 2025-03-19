@@ -9,7 +9,7 @@ import OnlineServicesSection from "@/components/pages/home/online-services-secti
 
 export default function Home() {
   return (
-    <main className="w-full min-h-screen flex flex-col items-center justify-center pb-28 gap-10">
+    <main className="w-full min-h-screen flex flex-col items-center justify-center pb-28 gap-20">
       <HeroSection />
       <AboutSection />
       <NewsSection />
