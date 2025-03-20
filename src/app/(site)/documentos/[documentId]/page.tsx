@@ -3,7 +3,7 @@ import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
 import AllFiles from '../pages/AllFiles';
 
-export default function ministerio() {
+export default function Documents({ params }: never) {
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]">
@@ -24,7 +24,7 @@ export default function ministerio() {
         </div>
 
         <div className="container mx-auto px-44 py-10">
-          <AllFiles/>
+          <AllFiles params={params}/>
         </div>
 
     </div>

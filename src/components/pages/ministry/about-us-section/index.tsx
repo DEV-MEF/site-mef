@@ -14,12 +14,14 @@ export default function AboutUsSection() {
   return (
     <section className="w-full">
       <SectionTitle text="SOBRE NÓS" />
-        {
-            aboutUsData.map(({Conteudo, id}) => {
-                return <ContentRenderer key={id} content={Conteudo} type={"markdown"} />
-            })
-        }
-      {/* <h1 className="text-md font-semibold text-light mb-6">SOBRE NÓS</h1> */}
+        <div className={"w-full mt-6"}>
+            {
+                aboutUsData.map(({Conteudo, id}) => {
+                    return <ContentRenderer key={id} content={Conteudo} type={"markdown"} />
+                })
+            }
+        </div>
+       {/*<h1 className="text-md font-semibold text-light mb-6">SOBRE NÓS</h1>*/}
       {/* <p className="text-light mb-4">Natureza</p>
       <h2 className="text-md font-semibold text-light mb-6">
         Ministério da Economia e Finanças

@@ -21,9 +21,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({ content, type }) => {
   if (type === "blocks" && Array.isArray(content)) {
     return <BlocksRenderer content={content} />;
   } else if (type === "markdown" && typeof content === "string") {
-    const decodedContent = decodeURIComponent(content);
-    console.log(decodedContent)
-    return <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} rehypePlugins={[rehypeRaw]}>{decodedContent}</ReactMarkdown>;
+    return <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>;
   } else {
     return <></>;
   }

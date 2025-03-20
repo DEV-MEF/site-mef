@@ -1,21 +1,35 @@
-import React from 'react';
+"use client"
+import React, {useEffect, useState} from 'react';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
+import {AxiosHttpClient} from "@/settings/axios";
+import {PdfViewer} from "@/lib/pdf-viewer";
+import {usePdfViewer} from "@/components/contexts/pdf-viewer";
 
-const AllFiles = () => {
-  const folders = [
-    { title: 'GAMAP', documents: 8 },
-    { title: 'GARFIP', documents: 3 },
-    { title: 'COSSIL', documents: 3 },
-    { title: 'UMAP', documents: 3 },
+type File = {
+    url: string,
+    name: string
+}
 
-  ];
+type Doc = {
+    documentId: string
+    name: string,
+    files: File
+}
 
-  const documents = Array(10).fill({
-    title: 'Comunicado',
-    fileName: 'n02_GEPE_MPF_2024.pdf',
-  });
+const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
+    const [files, setFiles] = useState<Doc[]>([]);
+    const {openNewDocument} = usePdfViewer();
+
+    useEffect(() => {
+        (async () => {
+            const {documentId} = await params;
+            AxiosHttpClient.get(`/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`).then(({data}) => {
+                setFiles(data);
+            });
+        })()
+    }, []);
 
   return (
     <div className="container mx-auto">
@@ -39,28 +53,28 @@ const AllFiles = () => {
 
       {/* Grid of Folders */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-        {folders.map((folder, index) => (
+        {/*{files.map((file, index) => (*/}
           <div
-            key={index}
+            key={"index"}
             className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]">
             <i
               className="pi pi-folder text-3xl text-[#5151F8] mb-3"
               style={{ display: 'block' }}
             ></i>
-            <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.title}</p>
+            <p className="text-[#3B4158] text-sm font-semibold mb-2">{"folder.title"}</p>
             <div
               className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
               style={{ fontSize: '12px' }}
             >
-              {folder.documents} Documentos
+              {"folder.documents"} Documentos
             </div>
           </div>
-        ))}
+        {/*))}*/}
       </div>
 
 
       <div className="space-y-4 my-5">
-        {documents.map((doc, index) => (
+        {files.map((doc, index) => (
           <div
             key={index}
             className="flex items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8] w-2/3"
@@ -74,8 +88,8 @@ const AllFiles = () => {
               </div>
               {/* Títulos */}
               <div>
-                <p className="text-[#1E293B] font-semibold">{doc.title}</p>
-                <p className="text-[#64748B] text-sm">{doc.fileName}</p>
+                <p className="text-[#1E293B] font-semibold">{doc.name}</p>
+                <p className="text-[#64748B] text-sm">{doc.files.name}</p>
               </div>
             </div>
 
@@ -84,6 +98,9 @@ const AllFiles = () => {
               <button
                 className="flex items-center justify-center w-10 h-10 border border-[#E2E8F0] rounded-full text-[#64748B]"
                 title="Visualizar"
+                onClick={() => {
+                    openNewDocument({name: doc.name, uri: doc.files.url, id: doc.documentId})
+                }}
               >
                 <i className="pi pi-eye"></i>
               </button>
@@ -103,6 +120,7 @@ const AllFiles = () => {
           </div>
         ))}
       </div>
+        <PdfViewer />
     </div>
   );
 };
