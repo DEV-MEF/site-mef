@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <div className="w-full container px-4 flex flex-col md:flex-row items-center justify-center gap-11 md:gap-3 lg:gap-11 py-20 md:py-16 lg:py-20">
+    <div className="w-full container px-4 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-11 md:gap-3 lg:gap-11 py-20 md:py-16 lg:py-20">
       {/* Card 1 */}
       <div className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
         <Image
