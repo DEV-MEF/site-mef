@@ -7,7 +7,7 @@ import ContentRenderer from "@/lib/utils";
 
 export default function WhatWeDoSection() {
 
-    const [WhatWeDo, setWhatWeDo] = useState([]);
+    const [whatWeDo, setWhatWeDo] = useState([]);
 
     useEffect(() => {
         AxiosHttpClient.get("/missions?populate=*")
@@ -25,7 +25,7 @@ export default function WhatWeDoSection() {
     <section>
 
         {
-            WhatWeDo.map(({content, id}) => {
+            whatWeDo.map(({content, id}) => {
                 return <ContentRenderer key={id} content={content} type={"blocks"} />
             })
         }

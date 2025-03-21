@@ -28,3 +28,5 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({ content, type }) => {
 };
 
 export default ContentRenderer;
+
+export const imageURLServer = "http://217.76.55.123:8091";
