@@ -7,7 +7,7 @@
 import axios from "axios"
 
 export const AxiosHttpClient = axios.create({
-    baseURL: process.env.BASE_SERVER+"/api"
+    baseURL: process.env.WEB_BASE_SERVER+"/api"
 });
 
 AxiosHttpClient.interceptors.request.use(
