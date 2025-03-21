@@ -25,7 +25,7 @@ export const useFolders = () => {
             })
             setUpdateCount(false)
         }
-    }, [folders, updateCount]);
+    }, [folders, updateCount, listCountByDocumentId]);
 
     interface Folders {
         documentId: string

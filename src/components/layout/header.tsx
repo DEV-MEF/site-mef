@@ -31,7 +31,7 @@ export function Header() {
         setDirecoes(direcoesFormatadas);
       }
     });
-  }, []);
+  }, [router]);
 
   const menuItems = [
     {

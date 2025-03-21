@@ -32,7 +32,7 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
                 setFiles(data);
             });
         })()
-    }, []);
+    }, [params]);
 
   return (
     <div className="container mx-auto">

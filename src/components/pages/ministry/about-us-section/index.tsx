@@ -7,7 +7,7 @@ import {AxiosHttpClient} from "@/settings/axios";
 export default function AboutUsSection() {
     const [aboutUsData, setAboutUsData] = useState([]);
     useEffect(() => {
-        AxiosHttpClient.get("/sobres?populate=*").then(({data}) => {
+        AxiosHttpClient.get("/sobres?populate=*").then(({data : {data}}) => {
             setAboutUsData(data)
         })
     }, []);
