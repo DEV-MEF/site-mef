@@ -8,7 +8,7 @@ export default function OurteamSection() {
     const [teamSections, setTeamSections] = useState([]);
 
     useEffect(() => {
-        AxiosHttpClient.get("/teams")
+        AxiosHttpClient.get("/teams?populate=*")
             .then(({data: {data}}) => {
                 if (data) {
                     setTeamSections(data);
@@ -21,13 +21,11 @@ export default function OurteamSection() {
 
     return (
         <section className="w-full">
-
             {
                 teamSections.map(({content, id}) => {
                     return <ContentRenderer key={id} content={content} type={"blocks"} />
                 })
             }
-
         </section>
     );
 }

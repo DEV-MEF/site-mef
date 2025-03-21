@@ -21,7 +21,7 @@ export function Header() {
   const [direcoes, setDirecoes] = useState<Menu[]>([]);
 
   useEffect(() => {
-    AxiosHttpClient.get("/directions").then(({data : {data}}) => {
+    AxiosHttpClient.get("/directions?populate=*").then(({data : {data}}) => {
       if (data) {
         const direcoesFormatadas = (data as Dir[]).map((dir) => ({
           label: dir.name, // Pegando apenas o 'name' do retorno
