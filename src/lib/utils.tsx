@@ -27,6 +27,13 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({ content, type }) => {
   }
 };
 
+export const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString('pt-PT', options);
+  return formattedDate.replace(/de (\w+)/, (_, month) => `${month.charAt(0).toUpperCase() + month.slice(1)}`); // Capitaliza o mês
+}
+
 export default ContentRenderer;
 
-export const imageURLServer = "http://217.76.55.123:8091";
+export const imageURLServer = process.env.WEB_BASE_SERVER;
