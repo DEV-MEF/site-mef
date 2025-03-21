@@ -31,7 +31,7 @@ export default function DocumentsSection() {
       sort: ['createdAt:desc'],
       pagination: {
         start: 0,
-        limit: 3,
+        limit: 4
       },
       populate: "*"
     }, {
@@ -44,8 +44,6 @@ export default function DocumentsSection() {
       });
     })()
   }, []);
-
-  console.log(files)
 
   return (
     <section className="w-full py-6">

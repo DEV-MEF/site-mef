@@ -4,7 +4,6 @@ import axios from "axios";
 export async function GET(request: NextRequest) {
     const fileUrl =  new URL(request.url).searchParams.get("file")?.toString() || "";
     const fileName =  new URL(request.url).searchParams.get("name")?.toString() || "";
-    console.log({fileUrl})
     const response = await axios.get(process.env.BASE_SERVER+fileUrl, {
         responseType: "stream",
     });
