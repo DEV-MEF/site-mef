@@ -53,7 +53,7 @@ export default function DocumentsSection() {
         <div className="flex items-center justify-between mb-6">
           <Title text="Documentos" />
           <Link
-            href="#"
+            href="/documentos"
             className="text-sm hover:underline flex items-center transition-colors text-primary-blue"
           >
             Mais documentos

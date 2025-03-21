@@ -5,11 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "primeicons/primeicons.css";
 import { useEffect, useState } from "react";
-import { AxiosHttpClient } from "@/settings/axios";
+import {useServicos} from "@/components/contexts/servicos";
 
-type Dir = {
-  name?: string
-}
 
 type Menu = {
   name?: string
@@ -18,20 +15,18 @@ type Menu = {
 
 export function Header() {
   const router = useRouter();
-  const [direcoes, setDirecoes] = useState<Menu[]>([]);
+  const [direcoesMenus, setDirecoesMenus] = useState<Menu[]>([]);
+  const {direcoes, setSelectedDirecao} = useServicos();
 
   useEffect(() => {
-    AxiosHttpClient.get("/directions?populate=*").then(({data : {data}}) => {
-      if (data) {
-        const direcoesFormatadas = (data as Dir[]).map((dir) => ({
-          label: dir.name, // Pegando apenas o 'name' do retorno
-          //command: () => router.push(`/direcoes/${dir.id}`),
-          command: () => { router.push(`/direcoes`) },
-        }));
-        setDirecoes(direcoesFormatadas);
-      }
-    });
-  }, [router]);
+    setDirecoesMenus((direcoes).map((dir) => ({
+      label: (dir.name || "").toUpperCase(), // Pegando apenas o 'name' do retorno
+      command: () => {
+        setSelectedDirecao(dir);
+        router.push(`/servicos#${dir.acronym || ""}`);
+      },
+    })));
+  }, [router, direcoes, setSelectedDirecao]);
 
   const menuItems = [
     {
@@ -48,17 +43,13 @@ export function Header() {
       ],
     },
     {
-      label: "DIREÇÕES",
-      items: direcoes.length > 0 ? direcoes : [{ label: "Carregando..." }],
+      label: "SERCIÇOS",
+      items: direcoesMenus.length > 0 ? direcoesMenus : [{ label: "Carregando..." }],
     },
     {
       label: "PUBLICAÇÕES",
       items: [
         { label: "Notícia", command: () => router.push("/noticias") },
-        { label: "Comunicado de imprensa", command: () => console.log("Menu item 1 clicked") },
-        { label: "Anúncios", command: () => console.log("Menu item 1 clicked") },
-        { label: "Entrevistas", command: () => console.log("Menu item 1 clicked") },
-        { label: "Eventos", command: () => console.log("Menu item 1 clicked") },
         { label: "Galeria de imagens", command: () => router.push("/galeria") },
         { label: "Multimédia", command: () => router.push("/multimedia") },
         { label: "Documentos", command: () => router.push("/documentos") },

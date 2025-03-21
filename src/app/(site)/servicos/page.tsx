@@ -1,9 +1,15 @@
+"use client"
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
-import DITEI from './pages/DITEI';
+import {useServicos} from "@/components/contexts/servicos";
+import ContentRenderer from "@/lib/utils";
+import {twMerge} from "tailwind-merge";
 
-export default function ministerio() {
+
+export default function Servicos() {
+    const {direcoes, selectedDirecao, setSelectedDirecao} = useServicos();
+
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]"> {/* Define o tamanho desejado */}
@@ -21,7 +27,7 @@ export default function ministerio() {
             ></div>
             {/* Texto sobre a imagem */}
             <div className="absolute inset-0 flex items-center px-44 py-56">
-                <h1 className="text-white text-3xl font-bold">Direções <small className='font-light'>»  Direcção dos Impostos</small></h1>
+                <h1 className="text-white text-3xl font-bold">Serviços <small className='font-light'>» {selectedDirecao.name || ""}</small></h1>
             </div>
         </div>
 
@@ -29,7 +35,7 @@ export default function ministerio() {
       <div className="grid grid-cols-3 gap-12">
 
         <div className="col-span-2">
-          <DITEI/>
+            {<ContentRenderer content={selectedDirecao?.content || ""} type={"blocks"} />}
         </div>
         <div className="col-span-1 flex flex-col space-y-8">
 
@@ -51,14 +57,21 @@ export default function ministerio() {
             <div className="text-primary text-3xl">
               <i className="pi pi-building" style={{ fontSize: '3rem' }}></i>
             </div>
-            <h4 className="text-lg font-semibold">Direções</h4>
+            <h4 className="text-lg font-semibold">Serviços</h4>
             <ul className="text-sm space-y-2">
-              <li>
-                <a href="#" className="hover:underline font-semibold">
-                 » Direcção de Tesouro
-                </a>
-              </li>
-              <li>
+                {
+                    direcoes?.map((value, index) => <li key={index}>
+                        <a href={`#${value.acronym || ""}`}
+                           className={twMerge("hover:underline font-semibold", value.documentId !== selectedDirecao?.documentId ? "font-light" : "")}
+                           onClick={() => {
+                               setSelectedDirecao(value)
+                           }}
+                        >
+                            » {value.name}
+                        </a>
+                    </li>)
+                }
+              {/*<li>
                 <a href="#" className="hover:underline font-light">
                   » Direcção de Orçamento
                 </a>
@@ -92,7 +105,7 @@ export default function ministerio() {
                 <a href="#" className="hover:underline font-light">
                   » Direcção do Planeamento
                 </a>
-              </li>
+              </li>*/}
             </ul>
           </div>
         </div>

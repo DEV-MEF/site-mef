@@ -143,7 +143,7 @@ export const PdfViewer: React.FC = () => {
                         </div>
                         <iframe
                             id="pdfIframe"
-                            src={urlServer+"/api/docs?file="+(selectedDocument?.uri || '') + '#navpanes=0&scrollbar=0'}
+                            src={urlServer+"/api/docs?file="+(selectedDocument?.uri || '') +"&name="+(selectedDocument?.name || "")+ '#navpanes=0&scrollbar=0'}
                             className="w-full h-full border-none"
                             title={selectedDocument?.name}
                         ></iframe>

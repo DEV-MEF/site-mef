@@ -46,7 +46,7 @@ export default function AboutSection() {
         />
         <h3 className="text-xl mb-3 text-[16px] font-medium">Nossa equipa</h3>
         <p className="text-text-light text-[13px] font-light">
-          Conheça a nossa Rede de Serviços Públicos: As Direções e Empresas
+          Conheça a nossa Rede de Serviços Públicos: As Serviços e Empresas
           Públicas. Saiba onde estão e o que fazem.
         </p>
       </div>

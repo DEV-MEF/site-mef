@@ -7,6 +7,7 @@ import "primeicons/primeicons.css";
 import { Header } from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import {PdfViewerProvider} from "@/components/contexts/pdf-viewer";
+import {ServicosProvider} from "@/components/contexts/servicos";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,11 +28,13 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={poppins.className}>
+      <ServicosProvider>
         <Header />
         <PdfViewerProvider>
           {children}
         </PdfViewerProvider>
         <Footer />
+      </ServicosProvider>
       </body>
     </html>
   );
