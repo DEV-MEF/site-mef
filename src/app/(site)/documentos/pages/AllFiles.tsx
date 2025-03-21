@@ -6,6 +6,7 @@ import 'primeicons/primeicons.css';
 import {AxiosHttpClient} from "@/settings/axios";
 import {PdfViewer} from "@/lib/pdf-viewer";
 import {usePdfViewer} from "@/components/contexts/pdf-viewer";
+import {useFolders} from "@/components/hooks/folders";
 
 type File = {
     url: string,
@@ -19,13 +20,15 @@ type Doc = {
 }
 
 const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
+    const {onClickFolder, folders, listCountByDocumentId} = useFolders();
+
     const [files, setFiles] = useState<Doc[]>([]);
     const {openNewDocument} = usePdfViewer();
 
     useEffect(() => {
         (async () => {
             const {documentId} = await params;
-            AxiosHttpClient.get(`/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`).then(({data}) => {
+            AxiosHttpClient.get(`/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`).then(({data : {data}}) => {
                 setFiles(data);
             });
         })()
@@ -47,29 +50,32 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
       <div className="flex justify-between items-center my-12">
         <h1 className="text-xl font-semibold text-[#3B4158]">REPOSITÓRIO</h1>
         <p className="text-sm text-[#3B4158] flex items-center">
-          <i className="pi pi-inbox mr-2"></i> 24 Resultados
+          <i className="pi pi-inbox mr-2"></i> {files.length} Resultado{files.length === 1 ? "" : "s"}
         </p>
       </div>
 
       {/* Grid of Folders */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-        {/*{files.map((file, index) => (*/}
+        {folders.map((folder, index) => (
           <div
-            key={"index"}
+            key={index}
+            onClick={() => {
+                onClickFolder(folder)
+            }}
             className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]">
             <i
               className="pi pi-folder text-3xl text-[#5151F8] mb-3"
               style={{ display: 'block' }}
             ></i>
-            <p className="text-[#3B4158] text-sm font-semibold mb-2">{"folder.title"}</p>
+            <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.nome}</p>
             <div
               className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
               style={{ fontSize: '12px' }}
             >
-              {"folder.documents"} Documentos
+                {listCountByDocumentId[folder.documentId]} Documentos
             </div>
           </div>
-        {/*))}*/}
+        ))}
       </div>
 
 

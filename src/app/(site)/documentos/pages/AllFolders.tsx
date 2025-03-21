@@ -1,51 +1,14 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
-import {AxiosHttpClient} from "@/settings/axios";
-import {useRouter} from "next/navigation";
+import {useFolders} from "@/components/hooks/folders";
 
-interface Folders {
-    documentId: string
-    nome: string
-}
 
-interface CountFileInFolder {
-    [k: string]: number
-}
 
 const AllFolders = () => {
-    const router = useRouter()
-    const [updateCount, setUpdateCount] = useState<boolean>(true);
-    const [folders, setFolders] = useState<Folders[]>([]);
-    const [listCountByDocumentId, setListCountByDocumentId] = useState<CountFileInFolder>({});
-    useEffect(() => {
-        AxiosHttpClient.get("/docs-categories?populate=*").then(({data}) => {
-            setFolders(data)
-        })
-    }, []);
-
-
-    useEffect(() => {
-        if (updateCount && folders.length > 0) {
-            folders.forEach(({documentId}) => {
-                AxiosHttpClient.get(`/docs?filters[folder][documentId][$eq]=${documentId}`).then(({data}) => {
-                    listCountByDocumentId[documentId] = data.length
-                    setListCountByDocumentId(listCountByDocumentId)
-                    setFolders([...folders])
-                })
-            })
-            setUpdateCount(false)
-        }
-    }, [folders, updateCount]);
-
-    const onClickFolder = ({documentId}: Folders) => {
-        if (listCountByDocumentId[documentId] > 0) {
-            router.push(`/documentos/${documentId}`);
-        }
-    }
-
+    const {onClickFolder, folders, listCountByDocumentId} = useFolders();
   return (
     <div className="container mx-auto">
       {/* Header */}
@@ -62,7 +25,7 @@ const AllFolders = () => {
       <div className="flex justify-between items-center my-12">
         <h1 className="text-xl font-semibold text-[#3B4158]">REPOSITÓRIO</h1>
         <p className="text-sm text-[#3B4158] flex items-center">
-          <i className="pi pi-inbox mr-2"></i> {folders.length} Resultados
+          <i className="pi pi-inbox mr-2"></i> {folders.length} Resultado{folders.length === 1 ? "" : "s"}
         </p>
       </div>
 

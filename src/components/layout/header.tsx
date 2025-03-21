@@ -7,17 +7,26 @@ import "primeicons/primeicons.css";
 import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 
+type Dir = {
+  name?: string
+}
+
+type Menu = {
+  name?: string
+  command: () => void
+}
+
 export function Header() {
   const router = useRouter();
-  const [direcoes, setDirecoes] = useState([]);
+  const [direcoes, setDirecoes] = useState<Menu[]>([]);
 
   useEffect(() => {
-    AxiosHttpClient.get("/directions").then((response) => {
-      if (response?.data) {
-        const direcoesFormatadas = response.data.map((dir) => ({
+    AxiosHttpClient.get("/directions").then(({data : {data}}) => {
+      if (data) {
+        const direcoesFormatadas = (data as Dir[]).map((dir) => ({
           label: dir.name, // Pegando apenas o 'name' do retorno
           //command: () => router.push(`/direcoes/${dir.id}`),
-          command: () => router.push(`/direcoes`),
+          command: () => { router.push(`/direcoes`) },
         }));
         setDirecoes(direcoesFormatadas);
       }

@@ -22,7 +22,11 @@ export const PdfViewerProvider = ({ children }: PdfViewerProvider) => {
         setIsDocumentModalOpen(true)
         setIsDocumentMinimized(false)
 
-        document.id = new Date().getTime()
+        const index = listDocument.findIndex(({id}) => id === document.id);
+        if(index !== -1){
+            setSelectedDocument(listDocument[index])
+            return
+        }
         listDocument.push(document)
         setListDocument(listDocument)
         setSelectedDocument(document)
