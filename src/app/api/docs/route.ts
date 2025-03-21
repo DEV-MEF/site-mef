@@ -7,6 +7,22 @@ export async function GET(request: NextRequest) {
         responseType: "stream",
     });
 
+    const mimeTypes: Record<string, string> = {
+        "pdf": "application/pdf",
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "gif": "image/gif",
+        "txt": "text/plain",
+        "json": "application/json",
+        "csv": "text/csv",
+        "zip": "application/zip",
+        "mp4": "video/mp4"
+    };
+
+    const ext = pdfUrl.split('.').pop()?.toLowerCase() || "";
+    const contentType = mimeTypes[ext] || "application/octet-stream";
+
     const stream = new ReadableStream({
         start(controller) {
             response.data.on("data", (chunk: never) => controller.enqueue(chunk));
@@ -17,7 +33,7 @@ export async function GET(request: NextRequest) {
 
     return new Response(stream, {
         headers: {
-            "Content-Type": "application/pdf",
+            "Content-Type": contentType,
             "Content-Disposition": 'inline; filename="file.pdf"',
         },
     });
