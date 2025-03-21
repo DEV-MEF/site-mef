@@ -23,7 +23,7 @@ export function Header() {
       label: (dir.name || "").toUpperCase(), // Pegando apenas o 'name' do retorno
       command: () => {
         setSelectedDirecao(dir);
-        router.push(`/servicos#${dir.acronym || ""}`);
+        router.push(`/servicos#${(dir.acronym || "").toLowerCase()}`);
       },
     })));
   }, [router, direcoes, setSelectedDirecao]);

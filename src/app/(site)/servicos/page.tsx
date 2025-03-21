@@ -61,7 +61,7 @@ export default function Servicos() {
             <ul className="text-sm space-y-2">
                 {
                     direcoes?.map((value, index) => <li key={index}>
-                        <a href={`#${value.acronym || ""}`}
+                        <a href={`#${(value.acronym || "").toLowerCase()}`}
                            className={twMerge("hover:underline font-semibold", value.documentId !== selectedDirecao?.documentId ? "font-light" : "")}
                            onClick={() => {
                                setSelectedDirecao(value)

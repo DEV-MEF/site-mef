@@ -24,9 +24,8 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
     useEffect(() => {
         const handleHashChange = () => {
             const hash  = window.location.hash.replace("#", "");
-            const index = direcoes.findIndex(({acronym}) => hash === acronym);
+            const index = direcoes.findIndex(({acronym}) => hash.toLowerCase() === acronym?.toString());
 
-            console.log({hash})
             if (hash === ""){
                 setSelectedDirecao(direcoes[0] || {})
                 return
