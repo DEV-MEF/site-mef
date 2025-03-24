@@ -3,7 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /opt/app
 EXPOSE 3000
 COPY package.json ./
-RUN yarn install
+RUN yarn install --no-cache
 # Copiar o código-fonte
 COPY . .
 
@@ -11,6 +11,9 @@ COPY . .
 RUN npm run build
 
 FROM node:20-alpine AS final
+
+RUN apk add --no-cache bash
+
 
 WORKDIR /opt/app
 
