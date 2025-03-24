@@ -42,7 +42,7 @@ export function Header() {
       ],
     },
     {
-      label: "SERCIÇOS",
+      label: "SERVIÇOS",
       items: direcoesMenus.length > 0 ? direcoesMenus : [{ label: "Carregando..." }],
     },
     {
