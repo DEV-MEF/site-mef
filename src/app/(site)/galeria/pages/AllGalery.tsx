@@ -3,6 +3,7 @@ import Image from 'next/image';
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import {imageURLServer} from "@/lib/utils";
+import {useRouter} from "next/navigation";
 
 type ImageType = {
     [k in ("large" | "medium" | "small")]: ImageType
@@ -23,6 +24,7 @@ type TImageApi = {
 };
 
 export default function AllGalery() {
+    const route = useRouter();
     const [colecao, setColecao] = useState<TImageApi[]>();
     useEffect(() => {
         (async () => {
@@ -42,7 +44,9 @@ export default function AllGalery() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
                 {
                     colecao?.map((value, index) => {
-                        return <div key={index} className="relative w-full h-72 md:h-72 lg:h-72 rounded overflow-hidden shadow-md">
+                        return <div key={index} className="relative w-full h-72 md:h-72 lg:h-72 rounded overflow-hidden shadow-md" onClick={() => {
+                            route.push(`/galeria/${value.documentId}`)
+                        }}>
                             <Image src={imageURLServer+(value.cover?.formats?.medium || value.cover).url} alt="Vídeo Principal" fill className="rounded object-cover" />
 
                             <div className="absolute bottom-0 flex flex-col items-start">
