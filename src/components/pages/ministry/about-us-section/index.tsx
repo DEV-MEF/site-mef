@@ -7,7 +7,7 @@ import { AxiosHttpClient } from "@/settings/axios";
 export default function AboutUsSection() {
     const [aboutUsData, setAboutUsData] = useState([]);
     useEffect(() => {
-        AxiosHttpClient.get("/sobres?populate=*").then(({data : {data}}) => {
+        AxiosHttpClient.get("/abouts?populate=*").then(({data : {data}}) => {
             setAboutUsData(data)
         })
     }, []);
@@ -16,8 +16,8 @@ export default function AboutUsSection() {
       <SectionTitle text="SOBRE NÓS" />
         <div className={"w-full mt-6"}>
             {
-                aboutUsData.map(({Conteudo, id}) => {
-                    return <ContentRenderer key={id} content={Conteudo} type={"markdown"} />
+                aboutUsData.map(({content, id}) => {
+                    return <ContentRenderer key={id} content={content} type={"blocks"} />
                 })
             }
         </div>
