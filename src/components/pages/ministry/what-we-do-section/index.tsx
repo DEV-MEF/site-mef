@@ -1,7 +1,36 @@
+"use client";
+
+
+import {useEffect, useState} from "react";
+import {AxiosHttpClient} from "@/settings/axios";
+import ContentRenderer from "@/lib/utils";
+
 export default function WhatWeDoSection() {
+
+    const [whatWeDo, setWhatWeDo] = useState([]);
+
+    useEffect(() => {
+        AxiosHttpClient.get("/missions?populate=*")
+            .then(({data: {data}}) => {
+                if (data) {
+                    setWhatWeDo(data);
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar dados da equipe:", error);
+            });
+    }, []);
+
   return (
     <section>
-      <h1 className="text-md font-semibold text-light mb-6">O QUE FAZEMOS</h1>
+
+        {
+            whatWeDo.map(({content, id}) => {
+                return <ContentRenderer key={id} content={content} type={"blocks"} />
+            })
+        }
+
+      {/*<h1 className="text-md font-semibold text-light mb-6">O QUE FAZEMOS</h1>
       <h2 className="text-md font-semibold text-light mb-6">
         Ministério da Economia e Finanças de São Tomé e Príncipe tem a seguinte
         missão:
@@ -24,7 +53,7 @@ export default function WhatWeDoSection() {
         * Assegurar a relação institucional do Governo com as Câmaras Distritais
         e representar o Estado São-tomense junto das instituições financeiras
         regionais e internacionais.
-      </p>
+      </p>*/}
     </section>
   );
 }

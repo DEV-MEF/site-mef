@@ -1,15 +1,59 @@
 import { FileText, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Title from "@/components/layout/title";
+import {useEffect, useState} from "react";
+import {usePdfViewer} from "@/components/contexts/pdf-viewer";
+import {AxiosHttpClient} from "@/settings/axios";
+import {PdfViewer} from "@/lib/pdf-viewer";
+import moment from "moment";
+import qs from "qs";
+
+type Doc = {
+  documentId: string
+  name: string,
+  content: string,
+  summary: string,
+  files: File
+  publishedAt: string
+}
+
+type File = {
+  url: string,
+  name: string
+}
 
 export default function DocumentsSection() {
+  const [files, setFiles] = useState<Doc[]>([]);
+  const {openNewDocument} = usePdfViewer();
+
+  useEffect(() => {
+    const query = qs.stringify({
+      sort: ['createdAt:desc'],
+      pagination: {
+        start: 0,
+        limit: 4
+      },
+      populate: "*"
+    }, {
+      encodeValuesOnly: true,
+    });
+
+    (async () => {
+      AxiosHttpClient.get(`/docs?${query}`).then(({data : {data}}) => {
+        setFiles(data);
+      });
+    })()
+  }, []);
+
+  console.log({files})
+
   return (
     <section className="w-full py-6">
       <div className="container mx-auto px-4 lg:px-8 ">
         <div className="flex items-center justify-between mb-6">
           <Title text="Documentos" />
           <Link
-            href="#"
+            href="/documentos"
             className="text-sm hover:underline flex items-center transition-colors text-primary-blue"
           >
             Mais documentos
@@ -18,30 +62,32 @@ export default function DocumentsSection() {
         </div>
 
         <div className="grid">
-          <div className="group">
-            <Link
-              href="/documentos/estrategia-agua"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Água que une - Estratégia Nacional para a Gestão da Água
-                    </h3>
-                    <span className="text-xs text-stone-500">09/03/2025</span>
+          {
+            files.map((value, index) => <div key={index} className="group">
+              <div className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
+                   onClick={() => {
+                     openNewDocument({name: value.name, uri: value.files.url, id: value.documentId})
+                   }}
+              >
+                <div className="flex items-start gap-3">
+                  <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
+                        {value.name}
+                      </h3>
+                      <span className="text-xs text-stone-500">{moment(value.publishedAt).format('DD/MM/YYYY')}</span>
+                    </div>
+                    <div className="text-sm  mt-1 line-clamp-1 text-text-second">
+                      {value.summary}
+                    </div>
                   </div>
-                  <p className="text-sm  mt-1 line-clamp-1 text-text-second">
-                    Apresentação da estratégia nacional para gestão de recursos
-                    hídricos.
-                  </p>
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>)
+          }
 
-          <div className="group">
+          {/*<div className="group">
             <Link
               href="/documentos/subsidio-mobilidade"
               className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
@@ -108,9 +154,10 @@ export default function DocumentsSection() {
                 </div>
               </div>
             </Link>
-          </div>
+          </div>*/}
         </div>
       </div>
+      <PdfViewer />
     </section>
   );
 }
