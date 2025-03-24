@@ -1,28 +1,60 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
 import { Galleria } from 'primereact/galleria';
-import Notices from '@/assets/notice.png';
-import Notices1 from '@/assets/notice1.jpg';
 import Image from "next/image";
+import {AxiosHttpClient} from "@/settings/axios";
+import {imageURLServer} from "@/lib/utils";
+
+type ImageType = {
+  [k in ("large" | "medium" | "small")]: ImageType
+} &{
+  name: string
+  documentId: string
+  url: string
+  alternativeText: string
+  formats: ImageType
+}
 
 type TImage = { source: string, alt: string, title: string };
+type TImageApi = {
+  documentId: string,
+  description: string,
+  url: string
+  medias: ImageType[]
+  cover: ImageType
+};
 
-const GaleryImages = () => {
-  const images = [
-    { source: Notices, alt: 'Imagem 1', title: 'Imagem 1' },
-    { source: Notices1, alt: 'Imagem 2', title: 'Imagem 2' },
-    { source: Notices, alt: 'Imagem 3', title: 'Imagem 3' },
-    { source: Notices1, alt: 'Imagem 4', title: 'Imagem 4' },
-  ];
+const GaleryImages = ({params} : {params : Promise<{code: string}>}) => {
+  const [images, setImages] = useState<TImage[]>();
+
+  useEffect(() => {
+    (async () => {
+      const {code} = await params;
+      AxiosHttpClient.get(`/galleries?filters[documentId][$eq]=${code}&populate=*`).then(({data : {data}}) => {
+        const colecao : TImageApi = data[0];
+        console.log(colecao)
+        setImages((colecao?.medias || []).map((value) => {
+          return {
+            title: value.alternativeText,
+            alt: value.alternativeText || value.name,
+            source: imageURLServer+(value?.formats?.medium || value).url
+          }
+        }));
+      });
+    })()
+  }, [params]);
 
   const itemTemplate = (item: TImage) => (
     <Image
       src={item.source}
       alt={item.alt}
+      width={500} // Largura base
+      height={300} // Altura base (ajusta proporcionalmente)
+      layout="intrinsic" // Mantém a proporção da imagem
       className="w-full h-auto object-cover"
     />
   );
@@ -31,6 +63,9 @@ const GaleryImages = () => {
     <Image
       src={item.source}
       alt={item.alt}
+      width={500} // Largura base
+      height={300} // Altura base (ajusta proporcionalmente)
+      layout="intrinsic" // Mantém a proporção da imagem
       className="w-20 h-20 object-cover rounded-md"
     />
   );
@@ -40,7 +75,7 @@ const GaleryImages = () => {
       <h1 className="text-2xl font-semibold text-primary mb-6">Galeria de Imagens</h1>
       <Galleria
         value={images}
-        numVisible={4}
+        numVisible={8}
         circular
         showItemNavigators
         showItemNavigatorsOnHover
