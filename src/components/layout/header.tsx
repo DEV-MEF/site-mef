@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Menubar } from "primereact/menubar";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import "primeicons/primeicons.css";
 import { useEffect, useState } from "react";
 import {useServicos} from "@/components/contexts/servicos";
 
