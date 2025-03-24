@@ -4,7 +4,6 @@ import Title from "@/components/layout/title";
 import {useEffect, useState} from "react";
 import {usePdfViewer} from "@/components/contexts/pdf-viewer";
 import {AxiosHttpClient} from "@/settings/axios";
-import ContentRenderer from "@/lib/utils";
 import {PdfViewer} from "@/lib/pdf-viewer";
 import moment from "moment";
 import qs from "qs";
@@ -12,7 +11,8 @@ import qs from "qs";
 type Doc = {
   documentId: string
   name: string,
-  description: string,
+  content: string,
+  summary: string,
   files: File
   publishedAt: string
 }
@@ -31,7 +31,7 @@ export default function DocumentsSection() {
       sort: ['createdAt:desc'],
       pagination: {
         start: 0,
-        limit: 3,
+        limit: 4
       },
       populate: "*"
     }, {
@@ -45,7 +45,7 @@ export default function DocumentsSection() {
     })()
   }, []);
 
-  console.log(files)
+  console.log({files})
 
   return (
     <section className="w-full py-6">
@@ -53,7 +53,7 @@ export default function DocumentsSection() {
         <div className="flex items-center justify-between mb-6">
           <Title text="Documentos" />
           <Link
-            href="#"
+            href="/documentos"
             className="text-sm hover:underline flex items-center transition-colors text-primary-blue"
           >
             Mais documentos
@@ -79,7 +79,7 @@ export default function DocumentsSection() {
                       <span className="text-xs text-stone-500">{moment(value.publishedAt).format('DD/MM/YYYY')}</span>
                     </div>
                     <div className="text-sm  mt-1 line-clamp-1 text-text-second">
-                      <ContentRenderer content={value.description} type={"blocks"} />
+                      {value.summary}
                     </div>
                   </div>
                 </div>

@@ -113,12 +113,24 @@
 import { useState, useEffect } from "react";
 import { Carousel } from "primereact/carousel";
 import ImagesTemplate from "./images-template";
+import qs from "qs";
+import {AxiosHttpClient} from "@/settings/axios";
+import {imageURLServer} from "@/lib/utils";
 
 // Definição de tipos
-interface ImageItem {
+type ImageItem = {
   src: string;
   title: string;
   subtitle: string;
+  link: string
+}
+
+type Image = {
+  title: string;
+  news: {[k: string] : string};
+  image: {[k: string] : string};
+  link: string;
+  description: string;
 }
 
 interface PageChangeEvent {
@@ -131,24 +143,6 @@ interface ResponsiveOption {
   numScroll: number;
 }
 
-const images: ImageItem[] = [
-  {
-    src: "/images/carroussel/background-1.jpg",
-    title: "Primeiro-Ministro representa São Tomé e Príncipe na...",
-    subtitle:
-      "DELEGAÇÃO DO BAD VISITA STP PARA AVALIAR AS PRIORIDADES E AGENDA DO GOVERNO",
-  },
-  {
-    src: "/images/carroussel/background-1.jpg",
-    title: "Outra manchete interessante sobre São Tomé e Príncipe",
-    subtitle: "Mais informações sobre o evento ou notícia destacada",
-  },
-  {
-    src: "/images/carroussel/background-1.jpg",
-    title: "Representação importante em conferência global",
-    subtitle: "Detalhes sobre a participação e impactos para o país",
-  },
-];
 
 export const HeroSection = () => {
   const responsiveOptions: ResponsiveOption[] = [
@@ -159,6 +153,8 @@ export const HeroSection = () => {
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [autoplayActive, setAutoplayActive] = useState<boolean>(true);
+
+  const [images, setImages] = useState<ImageItem[]>([]);
 
   // Função para lidar com a mudança de página
   const handlePageChange = (event: PageChangeEvent): void => {
@@ -188,7 +184,32 @@ export const HeroSection = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [currentIndex, autoplayActive]);
+  }, [currentIndex, autoplayActive, images]);
+
+  useEffect(() => {
+    const query = qs.stringify({
+      sort: ['createdAt:desc'],
+      pagination: {
+        start: 0,
+        limit: 4
+      },
+      populate: "*"
+    }, {
+      encodeValuesOnly: true,
+    });
+
+    (async () => {
+      AxiosHttpClient.get(`/highlights?${query}`).then(({data : {data}}) => {
+        console.log(data)
+        setImages((data as Image[]).map((image) => ({
+          title: image.title,
+          src: imageURLServer+image.image.url,
+          subtitle: image.description,
+          link: `noticias/${image?.news?.documentId || image?.link || "#"}`
+        })));
+      });
+    })()
+  }, []);
 
   // Controles personalizados para o carousel
   const customHeader = (

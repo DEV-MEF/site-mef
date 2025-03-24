@@ -2,8 +2,9 @@ import {NextRequest} from "next/server";
 import axios from "axios";
 
 export async function GET(request: NextRequest) {
-    const pdfUrl =  new URL(request.url).searchParams.get("file")?.toString() || "";
-    const response = await axios.get(process.env.BASE_SERVER+pdfUrl, {
+    const fileUrl =  new URL(request.url).searchParams.get("file")?.toString() || "";
+    const fileName =  new URL(request.url).searchParams.get("name")?.toString() || "";
+    const response = await axios.get(process.env.BASE_SERVER+fileUrl, {
         responseType: "stream",
     });
 
@@ -20,7 +21,7 @@ export async function GET(request: NextRequest) {
         "mp4": "video/mp4"
     };
 
-    const ext = pdfUrl.split('.').pop()?.toLowerCase() || "";
+    const ext = fileUrl.split('.').pop()?.toLowerCase() || "";
     const contentType = mimeTypes[ext] || "application/octet-stream";
 
     const stream = new ReadableStream({
@@ -34,7 +35,7 @@ export async function GET(request: NextRequest) {
     return new Response(stream, {
         headers: {
             "Content-Type": contentType,
-            "Content-Disposition": 'inline; filename="file.pdf"',
+            "Content-Disposition": `inline; filename="${fileName}.pdf"`,
         },
     });
 }
