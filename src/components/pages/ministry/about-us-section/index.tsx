@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import SectionTitle from "@/components/layout/title";
-import ContentRenderer from "@/lib/utils";
-import {useEffect, useState} from "react";
-import {AxiosHttpClient} from "@/settings/axios";
+import ContentRenderer from "@/lib/react-markdown-renderer";
+import { useEffect, useState } from "react";
+import { AxiosHttpClient } from "@/settings/axios";
 
 export default function AboutUsSection() {
     const [aboutUsData, setAboutUsData] = useState([]);
@@ -12,7 +12,7 @@ export default function AboutUsSection() {
         })
     }, []);
   return (
-    <section className="w-full">
+    <section className="w-full flex flex-col gap-8">
       <SectionTitle text="SOBRE NÓS" />
         <div className={"w-full mt-6"}>
             {
