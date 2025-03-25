@@ -5,6 +5,7 @@ import {
     useContext, useEffect, useState
 } from 'react'
 import {AxiosHttpClient} from "@/settings/axios";
+import qs from "qs";
 
 type Dir = {
     name?: string
@@ -14,11 +15,29 @@ type Dir = {
     webpage?: string
 }
 
+type Ministerio = {
+    name?: string
+    documentId?: string
+    acronym?: string
+    logo?: string
+}
+
+type Contato = {
+    location?: string
+    phone?: string
+    tel?: string
+    mail?: string
+    webpage?: string
+    photos?: string
+}
+
 const ServicosContext = createContext<ServicosContext>({} as ServicosContext)
 
 export const ServicosProvider = ({ children }: ServicosProvider) => {
 
     const [direcoes, setDirecoes] = useState<Dir[]>([]);
+    const [ministerio, setMinisterio] = useState<Ministerio>({});
+    const [contato, setContato] = useState<Contato>({});
     const [selectedDirecao, setSelectedDirecao] = useState<Dir>({});
 
     useEffect(() => {
@@ -47,10 +66,31 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
         };
     }, [direcoes]);
 
+
     useEffect(() => {
         AxiosHttpClient.get("/directions?populate=*").then(({data : {data}}) => {
             setDirecoes(data);
         });
+
+        const query = qs.stringify({
+            sort: ['createdAt:desc'],
+            pagination: {
+                start: 0,
+                limit: 1
+            },
+            populate: "*"
+        }, {
+            encodeValuesOnly: true,
+        });
+
+        AxiosHttpClient.get(`/ministries?${query}`).then(({data : {data}}) => {
+            setMinisterio(data?.[0] || {});
+        });
+
+        AxiosHttpClient.get(`/contacts?${query}`).then(({data : {data}}) => {
+            setContato(data?.[0] || {});
+        });
+
     }, [])
 
     return (
@@ -59,7 +99,9 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
                 direcoes,
                 setDirecoes,
                 selectedDirecao,
-                setSelectedDirecao
+                setSelectedDirecao,
+                ministerio,
+                contato
             }}
         >
             {children}
@@ -74,9 +116,11 @@ interface ServicosProvider {
 }
 
 interface ServicosContext {
-    direcoes: Dir[]
     setDirecoes: Dispatch<SetStateAction<Dir[]>>
     selectedDirecao: Dir,
-    setSelectedDirecao: Dispatch<SetStateAction<Dir>>
+    direcoes: Dir[]
+    setSelectedDirecao: Dispatch<SetStateAction<Dir>>,
+    ministerio: Ministerio,
+    contato: Contato
 }
 

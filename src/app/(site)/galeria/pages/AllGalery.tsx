@@ -29,7 +29,6 @@ export default function AllGalery() {
     useEffect(() => {
         (async () => {
             AxiosHttpClient.get(`/galleries?&populate=*`).then(({data : {data}}) => {
-                console.log({data})
                 setColecao(data);
             });
         })()

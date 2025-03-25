@@ -45,8 +45,6 @@ export default function DocumentsSection() {
     })()
   }, []);
 
-  console.log({files})
-
   return (
     <section className="w-full py-6">
       <div className="container mx-auto px-4 lg:px-8 ">

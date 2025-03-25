@@ -32,7 +32,7 @@ export default function WhatWeDoSection() {
 
       {/*<h1 className="text-md font-semibold text-light mb-6">O QUE FAZEMOS</h1>
       <h2 className="text-md font-semibold text-light mb-6">
-        Ministério da Economia e Finanças de São Tomé e Príncipe tem a seguinte
+        Ministérdio da Economia e Finanças de São Tomé e Príncipe tem a seguinte
         missão:
       </h2>
       <p className="font-light text-justify leading-loose mb-8 text-sm ">

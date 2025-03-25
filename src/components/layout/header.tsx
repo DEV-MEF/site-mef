@@ -15,7 +15,7 @@ type Menu = {
 export function Header() {
   const router = useRouter();
   const [direcoesMenus, setDirecoesMenus] = useState<Menu[]>([]);
-  const {direcoes, setSelectedDirecao} = useServicos();
+  const {direcoes, setSelectedDirecao, ministerio} = useServicos();
 
   useEffect(() => {
     setDirecoesMenus((direcoes).map((dir) => ({
@@ -66,7 +66,7 @@ export function Header() {
           <div className="absolute inset-0 bg-primary-blue clip-diagonal z-10" />
           <div className="absolute inset-y-0 right-0 w-full bg-gray-800" />
           <span className="relative z-10 text-[11px] block md:block">
-          Ministério da Economia e Finanças da República Democrática de São Tomé e Príncipe
+          {ministerio.name} da República Democrática de São Tomé e Príncipe
         </span>
         </div>
         <div className="w-full container mx-auto h-24 flex items-center justify-between px-4 lg:px-8 ">

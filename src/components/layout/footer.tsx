@@ -1,8 +1,11 @@
+"use client"
 import Image from "next/image";
 import Logo from "@/assets/brasao1.png";
+import {useServicos} from "@/components/contexts/servicos";
 /*import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';*/
 
 const Footer = () => {
+  const {ministerio, contato} = useServicos();
   return (
     <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 py-8">
       <div className="container mx-auto px-4 lg:px-8  flex flex-col md:flex-row justify-between items-start">
@@ -16,9 +19,9 @@ const Footer = () => {
             className="object-contain"
           />
           <p className="mt-4 leading-8 text-xs font-light">
-            Copyright © 2024 Ministério da Economia e Finanças
+            Copyright © 2024 {ministerio.name}
             <br />
-            Largo das Alfândegas, Água Grande, São Tomé
+            {contato.location}
             <br />
             Caixa Postal nº 168
             <br />
@@ -44,9 +47,9 @@ const Footer = () => {
             <br /> <br />
             Fale connosco aqui:
             <br />
-            Liga-nos +239 2221083 / 2224172
+            Liga-nos {contato.phone} / {contato.tel}
             <br />
-            Email: mfcea@financas.gov.st
+            Email: {contato.mail}
           </p>
         </div>
       </div>
