@@ -1,64 +1,21 @@
 "use client"
 import 'primeicons/primeicons.css'; // Importa ícones do PrimeReact
 import Image from 'next/image'; // Para carregar imagens otimizadas no Next.js
-import Notices1 from '@/assets/notice1.jpg';
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import qs from "qs";
-import ContentRenderer, {imageURLServer} from "@/lib/utils";
+import ContentRenderer, {CategoryNews, imageURLServer, NewsItem} from "@/lib/utils";
 import moment from "moment/moment";
 import {useRouter} from "next/navigation";
 moment.locale("pt");
 
-interface NewsItem {
-    createdAt: string;
-    title: string;
-    documentId: string;
-    summary: string;
-    content: string;
-    image?: {
-        id: number;
-        url: string;
-        name: string;
-        alternativeText: string;
-        width: number;
-        height: number;
-        formats?: {
-            medium?: { url: string };
-            large?: { url: string };
-        };
-    };
-    service?: {
-        id:number;
-        name: string;
-        webpage: string;
-        acronym: string;
-    };
-    tags?:[
-        {
-            id:number;
-            name: string
-        }
-    ];
-    category?:{
-        id:number;
-        documentId:string;
-        Descricao: string;
-    }
-}
 
-interface categoryNews {
-    id: string;
-    documentId: string;
-    Descricao:string;
-    createdAt:string;
-}
 export default function VerNoticias({ params }: { params: { documentId: string } }) {
-    const router = useRouter(); // Substituindo useNavigate por useRouter
+    const router = useRouter();
     const [news, setNews] = useState<NewsItem>()
     const [reticentlyNews, setReticentlyNews] = useState<NewsItem[]>([]);
 
-    const [categoryNews, setCategoryNews] = useState<categoryNews[]>([])
+    const [categoryNews, setCategoryNews] = useState<CategoryNews[]>([])
 
     useEffect(() => {
         (async () => {
@@ -76,7 +33,6 @@ export default function VerNoticias({ params }: { params: { documentId: string }
 
             AxiosHttpClient.get(`/news?${query}`).then(({data: {data}}) => {
                 setNews(data[0]);
-                console.log(data[0])
             });
         })()
     }, [params]);
@@ -85,7 +41,6 @@ export default function VerNoticias({ params }: { params: { documentId: string }
         (async () => {
             AxiosHttpClient.get(`/categoria-de-noticias?`).then(({data: {data}}) => {
                 setCategoryNews(data);
-                console.log(data)
             });
         })()
     }, []);
@@ -116,6 +71,10 @@ export default function VerNoticias({ params }: { params: { documentId: string }
     const readMore = (documentId: string) => {
         router.push(`/noticias/${documentId}`);
     };
+
+    const filterNews = (tag: string, category: string) => {
+        router.push(`/noticias/?tag=${tag}&category=${category}`)
+    }
 
     return (
         <div className="container">
@@ -168,9 +127,11 @@ export default function VerNoticias({ params }: { params: { documentId: string }
                 <div className="col-span-1 flex flex-col space-y-8">
                     <div className="bg-[#F1F1FF] p-6 rounded-lg">
                         <h4 className="text-lg font-semibold text-primary mb-4">Categorias</h4>
-                        <ul className="font-light text-sm space-y-4">
+                        <ul className="font-light text-sm space-y-4 cursor-pointer">
                             {categoryNews.map((categoria, index) => (
-                                <a key={index} href="#">
+                                <a key={index}
+                                   onClick={() => filterNews("",categoria.Descricao)}
+                                >
                                     <li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
                                         {categoria.Descricao} <span className="text-gray-500">(3)</span>
                                     </li>
@@ -211,7 +172,10 @@ export default function VerNoticias({ params }: { params: { documentId: string }
                         <h4 className="text-lg font-semibold text-primary mb-4">Tags Populares</h4>
                         <div className="flex flex-wrap gap-2">
                             {news?.tags?.map((tag) => (
-                                <span key={tag.id} className="bg-[#5151F8] text-white px-3 py-1 rounded-full text-[12px] cursor-pointer">
+                                <span
+                                    onClick={() => filterNews(tag.name,"",)}
+                                    key={tag.id}
+                                    className="bg-[#5151F8] text-white px-3 py-1 rounded-full text-[12px] cursor-pointer">
                                     {tag.name}
                                 </span>
                             ))}

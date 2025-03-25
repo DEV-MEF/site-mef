@@ -5,40 +5,11 @@ import Image from "next/image";
 import Title from "@/components/layout/title";
 import { AxiosHttpClient } from "@/settings/axios";
 import qs from "qs";
-import { imageURLServer } from "@/lib/utils";
+import {imageURLServer, NewsItem} from "@/lib/utils";
 import moment from "moment";
 import "moment/locale/pt";
 import { useRouter } from "next/navigation"; // Importando useRouter para navegação
 moment.locale("pt");
-
-interface NewsItem {
-    createdAt: string;
-    title: string;
-    documentId: string;
-    summary: string;
-    image: {
-        id: number;
-        url: string;
-        name: string;
-        alternativeText: string;
-        width: number;
-        height: number;
-        formats: {
-            medium?: {
-                url: string;
-                name: string;
-                size: number;
-                mime: string;
-            };
-            large?: {
-                url: string;
-                name: string;
-                size: number;
-                mime: string;
-            };
-        };
-    };
-}
 
 export default function NewsSection() {
     const [news, setNews] = useState<NewsItem[]>([]);
@@ -94,14 +65,9 @@ export default function NewsSection() {
                             <Image
                                 width={300}
                                 height={300}
-                                src={
-                                    item.image?.formats?.large?.url
-                                        ? `${imageURLServer}${item.image.formats.large.url}`
-                                        : item.image?.formats?.medium?.url
-                                            ? `${imageURLServer}${item.image.formats.medium.url}`
-                                            : item.image?.url
-                                                ? `${imageURLServer}${item.image.url}`
-                                                : "/images/ministry-logo.png"
+                                src={item && item.image
+                                    ? `${imageURLServer}${item.image.formats?.large?.url || item.image.formats?.medium?.url || item.image.url}`
+                                    : "/images/ministry-logo.png"
                                 }
                                 alt={item.image?.alternativeText || "Imagem da notícia"}
                                 className="w-full h-[200px] md:h-[250px] object-cover"

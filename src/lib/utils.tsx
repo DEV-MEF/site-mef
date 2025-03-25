@@ -17,6 +17,50 @@ interface ContentRendererProps {
   type: "blocks" | "markdown";
 }
 
+export interface NewsItem {
+  createdAt: string;
+  title: string;
+  documentId: string;
+  summary: string;
+  content: string;
+  image?: {
+    id: number;
+    url: string;
+    name: string;
+    alternativeText: string;
+    width: number;
+    height: number;
+    formats?: {
+      medium?: { url: string };
+      large?: { url: string };
+    };
+  };
+  service?: {
+    id:number;
+    name: string;
+    webpage: string;
+    acronym: string;
+  };
+  tags?:[
+    {
+      id:number;
+      name: string
+    }
+  ];
+  category?:{
+    id:number;
+    documentId:string;
+    Descricao: string;
+  }
+}
+
+export interface CategoryNews {
+  id: string;
+  documentId: string;
+  Descricao:string;
+  createdAt:string;
+}
+
 const ContentRenderer: React.FC<ContentRendererProps> = ({ content, type }) => {
   if (type === "blocks" && Array.isArray(content)) {
     return <BlocksRenderer content={content} />;
