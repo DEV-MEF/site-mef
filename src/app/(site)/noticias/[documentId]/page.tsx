@@ -3,7 +3,7 @@ import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
 import VerNoticias from '../pages/VerNoticias';
 
-export default function Noticias() {
+export default function Noticias({params}:never) {
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]">
@@ -24,7 +24,7 @@ export default function Noticias() {
         </div>
 
         <div className="container mx-auto px-44 py-16">
-            <VerNoticias/>
+            <VerNoticias params={params}/>
         </div>
     </div>
   );
