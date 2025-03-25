@@ -4,7 +4,7 @@ import 'primeicons/primeicons.css';
 
 import GaleryImages from '../pages/GaleryImages';
 
-export default function Galeria() {
+export default function Galeria({ params }: never) {
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]">
@@ -25,7 +25,7 @@ export default function Galeria() {
         </div>
 
         <div className="container mx-auto px-44 py-10 mb-20">
-          <GaleryImages/>
+          <GaleryImages params={params} />
         </div>
     </div>
   );
