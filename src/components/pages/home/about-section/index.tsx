@@ -1,7 +1,10 @@
+"use client"
 import React from "react";
 import Image from "next/image";
+import {useServicos} from "@/components/contexts/servicos";
 
 export default function AboutSection() {
+    const {ministerio} = useServicos();
   return (
     <div className="w-full container px-4 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-11 md:gap-3 lg:gap-11 py-20 md:py-16 lg:py-20">
       {/* Card 1 */}
@@ -15,7 +18,7 @@ export default function AboutSection() {
         />
         <h3 className="text-[16px] mb-3 font-medium">Sobre Nós</h3>
         <p className="text-text-light text-[13px] font-light">
-          Conheça o Ministério da Economia e Finanças de São Tomé e Príncipe.
+          Conheça o {ministerio.name}.
         </p>
       </div>
 

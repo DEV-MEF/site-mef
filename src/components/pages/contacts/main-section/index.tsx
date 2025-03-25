@@ -1,8 +1,11 @@
+"use client"
 import Image from "next/image";
 import ContactMap from "../map";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {useServicos} from "@/components/contexts/servicos";
 export default function MainSection() {
+  const {ministerio, contato} = useServicos();
   return (
     <section className="w-full flex flex-col gap-28 py-32">
       <div className="w-full flex flex-col lg:flex-row gap-20 lg:gap-6">
@@ -78,24 +81,23 @@ export default function MainSection() {
           />
           <div className="space-y-4">
             <p className="text-sm font-semibold">
-              Ministério da Economia e Finanças
+              {ministerio.name}
             </p>
             <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Endereço:</strong> Largo das
-              Alfândegas, Água Grande, São Tomé, Caixa Postal nº 168, São Tomé e
-              Príncipe
+              <strong className="font-semibold">Endereço:</strong>
+              {contato.location}
             </p>
             <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Telefone:</strong> +239 2221083
-              / 2224172
+              <strong className="font-semibold">Telefone:</strong>
+              {contato.tel} / {contato.phone}
             </p>
             <p className="text-sm font-light mt-2">
               <strong className="font-semibold">Email:</strong>{" "}
-              mfcea@financas.gov.st
+              {contato.mail}
             </p>
             <p className="text-sm font-light mt-2">
               <strong className="font-semibold">Website:</strong>{" "}
-              <a href="#">financas.gov.st</a>
+              <a href="#">{contato.webpage}</a>
             </p>
           </div>
         </div>
