@@ -34,6 +34,8 @@ body {
 /* Menu */
 .p-menubar {
   border: none !important;
+  width: auto;
+  background-color: transparent;
 }
 @media (min-width: 320px) and (max-width: 960px) {
   .p-menubar {
@@ -47,22 +49,22 @@ body {
   }
 
   .p-menubar .p-menubar-button {
-    background: transparent !important; 
+    background: transparent !important;
     box-shadow: none !important;
-    border: none !important; 
+    border: none !important;
   }
 }
-
 .p-menuitem .p-menuitem-content {
   font-size: 13px;
   font-weight: bold;
-  color: red;
 }
-.p-menuitem .p-menuitem-content:hover {
-  background-color: #ffffff;
-}
+
 .p-focus .p-menuitem-content {
   background-color: #ffffff;
+}
+.p-menuitem .p-menuitem-content:hover {
+  background-color: #3a3b7b;
+  color: white;
 }
 .p-submenu-list {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
