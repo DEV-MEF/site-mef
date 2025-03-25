@@ -28,7 +28,16 @@ type Contato = {
     tel?: string
     mail?: string
     webpage?: string
-    photos?: string
+    photos?: ImageType[]
+    linkmap?: string
+}
+
+type ImageType = {
+    name: string
+    documentId: string
+    url: string
+    alternativeText: string
+    formats: {[k in ("large" | "medium" | "small")]: ImageType}
 }
 
 const ServicosContext = createContext<ServicosContext>({} as ServicosContext)
@@ -88,6 +97,7 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
         });
 
         AxiosHttpClient.get(`/contacts?${query}`).then(({data : {data}}) => {
+            console.log({data})
             setContato(data?.[0] || {});
         });
 

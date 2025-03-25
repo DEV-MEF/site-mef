@@ -4,8 +4,11 @@ import ContactMap from "../map";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {useServicos} from "@/components/contexts/servicos";
+import {imageURLServer} from "@/lib/utils";
 export default function MainSection() {
   const {ministerio, contato} = useServicos();
+  const urlPhotoContact = (contato.photos?.[0]?.formats?.medium || contato.photos?.[0] || {}).url;
+
   return (
     <section className="w-full flex flex-col gap-28 py-32">
       <div className="w-full flex flex-col lg:flex-row gap-20 lg:gap-6">
@@ -75,7 +78,7 @@ export default function MainSection() {
           <Image
             width={300}
             height={300}
-            src="/images/contacts/ministerio.jpg"
+            src={(urlPhotoContact) ? imageURLServer+""+urlPhotoContact :  "/images/contacts/ministerio.jpg"}
             alt="Ministério"
             className="w-full h-40 object-cover rounded-lg mb-4"
           />
