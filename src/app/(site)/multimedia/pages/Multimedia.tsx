@@ -4,13 +4,11 @@ import Notices from '@/assets/notice1.jpg';
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 type ImageType = {
-    [k in ("large" | "medium" | "small")]: ImageType
-} &{
     name: string
     documentId: string
     url: string
     alternativeText: string
-    formats: ImageType
+    formats: {[k in ("large" | "medium" | "small")]: ImageType}
 }
 
 type TImageApi = {
