@@ -82,11 +82,11 @@ export default function DocumentsSection() {
                       <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
                         {value.name}
                       </h3>
-                      <span className="text-xs text-stone-500">
+                      <span className="text-xs text-text-light/90">
                         {moment(value.publishedAt).format("DD/MM/YYYY")}
                       </span>
                     </div>
-                    <div className="text-sm  mt-1 line-clamp-1 text-text-second">
+                    <div className="text-sm  mt-1 line-clamp-1 text-text-second/90">
                       {value.summary}
                     </div>
                   </div>
@@ -94,75 +94,6 @@ export default function DocumentsSection() {
               </div>
             </div>
           ))}
-
-          {/*<div className="group">
-            <Link
-              href="/documentos/subsidio-mobilidade"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Relatório final do grupo de trabalho para revisão do
-                      subsídio social de mobilidade
-                    </h3>
-                    <span className="text-xs text-text-light">09/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Relatório sobre o subsídio social de mobilidade.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          <div className="group">
-            <Link
-              href="/documentos/apresentacao-educacao"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Apresentação do Ministro da Educação na Comissão de
-                      Educação e Ciência
-                    </h3>
-                    <span className="text-xs text-text-light">05/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Apresentação do Ministro na Comissão de Educação e Ciência.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          <div className="group">
-            <Link
-              href="/documentos/apresentacao-educacao"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Decreto Lei 32/2025
-                    </h3>
-                    <span className="text-xs text-text-light">05/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Documento do Decreto Lei 32/2025, em que se estabelece o
-                    Decreto Lei 32/2025
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>*/}
         </div>
       </div>
       <PdfViewer />
