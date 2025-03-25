@@ -31,7 +31,7 @@ export default function MinistrySidebar() {
         <div className="text-primary text-3xl">
           <i className="pi pi-building" style={{ fontSize: "3rem" }}></i>
         </div>
-        <h4 className="text-lg font-semibold">O Ministério</h4>
+        <h4 className="text-lg">O Ministério</h4>
         <ul className="text-sm space-y-2">
           <li>
             <Link
@@ -51,7 +51,7 @@ export default function MinistrySidebar() {
               href="/ministerio/o-que-fazemos"
               className={
                 pathname.includes("/ministerio/o-que-fazemos")
-                  ? "hover:underline font-semibold"
+                  ? "hover:underline font-normal"
                   : "hover:underline font-light"
               }
             >
