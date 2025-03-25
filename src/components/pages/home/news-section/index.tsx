@@ -1,79 +1,89 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Title from "@/components/layout/title";
-import {AxiosHttpClient} from "@/settings/axios";
+import { AxiosHttpClient } from "@/settings/axios";
 import qs from "qs";
-import {imageURLServer} from "@/lib/utils";
-import moment from 'moment';
-import 'moment/locale/pt';
-moment.locale('pt');
+import { imageURLServer } from "@/lib/utils";
+import moment from "moment";
+import "moment/locale/pt";
+import { useRouter } from "next/navigation"; // Importando useRouter para navegação
+moment.locale("pt");
 
 interface NewsItem {
     createdAt: string;
     title: string;
     summary: string;
     image: {
-        id: number,
-        name: string,
-        url: string,
-        size: number
+        id: number;
+        url: string;
+        name: string;
+        alternativeText: string;
+        width: number;
+        height: number;
+        formats: {
+            medium?: {
+                url: string;
+                name: string;
+                size: number;
+                mime: string;
+            };
+            large?: {
+                url: string;
+                name: string;
+                size: number;
+                mime: string;
+            };
+        };
     };
 }
 
 export default function NewsSection() {
     const [news, setNews] = useState<NewsItem[]>([]);
+    const router = useRouter(); // Substituindo useNavigate por useRouter
 
     useEffect(() => {
-        const query = qs.stringify({
-            sort: ['createdAt:desc'],
-            pagination: {
-                start: 0,
-                limit: 3,
+        const query = qs.stringify(
+            {
+                populate: "*",
+                pagination: {
+                    start: 0,
+                    limit: 3,
+                },
+                sort: ["createdAt:desc"],
             },
-            populate: "*"
-        }, {
-            encodeValuesOnly: true,
-        });
+            {
+                encodeValuesOnly: true,
+            }
+        );
 
-        AxiosHttpClient.get(`/news?${query}`)
-            .then(({data: {data}}) => {
+        (async () => {
+            try {
+                const { data: { data } } = await AxiosHttpClient.get(`/news?${query}`);
                 if (data) {
                     setNews(data);
+                    console.log(data);
                 }
-            })
-            .catch((error) => {
-                console.error("Erro ao buscar dados da equipe:", error);
-            });
+            } catch (error) {
+                console.error("Erro ao buscar dados das notícias:", error);
+            }
+        })();
     }, []);
 
+    const readMore = (news: NewsItem) => {
+        router.push(`/noticias/?title=${encodeURIComponent(news.title)}&summary=${encodeURIComponent(news.summary)}&image=${encodeURIComponent(news.image?.url || "/images/ministry-logo.png")}`);
+    };
+
+
     return (
-        <section className="w-full container px-4 lg:px-8  py-11 md:gap-3 lg:gap-11">
+        <section className="w-full container px-4 lg:px-8 py-11 md:gap-3 lg:gap-11">
             <div className="flex justify-between py-5 items-center">
                 <div className="flex flex-col mb-6 gap-2">
-                    <Title text="ÚLTIMAS NOTÍCIAS"/>
+                    <Title text="ÚLTIMAS NOTÍCIAS" />
                     <p className="text-text-second font-light">
-                        Acompanhe as últimas notícias e fique sempre atualizado com as
-                        novidades em tempo real!
+                        Acompanhe as últimas notícias e fique sempre atualizado com as novidades em tempo real!
                     </p>
-                </div>
-
-                <div className="md:flex items-center justify-end mb-4 hidden">
-                    <button className="p-2 rounded-full bg-light-gray flex justify-center mr-2">
-                        <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                  d="M12.293 5.293a1 1 0 010 1.414L8.414 10l3.879 3.293a1 1 0 11-1.293 1.414l-5-4a1 1 0 010-1.414l5-4a1 1 0 011.414 0z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <button className="p-2 rounded-full bg-light-gray flex justify-center">
-                        <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                  d="M7.707 14.707a1 1 0 010-1.414L11.586 10 7.707 6.707a1 1 0 011.293-1.414l5 4a1 1 0 010 1.414l-5 4a1 1 0 01-1.414 0z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
                 </div>
             </div>
 
@@ -84,8 +94,16 @@ export default function NewsSection() {
                             <Image
                                 width={300}
                                 height={300}
-                                src={item.image && item.image.url ? `${imageURLServer}${item.image.url}` : "/images/ministry-logo.png"}
-                                alt="News Image"
+                                src={
+                                    item.image?.formats?.large?.url
+                                        ? `${imageURLServer}${item.image.formats.large.url}`
+                                        : item.image?.formats?.medium?.url
+                                            ? `${imageURLServer}${item.image.formats.medium.url}`
+                                            : item.image?.url
+                                                ? `${imageURLServer}${item.image.url}`
+                                                : "/images/ministry-logo.png"
+                                }
+                                alt={item.image?.alternativeText || "Imagem da notícia"}
                                 className="w-full h-[200px] md:h-[250px] object-cover"
                             />
                         </div>
@@ -94,16 +112,16 @@ export default function NewsSection() {
                                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 2a1 1 0 000 2h8a1 1 0 100-2H6zM3 5a2 2 0 012-2h10a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm3 1a1 1 0 100 2h8a1 1 0 100-2H6z" />
                                 </svg>
-                                { moment(item.createdAt, moment.ISO_8601).format('LL') }
+                                {moment(item.createdAt, moment.ISO_8601).format("LL")}
                             </div>
-                            <h3 className="text-text-primary font-bold text-sm mb-1">
-                                {item.title}
-                            </h3>
+                            <h3 className="text-text-primary font-bold text-sm mb-1">{item.title}</h3>
                             <p className="text-text-second text-xs font-normal mb-4">
-                                {item.summary.slice(0,93) || "A Descrção aqui...."}
+                                {item.summary?.slice(0, 93) || "A Descrição aqui...."}
                             </p>
                             <button
-                                className="text-sm w-28 my-3 text-primary-blue px-4 py-2 border border-primary-blue hover:bg-primary-blue hover:text-white">
+                                onClick={() => readMore(item)}
+                                className="text-sm w-28 my-3 text-primary-blue px-4 py-2 border border-primary-blue hover:bg-primary-blue hover:text-white"
+                            >
                                 Ler Mais
                             </button>
                         </div>

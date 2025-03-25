@@ -65,6 +65,7 @@ export default function Card({ imagePath, title, href }: CardProps) {
             transition-all hover:bg-primary-blue hover:text-white
             flex items-center justify-center z-30 shadow-md
           `}
+          target="_blank"
         >
           Acessar
           <ChevronRight size={16} />
