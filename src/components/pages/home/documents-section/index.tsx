@@ -1,48 +1,51 @@
 import { FileText, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Title from "@/components/layout/title";
-import {useEffect, useState} from "react";
-import {usePdfViewer} from "@/components/contexts/pdf-viewer";
-import {AxiosHttpClient} from "@/settings/axios";
-import {PdfViewer} from "@/lib/pdf-viewer";
+import { useEffect, useState } from "react";
+import { usePdfViewer } from "@/components/contexts/pdf-viewer";
+import { AxiosHttpClient } from "@/settings/axios";
+import { PdfViewer } from "@/lib/pdf-viewer";
 import moment from "moment";
 import qs from "qs";
 
 type Doc = {
-  documentId: string
-  name: string,
-  content: string,
-  summary: string,
-  files: File
-  publishedAt: string
-}
+  documentId: string;
+  name: string;
+  content: string;
+  summary: string;
+  files: File;
+  publishedAt: string;
+};
 
 type File = {
-  url: string,
-  name: string
-}
+  url: string;
+  name: string;
+};
 
 export default function DocumentsSection() {
   const [files, setFiles] = useState<Doc[]>([]);
-  const {openNewDocument} = usePdfViewer();
+  const { openNewDocument } = usePdfViewer();
 
   useEffect(() => {
-    const query = qs.stringify({
-      sort: ['createdAt:desc'],
-      pagination: {
-        start: 0,
-        limit: 4
+    const query = qs.stringify(
+      {
+        sort: ["createdAt:desc"],
+        pagination: {
+          start: 0,
+          limit: 4,
+        },
+        populate: "*",
       },
-      populate: "*"
-    }, {
-      encodeValuesOnly: true,
-    });
+      {
+        encodeValuesOnly: true,
+      }
+    );
 
     (async () => {
-      AxiosHttpClient.get(`/docs?${query}`).then(({data : {data}}) => {
+      AxiosHttpClient.get(`/docs?${query}`).then(({ data: { data } }) => {
         setFiles(data);
       });
-    })()
+    })();
   }, []);
 
   return (
@@ -60,12 +63,17 @@ export default function DocumentsSection() {
         </div>
 
         <div className="grid">
-          {
-            files.map((value, index) => <div key={index} className="group">
-              <div className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-                   onClick={() => {
-                     openNewDocument({name: value.name, uri: value.files.url, id: value.documentId})
-                   }}
+          {files.map((value, index) => (
+            <div key={index} className="group">
+              <div
+                className="block p-4 rounded-sm hover:bg-muted/50 transition-colors cursor-pointer"
+                onClick={() => {
+                  openNewDocument({
+                    name: value.name,
+                    uri: value.files.url,
+                    id: value.documentId,
+                  });
+                }}
               >
                 <div className="flex items-start gap-3">
                   <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
@@ -74,85 +82,18 @@ export default function DocumentsSection() {
                       <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
                         {value.name}
                       </h3>
-                      <span className="text-xs text-stone-500">{moment(value.publishedAt).format('DD/MM/YYYY')}</span>
+                      <span className="text-xs text-text-light/90">
+                        {moment(value.publishedAt).format("DD/MM/YYYY")}
+                      </span>
                     </div>
-                    <div className="text-sm  mt-1 line-clamp-1 text-text-second">
+                    <div className="text-sm  mt-1 line-clamp-1 text-text-second/90">
                       {value.summary}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>)
-          }
-
-          {/*<div className="group">
-            <Link
-              href="/documentos/subsidio-mobilidade"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Relatório final do grupo de trabalho para revisão do
-                      subsídio social de mobilidade
-                    </h3>
-                    <span className="text-xs text-text-light">09/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Relatório sobre o subsídio social de mobilidade.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          <div className="group">
-            <Link
-              href="/documentos/apresentacao-educacao"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Apresentação do Ministro da Educação na Comissão de
-                      Educação e Ciência
-                    </h3>
-                    <span className="text-xs text-text-light">05/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Apresentação do Ministro na Comissão de Educação e Ciência.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          <div className="group">
-            <Link
-              href="/documentos/apresentacao-educacao"
-              className="block p-4 rounded-sm hover:bg-muted/50 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
-                      Decreto Lei 32/2025
-                    </h3>
-                    <span className="text-xs text-text-light">05/03/2025</span>
-                  </div>
-                  <p className="text-sm mt-1 line-clamp-1 text-text-second">
-                    Documento do Decreto Lei 32/2025, em que se estabelece o
-                    Decreto Lei 32/2025
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>*/}
+            </div>
+          ))}
         </div>
       </div>
       <PdfViewer />
