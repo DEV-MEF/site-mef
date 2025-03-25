@@ -21,7 +21,7 @@ export default function MainSection() {
           </h2>
           <form className="w-full space-y-6 pt-5 ">
             <div className="w-full flex flex-col lg:flex-row gap-6">
-              <div className="w-full">
+              <div className="w-full flex flex-col gap-2">
                 <Label className="block text-sm mb-2 text-zinc-700">
                   Primeiro Nome
                 </Label>
@@ -32,10 +32,10 @@ export default function MainSection() {
                 />
               </div>
               <div className="w-full flex flex-col gap-2">
-                <label className="block text-sm mb-2 text-zinc-700">
+                <Label className="block text-sm mb-2 text-zinc-700">
                   Último Nome
-                </label>
-                <input
+                </Label>
+                <Input
                   type="text"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
                   placeholder="Name"
@@ -44,16 +44,16 @@ export default function MainSection() {
             </div>
             <div className="w-full flex flex-col lg:flex-row gap-6">
               <div className="w-full flex flex-col gap-2">
-                <label className="block text-sm text-zinc-700">Email</label>
-                <input
+                <Label className="block text-sm text-zinc-700">Email</Label>
+                <Input
                   type="email"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
                   placeholder="Your Email"
                 />
               </div>
               <div className="w-full flex flex-col gap-2">
-                <label className="block text-sm text-zinc-700">Telemóvel</label>
-                <input
+                <Label className="block text-sm text-zinc-700">Telemóvel</Label>
+                <Input
                   type="tel"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
                   placeholder="+880"
