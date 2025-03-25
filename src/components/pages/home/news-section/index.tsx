@@ -14,6 +14,7 @@ moment.locale("pt");
 interface NewsItem {
     createdAt: string;
     title: string;
+    documentId: string;
     summary: string;
     image: {
         id: number;
@@ -71,10 +72,9 @@ export default function NewsSection() {
         })();
     }, []);
 
-    const readMore = (news: NewsItem) => {
-        router.push(`/noticias/?title=${encodeURIComponent(news.title)}&summary=${encodeURIComponent(news.summary)}&image=${encodeURIComponent(news.image?.url || "/images/ministry-logo.png")}`);
+    const readMore = (documentId: string) => {
+        router.push(`/noticias/${documentId}`);
     };
-
 
     return (
         <section className="w-full container px-4 lg:px-8 py-11 md:gap-3 lg:gap-11">
@@ -119,8 +119,8 @@ export default function NewsSection() {
                                 {item.summary?.slice(0, 93) || "A Descrição aqui...."}
                             </p>
                             <button
-                                onClick={() => readMore(item)}
-                                className="text-sm w-28 my-3 text-primary-blue px-4 py-2 border border-primary-blue hover:bg-primary-blue hover:text-white"
+                                onClick={() => readMore(item.documentId)}
+                                className="text-sm w-28 my-3 text-primary-blue cursor-pointer px-4 py-2 border border-primary-blue hover:bg-primary-blue hover:text-white"
                             >
                                 Ler Mais
                             </button>
