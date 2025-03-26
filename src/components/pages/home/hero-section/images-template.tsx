@@ -37,7 +37,13 @@ export default function ImagesTemplate({
             {subtitle}
         </p>
         <button
-            onClick={() => { router.push(link) }}
+            onClick={() => {
+                if (link.includes("http")) {
+                    window.open(link, "_blank", "noopener,noreferrer");
+                    return
+                }
+                router.push(link)
+            }}
             className="bg-transparent text-white border font-semibold border-white cursor-pointer py-3 px-12 rounded hover:bg-white hover:text-primary-blue hover:border-primary-blue transition">
           Ler Mais
         </button>
