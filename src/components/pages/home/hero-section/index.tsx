@@ -92,14 +92,16 @@ export const HeroSection = () => {
 
     (async () => {
       AxiosHttpClient.get(`/highlights?${query}`).then(({ data: { data } }) => {
-        console.log(data);
         setImages(
-          (data as Image[]).map((image) => ({
-            title: image.title,
-            src: imageURLServer + image.image.url,
-            subtitle: image.description,
-            link: `noticias/${image?.news?.documentId || image?.link || "#"}`,
-          }))
+          (data as Image[]).map((image) => {
+            const noticias  = image?.news?.documentId ? "noticias/" : ""
+            return  {
+              title: image.title,
+                  src: imageURLServer + image.image.url,
+                subtitle: image.description,
+                link: `${noticias}${image?.news?.documentId || image?.link || "#"}`,
+            }
+          })
         );
       });
     })();
