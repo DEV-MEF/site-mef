@@ -29,11 +29,11 @@ export default function RootLayout({
     <html lang="pt">
       <body className={poppins.className}>
       <ServicosProvider>
-        <Header />
-        <PdfViewerProvider>
-          {children}
-        </PdfViewerProvider>
-        <Footer />
+          <PdfViewerProvider>
+            <Header />
+              {children}
+            <Footer />
+          </PdfViewerProvider>
       </ServicosProvider>
       </body>
     </html>

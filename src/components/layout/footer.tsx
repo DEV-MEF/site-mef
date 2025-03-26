@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Logo from "@/assets/brasao1.png";
 import {useServicos} from "@/components/contexts/servicos";
+import {PdfViewer} from "@/lib/pdf-viewer";
+import React from "react";
 /*import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';*/
 
 const Footer = () => {
@@ -59,6 +61,7 @@ const Footer = () => {
         Website Desenvolvido e Hospedado pela{" "}
         <span className="font-normal text-white">DITEI</span>
       </div>
+      <PdfViewer />
     </footer>
   );
 };

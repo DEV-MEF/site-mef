@@ -126,7 +126,6 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
           </div>
         ))}
       </div>
-        <PdfViewer />
     </div>
   );
 };
