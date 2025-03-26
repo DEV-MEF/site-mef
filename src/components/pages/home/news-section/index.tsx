@@ -5,41 +5,12 @@ import Image from "next/image";
 import Title from "@/components/layout/title";
 import { AxiosHttpClient } from "@/settings/axios";
 import qs from "qs";
-import { imageURLServer } from "@/lib/utils";
+import {imageURLServer, NewsItem} from "@/lib/utils";
 import moment from "moment";
 import "moment/locale/pt";
 import { MdDateRange } from "react-icons/md";
 import { useRouter } from "next/navigation"; // Importando useRouter para navegação
 moment.locale("pt");
-
-interface NewsItem {
-  createdAt: string;
-  title: string;
-  documentId: string;
-  summary: string;
-  image: {
-    id: number;
-    url: string;
-    name: string;
-    alternativeText: string;
-    width: number;
-    height: number;
-    formats: {
-      medium?: {
-        url: string;
-        name: string;
-        size: number;
-        mime: string;
-      };
-      large?: {
-        url: string;
-        name: string;
-        size: number;
-        mime: string;
-      };
-    };
-  };
-}
 
 export default function NewsSection() {
   const [news, setNews] = useState<NewsItem[]>([]);

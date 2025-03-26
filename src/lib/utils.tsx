@@ -51,7 +51,18 @@ export interface NewsItem {
     id:number;
     documentId:string;
     Descricao: string;
-  }
+  },
+  attaches?:[
+    {
+      documentId: string;
+      name: string;
+      url:string;
+      size: number;
+      createdAt: string;
+      mime: string;
+      ext: string;
+    }
+  ]
 }
 
 export interface CategoryNews {

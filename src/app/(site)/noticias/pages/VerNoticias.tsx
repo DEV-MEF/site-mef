@@ -121,6 +121,17 @@ export default function VerNoticias({ params }: { params: { documentId: string }
                             <ContentRenderer key={news.documentId} content={news.content} type={"blocks"} />
                         </>
                     )}
+
+                    {news?.attaches?.map((item) => (
+                        <a key={item.documentId}
+                           href={imageURLServer+item.url}
+                           target={"_blank"}
+                        >
+                            <li className="flex justify-between border-b border-gray-300 py-2 cursor-pointer efects hover:pl-5">
+                                {item.name} <span className="text-gray-500"></span>
+                            </li>
+                        </a>
+                    ))}
                 </div>
 
                 {/* Coluna de Cards (1x) */}
