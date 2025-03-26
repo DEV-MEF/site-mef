@@ -2,13 +2,17 @@
 
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import moment from "moment/moment";
+import moment from "moment";
 import {imageURLServer, NewsItem} from "@/lib/utils";
 import {useRouter} from "next/navigation";
 import qs from "qs";
 import {AxiosHttpClient} from "@/settings/axios";
-
 moment.locale("pt");
+
+type Filters = {
+    tags?: { name: { $contains: string } };
+    category?: { documentId: { $eq: string } };
+};
 
 export default function AllNotice() {
     const router = useRouter();
@@ -16,7 +20,6 @@ export default function AllNotice() {
     const [params, setParams] = useState<{ [key: string]: string } | null>(null);
     const [news, setNews] = useState<NewsItem[]>([]);
 
-    // Captura os parâmetros da URL
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
         const paramsObj: { [key: string]: string } = {};
@@ -28,34 +31,23 @@ export default function AllNotice() {
         setParams(paramsObj);
     }, []);
 
-
     useEffect(() => {
+        if (!params) return;
+
+        const filters: Filters = {
+            ...(params["tag"] && { tags: { name: { $contains: params["tag"] } } }),
+            ...(params["category"] && { category: { documentId: { $eq: params["category"] } } }),
+        };
+
         const query = qs.stringify({
-            filters: {
-                $or: [
-                    {
-                        tags: {
-                            name: {
-                                $contains: params && params["tag"] ? params["tag"] : ""
-                            },
-                        },
-                    },
-                    {
-                        category: {
-                            Descricao: {
-                                $eq: params && params["category"] ? params["category"] : ""
-                            }
-                        }
-                    },
-                ],
-            },
+            filters: Object.keys(filters).length ? { $or: [filters] } : undefined,
             populate: "*",
             sort: ['createdAt:desc'],
-        }, {skipNulls: true, encodeValuesOnly: true});
+        }, { encodeValuesOnly: true });
+
 
         AxiosHttpClient.get(`/news?${query}`).then(({data: {data}}) => {
             setNews(data);
-            console.log("🔹 Dados recebidos:", data);
         });
     }, [params]);
 
@@ -93,13 +85,15 @@ export default function AllNotice() {
                                         <path
                                             d="M6 2a1 1 0 000 2h8a1 1 0 100-2H6zM3 5a2 2 0 012-2h10a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm3 1a1 1 0 100 2h8a1 1 0 100-2H6z"/>
                                     </svg>
-                                    {item ? moment(item.createdAt).format("LL") : "Carregando..."}
+                                    {moment(item.createdAt, moment.ISO_8601).format("LL")}
                                 </div>
-                                <h3 className="text-text-primary font-bold text-sm mb-1">{item.title.slice(0, 42)}</h3>
+                                <h3 className="text-text-primary font-bold text-sm mb-1">{item.title.slice(0,82)}</h3>
                                 <p className="text-text-second text-xs font-normal mb-4">{item.summary?.slice(0, 98)}</p>
                                 <button
                                     onClick={() => readMore(item.documentId)}
-                                    className="cursor-pointer text-sm w-28 my-3 text-primary-blue px-4 py-2 border border-primary-blue hover:bg-primary-blue hover:text-white">
+                                    className="cursor-pointer text-sm w-28 my-3
+                                    text-primary-blue px-4 py-2 border border-primary-blue
+                                    hover:bg-primary-blue hover:text-white">
                                     Ler Mais
                                 </button>
                             </div>

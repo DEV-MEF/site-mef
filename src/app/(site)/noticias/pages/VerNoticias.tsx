@@ -141,7 +141,7 @@ export default function VerNoticias({ params }: { params: { documentId: string }
                         <ul className="font-light text-sm space-y-4 cursor-pointer">
                             {categoryNews.map((categoria, index) => (
                                 <a key={index}
-                                   onClick={() => filterNews("",categoria.Descricao)}
+                                   onClick={() => filterNews("",categoria.documentId)}
                                 >
                                     <li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
                                         {categoria.Descricao} <span className="text-gray-500">(3)</span>

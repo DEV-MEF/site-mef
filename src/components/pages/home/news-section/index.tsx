@@ -92,7 +92,7 @@ export default function NewsSection() {
                 {moment(item.createdAt, moment.ISO_8601).format("LL")}
               </div>
               <h3 className="text-text-primary font-bold text-sm mb-1">
-                {item.title}
+                {item.title.slice(0,82)}
               </h3>
               <p className="text-text-second text-xs font-normal mb-4">
                 {item.summary?.slice(0, 93) || "A Descrição aqui...."}

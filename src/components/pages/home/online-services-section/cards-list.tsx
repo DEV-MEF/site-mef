@@ -47,7 +47,12 @@ export default function CardsList() {
   const [service, setService] = useState<ServiceItem[]>([]);
 
   useEffect(() => {
-    const query = qs.stringify({ populate: "*" }, { encodeValuesOnly: true });
+    const query = qs.stringify({
+      populate: "*",
+      filters: {
+        type: "Serviço"
+      }
+    }, { encodeValuesOnly: true });
 
     (async () => {
       AxiosHttpClient.get(`/onlines?${query}`).then(({ data: { data } }) => {
