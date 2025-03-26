@@ -15,7 +15,7 @@ export default function MinistrySidebar() {
         </div>
         <h4 className="text-lg font-semibold text-light">Documentos</h4>
         <Link
-          href="/publicacoes/documentos"
+          href="/documentos"
           className="text-primary-blue font-semibold text-sm hover:underline "
         >
           » Serviço de Directório Online
@@ -37,8 +37,7 @@ export default function MinistrySidebar() {
             <Link
               href="/ministerio/sobre-nos"
               className={
-                pathname.includes("/ministerio/sobre-nos") ||
-                pathname.includes("/ministerio")
+                pathname.includes("/ministerio/sobre-nos")
                   ? "hover:underline font-semibold"
                   : "hover:underline font-light"
               }
@@ -68,6 +67,18 @@ export default function MinistrySidebar() {
               }
             >
               » Nossa Equipa
+            </Link>
+          </li>
+          <li>
+            <Link
+                href="/ministerio/o-ministro"
+                className={
+                  pathname.includes("/ministerio/o-ministro")
+                      ? "hover:underline font-semibold"
+                      : "hover:underline font-light"
+                }
+            >
+              » O Ministro
             </Link>
           </li>
         </ul>

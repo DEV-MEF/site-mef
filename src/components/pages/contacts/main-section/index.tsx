@@ -5,9 +5,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {useServicos} from "@/components/contexts/servicos";
 import {imageURLServer} from "@/lib/utils";
+import {useHookMessage} from "@/components/hooks/message";
 export default function MainSection() {
   const {ministerio, contato} = useServicos();
   const urlPhotoContact = (contato.photos?.[0]?.formats?.medium || contato.photos?.[0] || {}).url;
+  const {send, message, setMessage} = useHookMessage();
 
   return (
     <section className="w-full flex flex-col gap-28 py-32">
@@ -28,7 +30,11 @@ export default function MainSection() {
                 <Input
                   type="text"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
-                  placeholder="Your"
+                  placeholder="Seu Nome"
+                  value={message.name}
+                  onChange={(event) => {
+                    setMessage(prevState => ({...prevState, "name": event.target.value}))
+                  }}
                 />
               </div>
               <div className="w-full flex flex-col gap-2">
@@ -38,7 +44,11 @@ export default function MainSection() {
                 <Input
                   type="text"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
-                  placeholder="Name"
+                  placeholder="Seu último Nome"
+                  value={message.surname}
+                  onChange={(event) => {
+                    setMessage(prevState => ({...prevState, "surname": event.target.value}))
+                  }}
                 />
               </div>
             </div>
@@ -48,7 +58,11 @@ export default function MainSection() {
                 <Input
                   type="email"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
-                  placeholder="Your Email"
+                  placeholder="Seu Email"
+                  value={message.mail}
+                  onChange={(event) => {
+                    setMessage(prevState => ({...prevState, "mail": event.target.value}))
+                  }}
                 />
               </div>
               <div className="w-full flex flex-col gap-2">
@@ -56,7 +70,11 @@ export default function MainSection() {
                 <Input
                   type="tel"
                   className="w-full border border-[#D9D7D7] rounded-lg p-2"
-                  placeholder="+880"
+                  placeholder="+239"
+                  value={message.phone}
+                  onChange={(event) => {
+                    setMessage(prevState => ({...prevState, "phone": event.target.value}))
+                  }}
                 />
               </div>
             </div>
@@ -65,10 +83,21 @@ export default function MainSection() {
               <textarea
                 className="w-full border border-[#D9D7D7] rounded-lg p-2"
                 rows={4}
-                placeholder="Type Your Message Here..."
+                placeholder="Escreva sua mensagem aqui..."
+                value={message.message}
+                onChange={(event) => {
+                  setMessage(prevState => ({...prevState, "message": event.target.value}))
+                }}
               />
             </div>
-            <button className="bg-primary-blue text-white rounded-lg px-6 py-2">
+            <button className="bg-primary-blue text-white rounded-lg px-6 py-2"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if(message) {
+                        send(message)
+                      }
+                    }}
+            >
               Enviar Mensagem
             </button>
           </form>

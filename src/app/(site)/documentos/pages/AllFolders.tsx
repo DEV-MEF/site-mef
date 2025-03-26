@@ -3,12 +3,12 @@ import React from 'react';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
-import {useFolders} from "@/components/hooks/folders";
+import {useHookFolders} from "@/components/hooks/folders";
 
 
 
 const AllFolders = () => {
-    const {onClickFolder, folders, listCountByDocumentId} = useFolders();
+    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders();
   return (
     <div className="container mx-auto">
       {/* Header */}

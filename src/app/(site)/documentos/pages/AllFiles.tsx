@@ -6,7 +6,7 @@ import 'primeicons/primeicons.css';
 import {AxiosHttpClient} from "@/settings/axios";
 import {PdfViewer} from "@/lib/pdf-viewer";
 import {usePdfViewer} from "@/components/contexts/pdf-viewer";
-import {useFolders} from "@/components/hooks/folders";
+import {useHookFolders} from "@/components/hooks/folders";
 
 type File = {
     url: string,
@@ -20,7 +20,7 @@ type Doc = {
 }
 
 const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
-    const {onClickFolder, folders, listCountByDocumentId} = useFolders();
+    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders();
 
     const [files, setFiles] = useState<Doc[]>([]);
     const {openNewDocument} = usePdfViewer();

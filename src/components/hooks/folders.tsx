@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import {useRouter} from "next/navigation";
 
-export const useFolders = () => {
+export const useHookFolders = () => {
     const router = useRouter()
     const [updateCount, setUpdateCount] = useState<boolean>(true);
     const [folders, setFolders] = useState<Folders[]>([]);
