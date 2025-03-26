@@ -24,7 +24,6 @@ export default function Multimedia() {
     useEffect(() => {
         (async () => {
             AxiosHttpClient.get(`/towatches?&populate=*`).then(({data : {data}}) => {
-                console.log({data})
                 setMultimedia(data);
             });
         })()

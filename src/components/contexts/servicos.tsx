@@ -97,7 +97,6 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
         });
 
         AxiosHttpClient.get(`/contacts?${query}`).then(({data : {data}}) => {
-            console.log({data})
             setContato(data?.[0] || {});
         });
 
