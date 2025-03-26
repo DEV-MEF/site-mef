@@ -30,7 +30,7 @@
 // };
 
 // export default ContentRenderer;
-"use client"
+"use client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
@@ -41,6 +41,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import ReactMarkdown from "react-markdown";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
