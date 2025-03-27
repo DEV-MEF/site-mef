@@ -67,7 +67,7 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
                         className="pi pi-folder text-3xl text-[#5151F8] mb-3"
                         style={{display: 'block'}}
                     ></i>
-                    <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.nome}</p>
+                    <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.name}</p>
                     <div
                         className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                         style={{fontSize: '12px'}}

@@ -44,7 +44,7 @@ export const useHookFolders = (api: "document" | "legislation") => {
 
     interface Folders {
         documentId: string
-        nome: string
+        name: string
     }
 
     interface CountFileInFolder {
