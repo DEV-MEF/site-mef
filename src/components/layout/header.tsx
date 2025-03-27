@@ -52,6 +52,7 @@ export function Header() {
         { label: "Galeria de imagens", command: () => router.push("/galeria") },
         { label: "Multimédia", command: () => router.push("/multimedia") },
         { label: "Documentos", command: () => router.push("/documentos") },
+        { label: "Legislação", command: () => router.push("/legislacao") },
       ],
     },
     {

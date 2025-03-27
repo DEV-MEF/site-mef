@@ -19,7 +19,7 @@ type Doc = {
 }
 
 const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
-    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders("document");
+    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders("legislation");
 
     const [files, setFiles] = useState<Doc[]>([]);
     const {openNewDocument} = usePdfViewer();
@@ -27,7 +27,7 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
     useEffect(() => {
         (async () => {
             const {documentId} = await params;
-            AxiosHttpClient.get(`/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`).then(({data : {data}}) => {
+            AxiosHttpClient.get(`/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`).then(({data : {data}}) => {
                 setFiles(data);
             });
         })()
@@ -41,7 +41,7 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
         style={{ border: '1px solid #D6DDEB' }}
       >
         <p className="text-[#3B4158] text-sm flex items-center">
-          Home &raquo; Publicações &raquo; <span className="font-semibold"> Documentos</span>
+          Home &raquo; Publicações &raquo; <span className="font-semibold"> Lesgislação</span>
         </p>
       </div>
 
@@ -72,7 +72,7 @@ const AllFiles = ({params} : {params : Promise<{documentId: string}>}) => {
                         className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                         style={{fontSize: '12px'}}
                     >
-                        {count} Documento{count === 1 ? "" : "s"}
+                        {count ?? "--"} Lesgislaç{count === 1 ? "ão" : "ões"}
                     </div>
                 </div>
             }
