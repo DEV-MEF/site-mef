@@ -4,7 +4,6 @@ import Title from "@/components/layout/title";
 import { useEffect, useState } from "react";
 import { usePdfViewer } from "@/components/contexts/pdf-viewer";
 import { AxiosHttpClient } from "@/settings/axios";
-import { PdfViewer } from "@/lib/pdf-viewer";
 import moment from "moment";
 import qs from "qs";
 
