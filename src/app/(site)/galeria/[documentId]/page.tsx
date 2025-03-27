@@ -2,7 +2,7 @@ import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
 
-import GaleryImages from '../pages/GaleryImages';
+import GalleryImages from '../pages/GalleryImages';
 
 export default function Galeria({ params }: never) {
   return (
@@ -25,7 +25,7 @@ export default function Galeria({ params }: never) {
         </div>
 
         <div className="container mx-auto px-44 py-10 mb-20">
-          <GaleryImages params={params} />
+          <GalleryImages params={params} />
         </div>
     </div>
   );
