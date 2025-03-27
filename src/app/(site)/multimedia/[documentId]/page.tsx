@@ -140,7 +140,7 @@ const GalleryVideos = ({params} : {params : Promise<{documentId: string}>}) => {
                 showThumbnails
                 item={ItemTemplate}
                 thumbnail={thumbnailTemplate}
-                style={{ maxWidth: '900px', margin: '0 auto' }}
+                style={{ margin: '0 auto' }}
             />
         </div>
     );
