@@ -1,6 +1,9 @@
 .rerender p {
   color: #656565;
 }
+.rerender li {
+  color: #656565;
+}
 
 .rerender h4 {
   color: #1e2939;

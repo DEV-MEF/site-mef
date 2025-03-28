@@ -1,4 +1,4 @@
-import { FileText, ChevronRight } from "lucide-react";
+import { FileText, ChevronRight, ChevronsRight } from "lucide-react";
 import Link from "next/link";
 import Title from "@/components/layout/title";
 import { useEffect, useState } from "react";
@@ -52,16 +52,8 @@ export default function DocumentsSection() {
     <section className="w-full py-6">
       <div className="container mx-auto px-4 lg:px-8 ">
         <div className="flex items-center justify-between mb-6">
-          <Title text="Documentos" />
-          <Link
-            href="/documentos"
-            className="text-sm hover:underline flex items-center transition-colors text-primary-blue"
-          >
-            Mais documentos
-            <ChevronRight className="h-4 w-4 ml-1 " />
-          </Link>
+          <Title text="Documentos Recentes" />
         </div>
-
         <div className="grid">
           {files.map((value, index) => (
             <div key={index} className="group">
@@ -95,6 +87,13 @@ export default function DocumentsSection() {
             </div>
           ))}
         </div>
+        <Link
+          href="/documentos"
+          className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-8 ml-5"
+        >
+          Mais documentos
+          <ChevronsRight className="h-4 w-4 ml-1 " />
+        </Link>
       </div>
       <PdfViewer />
     </section>

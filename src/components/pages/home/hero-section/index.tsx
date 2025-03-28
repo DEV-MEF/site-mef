@@ -94,13 +94,15 @@ export const HeroSection = () => {
       AxiosHttpClient.get(`/highlights?${query}`).then(({ data: { data } }) => {
         setImages(
           (data as Image[]).map((image) => {
-            const noticias  = image?.news?.documentId ? "noticias/" : ""
-            return  {
+            const noticias = image?.news?.documentId ? "noticias/" : "";
+            return {
               title: image.title,
-                  src: imageURLServer + image.image.url,
-                subtitle: image.description,
-                link: `${noticias}${image?.news?.documentId || image?.link || "#"}`,
-            }
+              src: imageURLServer + image.image.url,
+              subtitle: image.description,
+              link: `${noticias}${
+                image?.news?.documentId || image?.link || "#"
+              }`,
+            };
           })
         );
       });
