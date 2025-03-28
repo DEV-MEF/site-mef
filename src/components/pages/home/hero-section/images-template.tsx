@@ -1,22 +1,21 @@
-"use client"
+"use client";
 import Image from "next/image";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type ImageTemplateProps = {
-    src: string;
-    title: string;
-    subtitle: string;
-    link: string
+  src: string;
+  title: string;
+  subtitle: string;
+  link: string;
 };
-
 
 export default function ImagesTemplate({
   title,
   subtitle,
   src,
-    link
+  link,
 }: ImageTemplateProps) {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <div className="relative w-full h-[500px]">
       <Image
@@ -33,18 +32,17 @@ export default function ImagesTemplate({
         <h2 className="text-3xl md:text-[4xl] md:text-[37px] lg:text-[44px] font-semibold mb-2 md:mb-4 lg:leading-tight">
           {title}
         </h2>
-        <p className="mt-2 mb-8 font-light lg:text-2xl">
-            {subtitle}
-        </p>
+        <p className="mt-2 mb-8 font-light lg:text-2xl">{subtitle}</p>
         <button
-            onClick={() => {
-                if (link.includes("http")) {
-                    window.open(link, "_blank", "noopener,noreferrer");
-                    return
-                }
-                router.push(link)
-            }}
-            className="bg-transparent text-white border font-semibold border-white cursor-pointer py-3 px-12 rounded hover:bg-white hover:text-primary-blue hover:border-primary-blue transition">
+          onClick={() => {
+            if (link.includes("http")) {
+              window.open(link, "_blank", "noopener,noreferrer");
+              return;
+            }
+            router.push(link);
+          }}
+          className="bg-transparent text-white border font-semibold border-white cursor-pointer py-3 px-12 rounded hover:bg-white hover:text-primary-blue hover:border-primary-blue transition"
+        >
           Ler Mais
         </button>
       </div>

@@ -6,17 +6,10 @@ export default function WhatWeDo() {
   return (
     <main className="w-full">
       <section className="w-full">
-        <div className="mb-20">
-          <Banner text_1="Ministério" text_2="O que fazemos" />
-
-          <div className="container mx-auto px-44 py-20">
-            <div className="grid grid-cols-3 gap-12">
-              <div className="col-span-2">
-                <WhatWeDoSection />
-              </div>
-              <MinistrySidebar />
-            </div>
-          </div>
+        <Banner text_1="Ministério" text_2="O que fazemos" />
+        <div className="w-full container mx-auto px-4 py-20 flex flex-col lg:flex-row gap-12">
+          <WhatWeDoSection />
+          <MinistrySidebar />
         </div>
       </section>
     </main>
