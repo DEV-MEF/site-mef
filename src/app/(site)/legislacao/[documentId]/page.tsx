@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import fundo from '@/assets/fundoPages.png';
 import 'primeicons/primeicons.css';
+import AllFiles from '../pages/AllFiles';
 
-import GaleryImages from '../pages/GaleryImages';
-
-export default function Galeria({ params }: never) {
+export default function Documents({ params }: never) {
   return (
     <div className='mb-20'>
         <div className="relative w-full h-[300px]">
@@ -20,13 +19,14 @@ export default function Galeria({ params }: never) {
                 aria-hidden="true"
             ></div>
             <div className="absolute inset-0 flex items-center px-44 py-56">
-            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Galeria</small></h1>
+            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Lesgislação</small></h1>
             </div>
         </div>
 
-        <div className="container mx-auto px-44 py-10 mb-20">
-          <GaleryImages params={params} />
+        <div className="container mx-auto px-44 py-10">
+          <AllFiles params={params}/>
         </div>
+
     </div>
   );
 }

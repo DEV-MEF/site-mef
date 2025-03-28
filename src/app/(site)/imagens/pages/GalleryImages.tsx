@@ -26,13 +26,13 @@ type TImageApi = {
   cover: ImageType
 };
 
-const GaleryImages = ({params} : {params : Promise<{code: string}>}) => {
+const GalleryImages = ({params} : {params : Promise<{documentId: string}>}) => {
   const [images, setImages] = useState<TImage[]>();
 
   useEffect(() => {
     (async () => {
-      const {code} = await params;
-      AxiosHttpClient.get(`/galleries?filters[documentId][$eq]=${code}&populate=*`).then(({data : {data}}) => {
+      const {documentId} = await params;
+      AxiosHttpClient.get(`/galleries?filters[documentId][$eq]=${documentId}&populate=*`).then(({data : {data}}) => {
         const colecao : TImageApi = data[0];
         console.log(colecao)
         setImages((colecao?.medias || []).map((value) => {
@@ -80,10 +80,10 @@ const GaleryImages = ({params} : {params : Promise<{code: string}>}) => {
         showThumbnails
         item={itemTemplate}
         thumbnail={thumbnailTemplate}
-        style={{ maxWidth: '900px', margin: '0 auto' }}
+        style={{ margin: '0 auto' }}
       />
     </div>
   );
 };
 
-export default GaleryImages;
+export default GalleryImages;

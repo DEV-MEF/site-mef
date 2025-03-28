@@ -8,7 +8,7 @@ import {useHookFolders} from "@/components/hooks/folders";
 
 
 const AllFolders = () => {
-    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders();
+    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders("document");
   return (
     <div className="container mx-auto">
       {/* Header */}
@@ -31,27 +31,29 @@ const AllFolders = () => {
 
       {/* Grid of Folders */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-        {folders.map((folder, index) => (
-          <div
-            key={index}
-            className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
-            onClick={() => {
-                onClickFolder(folder)
-            }}
-          >
-            <i
-              className="pi pi-folder text-3xl text-[#5151F8] mb-3"
-              style={{ display: 'block' }}
-            ></i>
-            <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.nome}</p>
-            <div
-              className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
-              style={{ fontSize: '12px' }}
-            >
-              {listCountByDocumentId[folder.documentId] ?? "--"} Documentos
-            </div>
-          </div>
-        ))}
+          {folders.map((folder, index) => {
+              const count = listCountByDocumentId[folder.documentId];
+                  return <div
+                      key={index}
+                      className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
+                      onClick={() => {
+                          onClickFolder(folder)
+                      }}
+                  >
+                      <i
+                          className="pi pi-folder text-3xl text-[#5151F8] mb-3"
+                          style={{display: 'block'}}
+                      ></i>
+                      <p className="text-[#3B4158] text-sm font-semibold mb-2">{folder.name}</p>
+                      <div
+                          className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
+                          style={{fontSize: '12px'}}
+                      >
+                          {count ?? "--"} Documento{count === 1 ? "" : "s"}
+                      </div>
+                  </div>
+              }
+          )}
       </div>
     </div>
   );

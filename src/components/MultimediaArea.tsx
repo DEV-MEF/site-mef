@@ -21,7 +21,7 @@ const MultimediaSection = () => {
     <div className="p-3 mt-20 bg-white">
       <div className='flex justify-between py-5 items-center'>
       <div className="flex flex-col mb-12 gap-2">
-           <h2 className="font-bold uppercase text-[16px] text-primary-blue">Multimédia</h2>
+           <h2 className="font-bold uppercase text-[16px] text-primary-blue">Vídeos</h2>
             <p className='text-text-second font-light'>Confira aqui os vídeos mais recentes e mantenha-se atualizado sobre tudo o que está acontecendo em primeira mão!</p>
         </div>
 

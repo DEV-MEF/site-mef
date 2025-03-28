@@ -1,7 +1,7 @@
 "use client"
-import Image from "next/image";
-import Logo from "@/assets/brasao1.png";
 import {useServicos} from "@/components/contexts/servicos";
+import {PdfViewer} from "@/lib/pdf-viewer";
+import React from "react";
 /*import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';*/
 
 const Footer = () => {
@@ -11,14 +11,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 lg:px-8  flex flex-col md:flex-row justify-between items-start">
         {/* Seção da Logo e Informações */}
         <div className="flex flex-col mb-8 md:mb-0">
-          <Image
-            src={Logo}
-            alt="Brasão de São Tomé e Príncipe"
-            width={80}
-            height={80}
-            className="object-contain"
-          />
-          <p className="mt-4 leading-8 text-xs font-light">
+          <p className="leading-8 text-xs font-light">
             Copyright © 2024 {ministerio.name}
             <br />
             {contato.location}
@@ -59,6 +52,7 @@ const Footer = () => {
         Website Desenvolvido e Hospedado pela{" "}
         <span className="font-normal text-white">DITEI</span>
       </div>
+      <PdfViewer />
     </footer>
   );
 };
