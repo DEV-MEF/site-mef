@@ -36,7 +36,7 @@ export default function Multimedia() {
                 multimedia?.map((value, index) => {
                     return <div key={index} className="relative w-full h-72 md:h-72 lg:h-80 rounded overflow-hidden shadow-md"
                                 onClick={() => {
-                                    route.push(`/multimedia/${value.documentId}`)
+                                    route.push(`/videos/${value.documentId}`)
                                 }}
                     >
                         <Image src={Notices} alt="Vídeo Principal" fill className="rounded object-cover" />

@@ -35,14 +35,14 @@ export default function AllGalery() {
     return (
         <div className="">
             <div className="flex flex-col mb-6 gap-2">
-                <h2 className="font-bold text-[16px] text-primary-blue">Galeria</h2>
-                <p className='text-text-second font-light'>Veja a nossa Galeria e acompanhe as nossas actividades!</p>
+                <h2 className="font-bold text-[16px] text-primary-blue">Imagens</h2>
+                <p className='text-text-second font-light'>Veja a nossa Galeria de Imagens e acompanhe as nossas actividades!</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
                 {
                     colecao?.map((value, index) => {
                         return <div key={index} className="relative w-full h-72 md:h-72 lg:h-72 rounded overflow-hidden shadow-md" onClick={() => {
-                            route.push(`/galeria/${value.documentId}`)
+                            route.push(`/imagens/${value.documentId}`)
                         }}>
                             <Image src={imageURLServer+(value.cover?.formats?.medium || value.cover).url} alt="Vídeo Principal" fill className="rounded object-cover" />
 

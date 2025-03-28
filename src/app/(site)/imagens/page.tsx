@@ -20,7 +20,7 @@ export default function Galeria() {
                 aria-hidden="true"
             ></div>
             <div className="absolute inset-0 flex items-center px-44 py-56">
-            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Galeria</small></h1>
+            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Imagens</small></h1>
             </div>
         </div>
 
