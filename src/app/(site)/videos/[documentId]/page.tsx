@@ -24,7 +24,7 @@ export default function Galeria({ params }: never) {
                 aria-hidden="true"
             ></div>
             <div className="absolute inset-0 flex items-center px-44 py-56">
-            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Multimédia</small></h1>
+            <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Vídeos</small></h1>
             </div>
         </div>
 
@@ -130,7 +130,7 @@ const GalleryVideos = ({params} : {params : Promise<{documentId: string}>}) => {
 
     return (
         <div className="container mx-auto px-10 py-20">
-            <h1 className="text-2xl font-semibold text-primary mb-6">Multimédia</h1>
+            <h1 className="text-2xl font-semibold text-primary mb-6">Vídeos</h1>
             <Galleria
                 value={images}
                 numVisible={8}
