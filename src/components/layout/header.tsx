@@ -84,7 +84,7 @@ export function Header() {
           {ministerio.name} da República Democrática de São Tomé e Príncipe
         </span>
       </div>
-      <div className="w-full container mx-auto h-24 flex items-center justify-between">
+      <div className="w-full container px-4 lg:px-2 lg:pl-3 mx-auto h-24 flex items-center justify-between">
         <Link href="/" className="">
           <Image
             src="/images/logo.new.png"
