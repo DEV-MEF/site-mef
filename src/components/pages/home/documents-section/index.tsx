@@ -1,4 +1,4 @@
-import { FileText, ChevronRight, ChevronsRight } from "lucide-react";
+import { FileText, ChevronsRight } from "lucide-react";
 import Link from "next/link";
 import Title from "@/components/layout/title";
 import { useEffect, useState } from "react";
