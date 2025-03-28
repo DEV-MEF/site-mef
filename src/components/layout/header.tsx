@@ -91,6 +91,7 @@ export function Header() {
             alt="Logo"
             width={300}
             height={10}
+            unoptimized
             className="object-contain"
           />
         </Link>
