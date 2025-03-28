@@ -50,7 +50,7 @@ export function Header() {
       items: [
         { label: "Notícia", command: () => router.push("/noticias") },
         { label: "Imagens", command: () => router.push("/imagens") },
-        { label: "Videos", command: () => router.push("/videos") },
+        { label: "Vídeos", command: () => router.push("/videos") },
         { label: "Documentos", command: () => router.push("/documentos") },
         { label: "Legislação", command: () => router.push("/legislacao") },
       ],
