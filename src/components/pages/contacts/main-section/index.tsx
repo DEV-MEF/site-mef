@@ -93,7 +93,14 @@ export default function MainSection() {
             <button className="bg-primary-blue text-white rounded-lg px-6 py-2"
                     onClick={(e) => {
                       e.preventDefault()
-                      if(message) {
+                      let valid = true;
+                      Object.keys(message).forEach((key) => {
+                        if(message[key as never]){
+                          valid = false;
+                        }
+                      })
+
+                      if (valid) {
                         send(message)
                       }
                     }}
