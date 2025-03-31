@@ -53,7 +53,6 @@ type Image = {
 type VideoApi = {
     documentId: string,
     description: string,
-    url: string
     media: Video[]
     cover: Image
 };

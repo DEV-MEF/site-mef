@@ -21,7 +21,6 @@ type TImage = { source: string, alt: string, title: string };
 type TImageApi = {
   documentId: string,
   description: string,
-  url: string
   medias: ImageType[]
   cover: ImageType
 };
