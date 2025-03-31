@@ -62,7 +62,7 @@ export function Header() {
     {
       label: "PUBLICAÇÕES",
       items: [
-        { label: "Notícia", command: () => router.push("/noticias") },
+        { label: "Notícias", command: () => router.push("/noticias") },
         { label: "Imagens", command: () => router.push("/imagens") },
         { label: "Vídeos", command: () => router.push("/videos") },
         { label: "Documentos", command: () => router.push("/documentos") },
