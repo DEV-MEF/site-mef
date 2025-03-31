@@ -7,6 +7,10 @@ import { imageURLServer, NewsItem } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import qs from "qs";
 import { AxiosHttpClient } from "@/settings/axios";
+import SectionTitle from "@/components/layout/title";
+import { MdDateRange } from "react-icons/md";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 moment.locale("pt");
 
 type Filters = {
@@ -60,18 +64,25 @@ export default function AllNews() {
   };
 
   return (
-    <div className="">
-      <div className="flex flex-col mb-6 gap-2">
-        <h2 className="font-bold text-[16px] text-primary-blue">
-          ÚLTIMAS NOTÍCIAS
-        </h2>
-        <p className="text-text-second font-light">
-          Acompanhe as últimas notícias e fique sempre atualizado com as
-          novidades em tempo real!
-        </p>
+    <section className="w-full flex- flex-col">
+      <div className="w-full flex flex-col md:flex-row mb-6 gap-2 items-center justify-between">
+        <div className="w-full">
+          <SectionTitle text="ÚLTIMAS NOTÍCIAS" />
+          <p className="text-zinc-500 mt-2 mb-4">
+            Acompanhe as últimas notícias e fique sempre atualizado com as
+            novidades em tempo real!
+          </p>
+        </div>
+        <div className="w-full relative md:w-6/12 lg:w-5/12 2xl:w-4/12">
+          <Input
+            placeholder="Pesquisar..."
+            className="w-full h-12 pl-5 pr-12 rounded-md border border-zinc-300 focus:border-primary-blue focus-visible:ring-0 focus:ring-0 focus:outline-none text-zinc-800"
+          />
+          <Search className="absolute right-4 top-3 cursor-pointer transition-colors placeholder:text-text-light/90 text-text-second/60 hover:text-text-second/80" />
+        </div>
       </div>
-      <div className="py-3">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+      <div className="w-full py-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 2xl:gap-4">
           {news.map((item) => (
             <div
               key={item.documentId}
@@ -96,19 +107,13 @@ export default function AllNews() {
               </div>
               <div className="px-4 md:px-6 lg:px-7 py-4 flex flex-col gap-2">
                 <div className="flex items-center text-text-light text-xs mb-2">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M6 2a1 1 0 000 2h8a1 1 0 100-2H6zM3 5a2 2 0 012-2h10a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm3 1a1 1 0 100 2h8a1 1 0 100-2H6z" />
-                  </svg>
+                  <MdDateRange size={16} className="mb-1 mr-1" />
                   {moment(item.createdAt, moment.ISO_8601).format("LL")}
                 </div>
                 <h3 className="text-text-primary font-bold text-sm mb-1">
                   {item.title.slice(0, 82)}
                 </h3>
-                <p className="text-text-second text-xs font-normal mb-4">
+                <p className="text-text-light text-xs font-normal mb-4">
                   {item.summary?.slice(0, 98)}
                 </p>
                 <button
@@ -124,6 +129,6 @@ export default function AllNews() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
