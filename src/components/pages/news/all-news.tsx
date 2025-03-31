@@ -10,7 +10,8 @@ import { AxiosHttpClient } from "@/settings/axios";
 import SectionTitle from "@/components/layout/title";
 import { MdDateRange } from "react-icons/md";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { RiSearchLine } from "react-icons/ri";
+import PaginationComponent from "./pagination";
 moment.locale("pt");
 
 type Filters = {
@@ -78,10 +79,14 @@ export default function AllNews() {
             placeholder="Pesquisar..."
             className="w-full h-12 pl-5 pr-12 rounded-md border border-zinc-300 focus:border-primary-blue focus-visible:ring-0 focus:ring-0 focus:outline-none text-zinc-800"
           />
-          <Search className="absolute right-4 top-3 cursor-pointer transition-colors placeholder:text-text-light/90 text-text-second/60 hover:text-text-second/80" />
+          <RiSearchLine
+            size={24}
+            className="absolute right-4 top-3 cursor-pointer transition-colors placeholder:text-text-light/90 text-text-second/60 hover:text-text-second/80"
+            title="Pesquisar notícias"
+          />
         </div>
       </div>
-      <div className="w-full py-3">
+      <div className="w-full py-3 mb-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 2xl:gap-4">
           {news.map((item) => (
             <div
@@ -129,6 +134,7 @@ export default function AllNews() {
           ))}
         </div>
       </div>
+      <PaginationComponent />
     </section>
   );
 }
