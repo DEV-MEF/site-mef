@@ -5,7 +5,7 @@ import AllNews from "@/components/pages/news/all-news";
 
 export default function Noticias() {
   return (
-    <main className="mb-20">
+    <main className="w-full mb-20">
       <div className="relative w-full h-[300px]">
         <Image
           src={fundo}
@@ -24,8 +24,7 @@ export default function Noticias() {
           </h1>
         </div>
       </div>
-
-      <div className="container mx-auto px-44 py-16">
+      <div className="w-full container px-4 mx-auto py-16">
         <AllNews />
       </div>
     </main>
