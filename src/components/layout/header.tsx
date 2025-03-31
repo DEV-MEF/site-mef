@@ -62,7 +62,7 @@ export function Header() {
     {
       label: "PUBLICAÇÕES",
       items: [
-        { label: "Notícia", command: () => router.push("/noticias") },
+        { label: "Notícias", command: () => router.push("/noticias") },
         { label: "Imagens", command: () => router.push("/imagens") },
         { label: "Vídeos", command: () => router.push("/videos") },
         { label: "Documentos", command: () => router.push("/documentos") },
@@ -84,13 +84,13 @@ export function Header() {
           {ministerio.name} da República Democrática de São Tomé e Príncipe
         </span>
       </div>
-      <div className="w-full container px-4 lg:px-2 lg:pl-3 mx-auto h-24 flex items-center justify-between">
+      <div className="w-full container px-4 -pl-10 lg:px-2 lg:pl-3 mx-auto h-24 flex items-center justify-between">
         <Link href="/" className="">
           <Image
             src="/images/logo.new.png"
             alt="Logo"
             width={300}
-            height={10}
+            height={20}
             unoptimized
             className="object-contain"
           />
@@ -98,7 +98,7 @@ export function Header() {
         <div className="">
           <Menubar
             model={menuItems}
-            className="border-none shadow-none w-10 h-10 md:w-auto bg-primary-blue text-white md:text-current outline-none md:bg-transparent focus:shadow-transparent focus-visible:shadow-none"
+            className="border-none uppercase shadow-none w-10 h-10 md:w-auto  text-white md:text-current outline-none md:bg-transparent focus:shadow-transparent focus-visible:shadow-none"
           />
         </div>
       </div>

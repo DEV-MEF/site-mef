@@ -37,6 +37,22 @@ body {
   width: auto;
   background-color: transparent;
 }
+
+@media (min-width: 970px) {
+  .p-submenu-list .p-menuitem-content:hover .p-menuitem-text {
+    color: white !important;
+  }
+  /* .p-menuitemt:hover .p-menuitem-link {
+    color: white !important;
+  } */
+  .p-menuitem-content .p-menuitem-link:hover {
+    color: white !important;
+  }
+
+  .p-menuitem .p-menuitem-content:hover {
+    background-color: #3a3b7b;
+  }
+}
 @media (min-width: 320px) and (max-width: 960px) {
   .p-menubar {
     background-color: #3a3b7b !important;
@@ -62,10 +78,10 @@ body {
 .p-focus .p-menuitem-content {
   background-color: #ffffff;
 }
-.p-menuitem .p-menuitem-content:hover {
+/* .p-menuitem .p-menuitem-content:hover {
   background-color: #3a3b7b;
   color: white;
-}
+} */
 .p-submenu-list {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   transition: all 0.2s ease;
