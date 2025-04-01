@@ -1,59 +1,75 @@
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export default function PaginationComponent() {
+interface PaginationProps {
+  pagination: {
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
+  };
+}
+
+export default function PaginationComponent({ pagination }: PaginationProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const totalPages = pagination.pageCount;
+
+  const changePage = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+
+    const newParams = new URLSearchParams(window.location.search);
+    newParams.set("page", page.toString());
+
+    router.push(`?${newParams.toString()}`);
+  };
+
   return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious className="text-primary-blue/60" href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink className="text-primary-blue" href="#">
-            1
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis className="text-primary-blue/60" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            className="text-primary-blue/80 hover:text-primary-blue"
-            href="#"
-          >
-            6
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            className="text-primary-blue/80 hover:text-primary-blue"
-            href="#"
-          >
-            7
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            className="text-primary-blue/80 hover:text-primary-blue"
-            href="#"
-          >
-            8
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext
-            className="text-primary-blue hover:text-primary-blue/80"
-            href="#"
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+      <Pagination>
+        <PaginationContent>
+          {/* Botão Anterior */}
+          <PaginationItem>
+            <PaginationPrevious
+                className={`text-primary-blue/60 ${currentPage === 1 ? "opacity-50 cursor-pointer pointer-events-none" : "cursor-pointer"}`}
+                onClick={() => changePage(currentPage - 1)}
+                href="#"
+            />
+          </PaginationItem>
+
+          {/* Paginação dinâmica */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink
+                    className={`text-primary-blue ${
+                        currentPage === page ? "cursor-pointer font-bold border-b-2 border-primary-blue" : "cursor-pointer"
+                    }`}
+                    href="#"
+                    onClick={() => changePage(page)}
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+          ))}
+
+          {/* Botão Próximo */}
+          <PaginationItem>
+            <PaginationNext
+                className={`text-primary-blue/60 ${currentPage === totalPages ? " cursor-pointer opacity-50 pointer-events-none" : "cursor-pointer"}`}
+                onClick={() => changePage(currentPage + 1)}
+                href="#"
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
   );
 }
