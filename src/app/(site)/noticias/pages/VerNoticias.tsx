@@ -111,7 +111,7 @@ export default function VerNoticias({params}: { params: { documentId: string } }
         };
 
         fetchCounts();
-    }, [categoryNews]);
+    }, [categoryNews, listCountByDocumentId]);
 
     const readMore = (documentId: string) => {
         router.push(`/noticias/${documentId}`);
