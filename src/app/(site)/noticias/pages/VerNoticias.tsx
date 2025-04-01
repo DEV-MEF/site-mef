@@ -75,8 +75,9 @@ export default function VerNoticias({params}: { params: { documentId: string } }
         })();
     }, []);
 
-// contagem de noticias por categorias
+// contagem de notícias por categorias
     useEffect(() => {
+        console.log(categoryNews)
         if (categoryNews.length === 0) return; // Evita chamadas desnecessárias
 
         const fetchCounts = async () => {
@@ -103,6 +104,8 @@ export default function VerNoticias({params}: { params: { documentId: string } }
                     updatedCounts[documentId] = meta.pagination.total;
                 })
             );
+
+            console.log(listCountByDocumentId)
 
             setListCountByDocumentId(updatedCounts);
         };
@@ -187,9 +190,8 @@ export default function VerNoticias({params}: { params: { documentId: string } }
                                    onClick={() => filterNews("", categoria.documentId)}
                                 >
                                     <li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
-                                        {categoria.Descricao} <span className="text-gray-500">
-                                        { listCountByDocumentId[categoria.documentId] }
-                                    </span>
+                                        {categoria.Descricao}
+                                        <span className="text-gray-500">{ listCountByDocumentId[categoria.documentId] }</span>
                                     </li>
                                 </a>
                             ))}
