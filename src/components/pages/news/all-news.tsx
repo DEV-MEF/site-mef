@@ -59,7 +59,7 @@ export default function AllNews() {
             .catch((error) => {
                 console.error("Erro ao buscar notícias:", error);
             });
-    }, [searchParams]); // Agora dispara a busca sempre que `searchParams` mudar
+    }, [searchParams]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
