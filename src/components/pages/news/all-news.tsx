@@ -27,7 +27,7 @@ type Meta = {
 export default function AllNews() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [search, setSearch] = useState(""); // Estado para pesquisa
+    const [search, setSearch] = useState("");
     const [news, setNews] = useState<NewsItem[]>([]);
     const [meta, setMeta] = useState<Meta | null>(null);
 
