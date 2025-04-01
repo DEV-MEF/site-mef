@@ -33,7 +33,7 @@ export default function AllNews() {
 
     useEffect(() => {
         const page = Number(searchParams.get("page")) || 1;
-        const pageSize = 6; // Define 6 itens por página
+        const pageSize = 6;
 
         const filters = {
             ...(searchParams.get("tag") && { tags: { name: { $contains: searchParams.get("tag") } } }),
