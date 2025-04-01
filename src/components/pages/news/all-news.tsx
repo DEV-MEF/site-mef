@@ -67,7 +67,8 @@ export default function AllNews() {
     };
 
     const applySearch = () => {
-        const newParams = new URLSearchParams(window.location.search);
+        //const newParams = new URLSearchParams(window.location.search);
+        const newParams = new URLSearchParams();
 
         if (search.trim()) {
             newParams.set("search", search);
