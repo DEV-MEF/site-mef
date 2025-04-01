@@ -38,7 +38,8 @@ export default function AllNews() {
         const filters = {
             ...(searchParams.get("tag") && { tags: { name: { $contains: searchParams.get("tag") } } }),
             ...(searchParams.get("category") && { category: { documentId: { $eq: searchParams.get("category") } } }),
-            ...(searchParams.get("search") && { title: { $contains: searchParams.get("search") } })
+            ...(searchParams.get("search") && { title: { $contains: searchParams.get("search") } }),
+            ...(searchParams.get("search") && { summary: { $contains: searchParams.get("search") } }),
         };
 
         const query = qs.stringify(
