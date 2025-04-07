@@ -31,7 +31,7 @@ export default function Servicos() {
             </div>
         </div>
 
-        <div className="container mx-auto px-44 py-20">
+        <div className="container mx-auto py-20">
       <div className="grid grid-cols-3 gap-12">
 
         <div className="col-span-2">
