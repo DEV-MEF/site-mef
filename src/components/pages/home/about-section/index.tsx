@@ -1,17 +1,20 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
-import {useServicos} from "@/components/contexts/servicos";
-import {useRouter} from "next/navigation";
+import { useServicos } from "@/components/contexts/servicos";
+import { useRouter } from "next/navigation";
 
 export default function AboutSection() {
-    const {ministerio} = useServicos();
-    const route = useRouter();
+  const { ministerio } = useServicos();
+  const route = useRouter();
   return (
-    <div className="w-full container px-4 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-11 md:gap-3 lg:gap-11 py-20 md:py-16 lg:py-20">
+    <section className="w-full container px-4 flex flex-col md:flex-row items-center justify-center gap-11 md:gap-3 lg:gap-11 md:py-0 mt-14 lg:mt-20">
       {/* Card 1 */}
-      <div className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
-           onClick={() => { route.push("/ministerio/sobre-nos")}}
+      <div
+        className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+        onClick={() => {
+          route.push("/ministerio/sobre-nos");
+        }}
       >
         <Image
           src="/images/about-section/about.svg"
@@ -27,8 +30,11 @@ export default function AboutSection() {
       </div>
 
       {/* Card 2 */}
-      <div className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-primary-blue bg-opacity-90 text-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
-           onClick={() => { route.push("/ministerio/o-que-fazemos")}}
+      <div
+        className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-primary-blue bg-opacity-90 text-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+        onClick={() => {
+          route.push("/ministerio/o-que-fazemos");
+        }}
       >
         <Image
           width={250}
@@ -45,8 +51,11 @@ export default function AboutSection() {
       </div>
 
       {/* Card 3 */}
-      <div className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
-           onClick={() => { route.push("/ministerio/nossa-equipa")}}
+      <div
+        className="flex flex-col items-start p-10 md:p-6 lg:p-10 bg-white shadow-[0_-10px_39px_0_rgba(8,18,109,.1)] rounded-lg w-full md:w-1/3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+        onClick={() => {
+          route.push("/ministerio/nossa-equipa");
+        }}
       >
         <Image
           width={250}
@@ -61,6 +70,6 @@ export default function AboutSection() {
           Públicas. Saiba onde estão e o que fazem.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

@@ -25,7 +25,7 @@ export default function Noticias({ params }: never) {
         </div>
       </div>
 
-      <div className="container mx-auto px-44 py-16">
+      <div className="w-full container mx-auto px-4 lg:px-8 py-16">
         <SingularNews params={params} />
       </div>
     </main>

@@ -47,12 +47,15 @@ export default function CardsList() {
   const [service, setService] = useState<ServiceItem[]>([]);
 
   useEffect(() => {
-    const query = qs.stringify({
-      populate: "*",
-      filters: {
-        type: "Serviço"
-      }
-    }, { encodeValuesOnly: true });
+    const query = qs.stringify(
+      {
+        populate: "*",
+        filters: {
+          type: "Serviço",
+        },
+      },
+      { encodeValuesOnly: true }
+    );
 
     (async () => {
       AxiosHttpClient.get(`/onlines?${query}`).then(({ data: { data } }) => {
@@ -64,7 +67,7 @@ export default function CardsList() {
   }, []);
 
   return (
-    <Carousel className="md:pr-14 w-full relative">
+    <Carousel className="md:pr-14 w-full relative -mt-4">
       {/* Controles de navegação agrupados no canto superior direito */}
       <div className="flex justify-end mb-4">
         <div className="flex items-center -space-x-16">

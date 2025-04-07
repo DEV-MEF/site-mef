@@ -24,7 +24,7 @@ export default function Noticias() {
           </h1>
         </div>
       </div>
-      <div className="w-full container px-4 mx-auto py-16">
+      <div className="w-full container px-4 lg:px-8 mx-auto py-16">
         <AllNews />
       </div>
     </main>
