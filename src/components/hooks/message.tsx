@@ -2,7 +2,7 @@
 import {AxiosHttpClient} from "@/settings/axios";
 import {useState} from "react";
 
-type Message = {
+export type Message = {
     name: string
     surname: string
     mail: string

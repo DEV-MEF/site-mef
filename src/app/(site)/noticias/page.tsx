@@ -2,6 +2,7 @@ import Image from "next/image";
 import fundo from "@/assets/fundoPages.png";
 import "primeicons/primeicons.css";
 import AllNews from "@/components/pages/news/all-news";
+import {Suspense} from "react";
 
 export default function Noticias() {
   return (
@@ -24,9 +25,11 @@ export default function Noticias() {
           </h1>
         </div>
       </div>
-      <div className="w-full container px-4 lg:px-8 mx-auto py-16">
-        <AllNews />
-      </div>
+        <Suspense>
+          <div className="w-full container px-4 mx-auto py-16">
+            <AllNews />
+          </div>
+        </Suspense>
     </main>
   );
 }

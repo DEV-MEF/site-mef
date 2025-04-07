@@ -1,14 +1,10 @@
-"use client";
-import "primeicons/primeicons.css"; // Importa ícones do PrimeReact
-import Image from "next/image"; // Para carregar imagens otimizadas no Next.js
+"use client"
+import 'primeicons/primeicons.css'; // Importa ícones do PrimeReact
+import Image from 'next/image'; // Para carregar imagens otimizadas no Next.js
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import qs from "qs";
-import ContentRenderer, {
-    CategoryNews,
-    imageURLServer,
-    NewsItem,
-} from "@/lib/utils";
+import ContentRenderer, {CategoryNews, imageURLServer, NewsItem} from "@/lib/utils";
 import moment from "moment/moment";
 import {useRouter} from "next/navigation";
 
@@ -18,17 +14,17 @@ interface CountFileInFolder {
     [k: string]: number
 }
 
-export default function SingularNews({params,}: { params: { documentId: string }; }) {
+export default function VerNoticias({params}: { params: { documentId: string } }) {
     const router = useRouter();
     const [news, setNews] = useState<NewsItem>();
     const [reticentlyNews, setReticentlyNews] = useState<NewsItem[]>([]);
     const [listCountByDocumentId, setListCountByDocumentId] = useState<CountFileInFolder>({});
     const [categoryNews, setCategoryNews] = useState<CategoryNews[]>([]);
 
-    // carregamento de noticia
+// carregamento de noticia
     useEffect(() => {
         (async () => {
-            const {documentId} = await params;
+            const { documentId } = await params;
             const query = qs.stringify(
                 {
                     populate: "*",
@@ -43,21 +39,19 @@ export default function SingularNews({params,}: { params: { documentId: string }
                 }
             );
 
-            const {data: {data}} = await AxiosHttpClient.get(`/news?${query}`);
+            const { data: { data } } = await AxiosHttpClient.get(`/news?${query}`);
             setNews(data[0]);
         })();
     }, [params]);
 
-    // categorias de notícias
+// categorias de notícias
     useEffect(() => {
-        (async () => {
-            await AxiosHttpClient.get(`/categoria-de-noticias`).then(({data: {data}}) => {
-                setCategoryNews(data);
-            });
-        })();
+        AxiosHttpClient.get(`/categoria-de-noticias`).then(({ data: { data } }) => {
+            setCategoryNews(data);
+        });
     }, []);
 
-    // noticias recentes
+// noticias recentes
     useEffect(() => {
         const query = qs.stringify(
             {
@@ -74,47 +68,50 @@ export default function SingularNews({params,}: { params: { documentId: string }
         );
 
         (async () => {
-            const {data: {data}} = await AxiosHttpClient.get(`/news?${query}`);
+            const { data: { data } } = await AxiosHttpClient.get(`/news?${query}`);
             if (data) {
                 setReticentlyNews(data);
             }
         })();
     }, []);
 
-    // contagem de notícias por categorias
+// contagem de notícias por categorias
     useEffect(() => {
-      if (categoryNews.length === 0) return;
+        console.log(categoryNews)
+        if (categoryNews.length === 0) return; // Evita chamadas desnecessárias
 
-      const fetchCounts = async () => {
-        const updatedCounts: CountFileInFolder = {};
+        const fetchCounts = async () => {
+            const updatedCounts: CountFileInFolder = {};
 
-        await Promise.all(
-            categoryNews.map(async ({ documentId }) => {
-              const query = qs.stringify(
-                  {
-                    pagination: { limit: 1 },
-                    filters: {
-                      category: {
-                        documentId: {
-                          $eq: documentId,
+            await Promise.all(
+                categoryNews.map(async ({ documentId }) => {
+                    const query = qs.stringify(
+                        {
+                            pagination: { limit: 1 },
+                            filters: {
+                                category: {
+                                    documentId: {
+                                        $eq: documentId,
+                                    },
+                                },
+                            },
+                            sort: ["createdAt:desc"],
                         },
-                      },
-                    },
-                    sort: ["createdAt:desc"],
-                  },
-                  { encodeValuesOnly: true }
-              );
+                        { encodeValuesOnly: true }
+                    );
 
-              const { data: { meta } } = await AxiosHttpClient.get(`/news?${query}`);
-              updatedCounts[documentId] = meta.pagination.total;
-            })
-        );
+                    const { data: { meta } } = await AxiosHttpClient.get(`/news?${query}`);
+                    updatedCounts[documentId] = meta.pagination.total;
+                })
+            );
 
-        setListCountByDocumentId(updatedCounts);
-      };
+            console.log(listCountByDocumentId)
 
-      fetchCounts();
-    }, [categoryNews]);
+            setListCountByDocumentId(updatedCounts);
+        };
+
+        fetchCounts();
+    }, [categoryNews, listCountByDocumentId]);
 
     const readMore = (documentId: string) => {
         router.push(`/noticias/${documentId}`);
@@ -123,6 +120,7 @@ export default function SingularNews({params,}: { params: { documentId: string }
     const filterNews = (tag: string, category: string) => {
         router.push(`/noticias/?tag=${tag}&category=${category}`);
     };
+
 
     return (
         <div className="container">
@@ -151,14 +149,9 @@ export default function SingularNews({params,}: { params: { documentId: string }
                 <div className="col-span-2">
                     <div className="mb-8">
                         <Image
-                            src={
-                                news && news.image
-                                    ? `${imageURLServer}${
-                                        news.image.formats?.large?.url ||
-                                        news.image.formats?.medium?.url ||
-                                        news.image.url
-                                    }`
-                                    : "/images/ministry-logo.png"
+                            src={news && news.image
+                                ? `${imageURLServer}${news.image.formats?.large?.url || news.image.formats?.medium?.url || news.image.url}`
+                                : "/images/ministry-logo.png"
                             }
                             alt="Imagem principal da notícia"
                             width={1212}
@@ -171,19 +164,14 @@ export default function SingularNews({params,}: { params: { documentId: string }
                     {news && (
                         <>
                             <p className="font-light mb-4">{news.summary}</p>
-                            <ContentRenderer
-                                key={news.documentId}
-                                content={news.content}
-                                type={"blocks"}
-                            />
+                            <ContentRenderer key={news.documentId} content={news.content} type={"blocks"}/>
                         </>
                     )}
 
                     {news?.attaches?.map((item) => (
-                        <a
-                            key={item.documentId}
-                            href={imageURLServer + item.url}
-                            target={"_blank"}
+                        <a key={item.documentId}
+                           href={imageURLServer + item.url}
+                           target={"_blank"}
                         >
                             <li className="flex justify-between border-b border-gray-300 py-2 cursor-pointer efects hover:pl-5">
                                 {item.name} <span className="text-gray-500"></span>
@@ -195,20 +183,15 @@ export default function SingularNews({params,}: { params: { documentId: string }
                 {/* Coluna de Cards (1x) */}
                 <div className="col-span-1 flex flex-col space-y-8">
                     <div className="bg-[#F1F1FF] p-6 rounded-lg">
-                        <h4 className="text-lg font-semibold text-primary mb-4">
-                            Categorias
-                        </h4>
+                        <h4 className="text-lg font-semibold text-primary mb-4">Categorias</h4>
                         <ul className="font-light text-sm space-y-4 cursor-pointer">
                             {categoryNews.map((categoria, index) => (
-                                <a
-                                    key={index}
-                                    onClick={() => filterNews("", categoria.documentId)}
+                                <a key={index}
+                                   onClick={() => filterNews("", categoria.documentId)}
                                 >
                                     <li className="flex justify-between border-b border-gray-300 py-2 efects hover:pl-5">
-                                        {categoria.Descricao}{" "}
-                                        <span className="text-gray-500">
-                                            {listCountByDocumentId[categoria.documentId]}
-                                        </span>
+                                        {categoria.Descricao}
+                                        <span className="text-gray-500">{ listCountByDocumentId[categoria.documentId] }</span>
                                     </li>
                                 </a>
                             ))}
@@ -216,40 +199,27 @@ export default function SingularNews({params,}: { params: { documentId: string }
                     </div>
 
                     <div className="bg-[#F1F1FF] p-6 rounded-lg">
-                        <h4 className="text-lg font-semibold text-primary mb-4">
-                            Notícias Recentes
-                        </h4>
+                        <h4 className="text-lg font-semibold text-primary mb-4">Notícias Recentes</h4>
                         <div className="space-y-6">
                             {reticentlyNews.map((news, index) => (
                                 <div key={index} className="flex items-center space-x-4">
                                     <div className="w-24 h-16 relative">
                                         <Image
-                                            src={
-                                                news && news.image
-                                                    ? `${imageURLServer}${
-                                                        news.image.formats?.large?.url ||
-                                                        news.image.formats?.medium?.url ||
-                                                        news.image.url
-                                                    }`
-                                                    : "/images/ministry-logo.png"
+                                            src={news && news.image
+                                                ? `${imageURLServer}${news.image.formats?.large?.url || news.image.formats?.medium?.url || news.image.url}`
+                                                : "/images/ministry-logo.png"
                                             }
                                             alt="Notícia"
-                                            fill
-                                            className="rounded-lg object-cover"
+                                            fill className="rounded-lg object-cover"
                                         />
                                     </div>
                                     <div>
                                         <p className="font-light text-sm cursor-pointer">
                                             <a
                                                 onClick={() => readMore(news.documentId)}
-                                                className="text-primary hover:underline"
-                                            >
-                                                {news.title.slice(0, 32)}
-                                            </a>
+                                                className="text-primary hover:underline">{news.title.slice(0, 32)}</a>
                                         </p>
-                                        <p className="text-gray-500 text-xs">
-                                            {news.category?.Descricao}
-                                        </p>
+                                        <p className="text-gray-500 text-xs">{news.category?.Descricao}</p>
                                     </div>
                                 </div>
                             ))}
@@ -257,18 +227,15 @@ export default function SingularNews({params,}: { params: { documentId: string }
                     </div>
 
                     <div className="bg-[#F1F1FF] p-6 rounded-lg">
-                        <h4 className="text-lg font-semibold text-primary mb-4">
-                            Tags Populares
-                        </h4>
+                        <h4 className="text-lg font-semibold text-primary mb-4">Tags Populares</h4>
                         <div className="flex flex-wrap gap-2">
                             {news?.tags?.map((tag) => (
                                 <span
-                                    onClick={() => filterNews(tag.name, "")}
+                                    onClick={() => filterNews(tag.name, "",)}
                                     key={tag.id}
-                                    className="bg-[#5151F8] text-white px-3 py-1 rounded-full text-[12px] cursor-pointer"
-                                >
-                  {tag.name}
-                </span>
+                                    className="bg-[#5151F8] text-white px-3 py-1 rounded-full text-[12px] cursor-pointer">
+                                    {tag.name}
+                                </span>
                             ))}
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import ContentRenderer from "@/lib/utils";
 import "@/styles/react-markdown-rerender.css"
+import SectionTitle from "@/components/layout/title";
 
 export default function OurteamSection() {
   const [teamSections, setTeamSections] = useState([]);
@@ -22,10 +23,13 @@ export default function OurteamSection() {
   }, []);
 
   return (
-    <section className="w-full rerender">
-      {teamSections.map(({ content, id }) => {
-        return <ContentRenderer key={id} content={content} type={"blocks"} />;
-      })}
-    </section>
+      <section className="w-full flex flex-col gap-8">
+        <SectionTitle text="Nossa equipa"/>
+        <section className="w-full rerender">
+          {teamSections.map(({content, id}) => {
+            return <ContentRenderer key={id} content={content} type={"blocks"}/>;
+          })}
+        </section>
+      </section>
   );
 }
