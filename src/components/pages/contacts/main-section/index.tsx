@@ -8,7 +8,9 @@ import {imageURLServer} from "@/lib/utils";
 import {useHookMessage} from "@/components/hooks/message";
 import {useRef} from "react";
 import {Message} from "postcss";
-export default function MainSection() {
+
+
+export default function ContactMainSection() {
   const {ministerio, contato} = useServicos();
   const urlPhotoContact = (contato.photos?.[0]?.formats?.medium || contato.photos?.[0] || {}).url;
   const {send, message, setMessage} = useHookMessage();
