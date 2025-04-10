@@ -164,7 +164,7 @@ export function Header() {
                       variant="ghost"
                       className={cn(
                         "uppercase text-sm px-3 py-5 rounded-none relative",
-                        "hover:bg-primary-blue/10 hover:text-primary-blue cursor-pointer hover:font-semibold transition-all ease-in-out duration-50",
+                        "hover:bg-primary-blue/10 hover:text-primary-blue cursor-pointer transition-all ease-in-out duration-50",
                         isActive(item.href, item.items)
                           ? "text-primary-blue font-semibold"
                           : "text-text-primary font-medium"
@@ -181,7 +181,7 @@ export function Header() {
                           className={cn(
                             "w-full justify-start font-normal uppercase",
                             "hover:bg-primary-blue/10 hover:text-primary-blue",
-                            "transition-all duration-150 hover:pl-7 cursor-pointer hover:font-semibold",
+                            "transition-all duration-150 hover:pl-7 cursor-pointer ",
                             isSubItemActive(subItem)
                               ? "text-primary-blue bg-primary-blue/5 font-semibold"
                               : "text-text-primary font-medium"
@@ -201,7 +201,7 @@ export function Header() {
                     variant="ghost"
                     className={cn(
                       "uppercase font-medium text-sm px-3 py-5 rounded-none relative",
-                      "hover:bg-primary-blue/10 hover:text-primary-blue cursor-pointer rounded hover:font-semibold",
+                      "hover:bg-primary-blue/10 hover:text-primary-blue cursor-pointer rounded",
                       "transition-colors duration-200",
                       isActive(item.href)
                         ? "text-primary-blue font-semibold"
