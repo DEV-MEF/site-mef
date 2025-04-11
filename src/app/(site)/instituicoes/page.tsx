@@ -5,6 +5,8 @@ import 'primeicons/primeicons.css';
 import {useServicos} from "@/components/contexts/servicos";
 import ContentRenderer from "@/lib/utils";
 import {twMerge} from "tailwind-merge";
+import "@/styles/react-markdown-rerender.css"
+
 
 
 export default function Servicos() {
@@ -27,14 +29,14 @@ export default function Servicos() {
             ></div>
             {/* Texto sobre a imagem */}
             <div className="absolute inset-0 flex items-center px-44 py-56">
-                <h1 className="text-white text-3xl font-bold">Serviços <small className='font-light'>» {selectedDirecao.name || ""}</small></h1>
+                <h1 className="text-white text-3xl font-bold">Instituições <small className='font-light'>» {selectedDirecao.name || ""}</small></h1>
             </div>
         </div>
 
         <div className="container mx-auto py-20">
       <div className="grid grid-cols-3 gap-12">
 
-        <div className="col-span-2">
+        <div className="col-span-2 w-full rerender">
             {<ContentRenderer content={selectedDirecao?.content || ""} type={"blocks"} />}
         </div>
         <div className="col-span-1 flex flex-col space-y-8">
@@ -57,7 +59,7 @@ export default function Servicos() {
             <div className="text-primary text-3xl">
               <i className="pi pi-building" style={{ fontSize: '3rem' }}></i>
             </div>
-            <h4 className="text-lg font-semibold">Serviços</h4>
+            <h4 className="text-lg font-semibold">Instituições</h4>
             <ul className="text-sm space-y-2">
                 {
                     direcoes?.map((value, index) => <li key={index}>

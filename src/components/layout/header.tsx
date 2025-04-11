@@ -65,7 +65,7 @@ export function Header() {
     label: (dir.name || "").toUpperCase(),
     command: () => {
       setSelectedDirecao(dir);
-      router.push(`/servicos#${(dir.acronym || "").toLowerCase()}`);
+      router.push(`/instituicoes#${(dir.acronym || "").toLowerCase()}`);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   }));
@@ -78,7 +78,7 @@ export function Header() {
     },
     {
       label: "MINISTÉRIO",
-      href: "/ministerio",
+      // href: "/ministerio",
       items: [
         {
           label: "Sobre Nós",
@@ -99,8 +99,8 @@ export function Header() {
       ],
     },
     {
-      label: "SERVIÇOS",
-      href: "/servicos",
+      label: "Instituições",
+      // href: "/servicos",
       items:
         direcoes.length > 0
           ? servicesMenuItems
@@ -108,7 +108,7 @@ export function Header() {
     },
     {
       label: "PUBLICAÇÕES",
-      href: "/publicacoes",
+      // href: "/publicacoes",
       items: [
         { label: "Notícias", href: "/noticias" },
         { label: "Imagens", href: "/imagens" },
@@ -326,7 +326,7 @@ export function Header() {
                     ))}
                   </ul>
                 </div>
-                {/* 
+                {/*
                 <div className="mt-auto border-t pt-4">
                   <div className="px-4 text-sm text-gray-500">
                     {ministerio.name} © {new Date().getFullYear()}
