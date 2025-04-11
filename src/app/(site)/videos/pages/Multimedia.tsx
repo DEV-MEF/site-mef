@@ -42,7 +42,8 @@ export default function Multimedia() {
                                 }}
                     >
                         <Image src={ value.cover
-                            ? `${imageURLServer}${
+                            ? `${imageURLServer}
+                            ${
                                 value.cover.formats?.large?.url ||
                                 value.cover.formats?.medium?.url ||
                                 value.cover.url
