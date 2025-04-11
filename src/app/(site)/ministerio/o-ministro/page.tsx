@@ -1,6 +1,7 @@
 import Banner from "@/components/pages/banner";
 import MinistrySidebar from "@/components/pages/ministry/sidebar";
 import MinisterSection from "@/components/pages/ministry/minister-section";
+import "@/styles/react-markdown-rerender.css"
 
 export default function Minister() {
     return (

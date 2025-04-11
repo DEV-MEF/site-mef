@@ -22,7 +22,7 @@ export default function ministerio() {
             <h1 className="text-white text-3xl font-bold">Publicações <small className='font-light'> » Vídeos</small></h1>
             </div>
         </div>
-        <div className="container mx-auto px-44 py-20">
+        <div className="container mx-auto py-20">
             <Multimedia/>
         </div>
     </div>

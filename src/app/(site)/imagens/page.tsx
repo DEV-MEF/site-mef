@@ -24,7 +24,7 @@ export default function Galeria() {
             </div>
         </div>
 
-        <div className="container mx-auto px-44 py-10 mb-20">
+        <div className="container mx-auto py-10 mb-20">
           <AllGalery/>
         </div>
     </div>
