@@ -9,18 +9,12 @@ import { useHookMessage } from "@/components/hooks/message";
 import { useRef } from "react";
 import { Message } from "postcss";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function ContactMainSection() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ministerio, contato } = useServicos();
   const urlPhotoContact = (
     contato.photos?.[0]?.formats?.medium ||
@@ -51,7 +45,7 @@ export default function ContactMainSection() {
                 </Label>
                 <Input
                   type="text"
-                  className="w-full border rounded-md pl-4 h-12 placeholder:text-zinc-100 outline-none border-zinc-300 focus:border-primary-blue focus-visible:ring-0"
+                  className="w-full border rounded-md pl-4 h-12 placeholder:text-zinc-100 outline-none border-zinc-300 focus:border-primary-blue focus-visible:ring-0 placeholder:text-sm"
                   placeholder="Seu Nome"
                   value={message.name}
                   ref={(el) => {
@@ -125,7 +119,7 @@ export default function ContactMainSection() {
             <div className="w-full flex flex-col gap-2">
               <label className="text-sm text-[#666666]">Mensagem</label>
               <textarea
-                className="w-full border resize-none rounded-md pl-4 pt-4 h-40 placeholder:text-zinc-100 outline-none border-zinc-300 focus:border-primary-blue focus-visible:ring-0"
+                className="w-full placeholder:text-sm border resize-none rounded-md pl-4 pt-4 h-40 placeholder:text-zinc-100 outline-none border-zinc-300 focus:border-primary-blue focus-visible:ring-0"
                 rows={4}
                 placeholder="Escreva sua mensagem aqui..."
                 value={message.message}
@@ -226,21 +220,20 @@ export default function ContactMainSection() {
               <div className="space-y-4">
                 <div className="flex items-start justify-center gap-1">
                   <MapPin className="h-8 w-8 text-primary-blue" />
-                  <p className="text-sm">
+                  <p className="text-sm text-zinc-600">
                     Largo das Alfândegas, Água Grande, São Tomé, Caixa Postal nº
                     168, São Tomé e Príncipe
                   </p>
                 </div>
 
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-1">
                   <Phone className="h-5 w-5 text-primary-blue" />
-                  <h4 className="font-medium text-sm text-zinc-600 hover:text-primary-blue">
-                    Telefone:
-                  </h4>
-                  <p className="text-sm">+239 2224172 / +239 2221053</p>
+                  <p className="text-sm text-zinc-600">
+                    +239 2224172 / +239 2221053
+                  </p>
                 </div>
 
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-1">
                   <Mail className="h-5 w-5 text-primary-blue" />
                   <Link
                     href="mailto:mfcea@financas.gov.st"
@@ -250,7 +243,7 @@ export default function ContactMainSection() {
                   </Link>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-1">
                   <Globe className="h-5 w-5 text-primary-blue" />
                   <Link
                     href="https://financas.gov.st"
@@ -261,9 +254,11 @@ export default function ContactMainSection() {
                     financas.gov.st
                   </Link>
                 </div>
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-1">
                   <Clock className="h-5 w-5 text-primary-blue" />
-                  <p className="text-sm">Segunda a Sexta: 7:30 - 15:30</p>
+                  <p className="text-sm text-zinc-600">
+                    Segunda à Sexta: 7:30 - 15:30
+                  </p>
                 </div>
               </div>
             </CardContent>
