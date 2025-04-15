@@ -78,7 +78,7 @@ export default function MinistrySidebar() {
                       : "hover:underline font-light"
                 }
             >
-              » A mensagem do Ministro
+              » Mensagem do Ministro
             </Link>
           </li>
         </ul>

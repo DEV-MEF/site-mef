@@ -19,7 +19,7 @@ export default function MinisterSection() {
     }, []);
   return (
     <section className="w-full flex flex-col gap-8">
-      <SectionTitle text="A mensagem do Ministro" />
+      <SectionTitle text="Mensagem do Ministro" />
         <div className={"w-full mt-6 rerender"}>
             {
                 <ContentRenderer content={ministros?.bibliography || ""} type={"blocks"} />

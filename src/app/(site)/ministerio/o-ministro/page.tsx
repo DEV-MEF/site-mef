@@ -7,7 +7,7 @@ export default function Minister() {
     return (
         <main className="w-full">
             <div className="w-full mb-20">
-                <Banner text_1="Ministério" text_2="A mensagem do Ministro" />
+                <Banner text_1="Ministério" text_2="Mensagem do Ministro" />
                 <div className="w-full container mx-auto px-4 py-20 flex flex-col lg:flex-row gap-12">
                     <MinisterSection />
                     <MinistrySidebar />

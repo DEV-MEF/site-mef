@@ -41,9 +41,8 @@ export default function Multimedia() {
                                     route.push(`/videos/${value.documentId}`)
                                 }}
                     >
-                        <Image src={ value.cover
-                            ? `${imageURLServer}
-                            ${
+                        <Image src={ value.cover ?
+                            `${imageURLServer}${
                                 value.cover.formats?.large?.url ||
                                 value.cover.formats?.medium?.url ||
                                 value.cover.url
