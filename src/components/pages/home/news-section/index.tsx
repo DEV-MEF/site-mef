@@ -5,11 +5,13 @@ import Image from "next/image";
 import Title from "@/components/layout/title";
 import { AxiosHttpClient } from "@/settings/axios";
 import qs from "qs";
-import {imageURLServer, NewsItem} from "@/lib/utils";
+import { imageURLServer, NewsItem } from "@/lib/utils";
 import moment from "moment";
 import "moment/locale/pt";
 import { MdDateRange } from "react-icons/md";
 import { useRouter } from "next/navigation"; // Importando useRouter para navegação
+import Link from "next/link";
+import { ChevronsRight } from "lucide-react";
 moment.locale("pt");
 
 export default function NewsSection() {
@@ -92,7 +94,7 @@ export default function NewsSection() {
                 {moment(item.createdAt, moment.ISO_8601).format("LL")}
               </div>
               <h3 className="text-text-primary font-bold text-sm mb-1">
-                {item.title.slice(0,82)}
+                {item.title.slice(0, 82)}
               </h3>
               <p className="text-text-second text-xs font-normal mb-4">
                 {item.summary?.slice(0, 93) || "A Descrição aqui...."}
@@ -107,6 +109,13 @@ export default function NewsSection() {
           </div>
         ))}
       </div>
+      <Link
+        href="/noticias"
+        className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-10"
+      >
+        Mais notícias
+        <ChevronsRight className="h-4 w-4 ml-1 " />
+      </Link>
     </section>
   );
 }
