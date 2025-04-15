@@ -109,7 +109,7 @@ export default function Card({ imagePath, title, href }: CardProps) {
           src={imagePath}
           alt={title}
           unoptimized
-          className="w-full h-full object-cover bg-primary"
+          className="w-full h-full object-cover bg-primary-blue/5"
         />
       </div>
 
