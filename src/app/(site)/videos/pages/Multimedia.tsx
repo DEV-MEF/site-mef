@@ -1,6 +1,5 @@
 "use client"
 import Image from 'next/image';
-import Notices from '@/assets/notice1.jpg';
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import {useRouter} from "next/navigation";
