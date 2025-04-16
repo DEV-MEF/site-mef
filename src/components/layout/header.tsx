@@ -33,7 +33,7 @@ export function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { direcoes, setSelectedDirecao, ministerio } = useServicos();
+  const { direcoes, setSelectedDirecao } = useServicos();
 
   // Track scroll for header shadow
   useEffect(() => {
