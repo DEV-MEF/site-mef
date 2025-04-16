@@ -33,7 +33,7 @@ export function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { direcoes, setSelectedDirecao, ministerio } = useServicos();
+  const { direcoes, setSelectedDirecao } = useServicos();
 
   // Track scroll for header shadow
   useEffect(() => {
@@ -93,7 +93,7 @@ export function Header() {
           href: "/ministerio/nossa-equipa",
         },
         {
-          label: "A mensagem do Ministro",
+          label: "Mensagem do Ministro",
           href: "/ministerio/o-ministro",
         },
       ],
@@ -131,13 +131,13 @@ export function Header() {
       )}
     >
       {/* Top ribbon */}
-      <div className="relative hidden h-[30px] items-center justify-end pr-4 text-sm text-white md:flex">
+      {/*<div className="relative hidden h-[30px] items-center justify-end pr-4 text-sm text-white md:flex">
         <div className="clip-diagonal absolute inset-0 z-10 bg-primary-blue" />
         <div className="absolute inset-y-0 right-0 w-full bg-gray-800" />
         <span className="relative z-10 block text-[11px] md:block">
           {ministerio.name} da República Democrática de São Tomé e Príncipe
         </span>
-      </div>
+      </div>*/}
 
       {/* Main header */}
       <div className="container mx-auto flex h-24 w-full items-center justify-between px-4">

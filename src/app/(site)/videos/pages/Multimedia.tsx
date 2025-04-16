@@ -1,6 +1,5 @@
 "use client"
 import Image from 'next/image';
-import Notices from '@/assets/notice1.jpg';
 import {useEffect, useState} from "react";
 import {AxiosHttpClient} from "@/settings/axios";
 import {useRouter} from "next/navigation";
@@ -41,9 +40,8 @@ export default function Multimedia() {
                                     route.push(`/videos/${value.documentId}`)
                                 }}
                     >
-                        <Image src={ value.cover
-                            ? `${imageURLServer}
-                            ${
+                        <Image src={ value.cover ?
+                            `${imageURLServer}${
                                 value.cover.formats?.large?.url ||
                                 value.cover.formats?.medium?.url ||
                                 value.cover.url
