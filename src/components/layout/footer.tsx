@@ -7,7 +7,7 @@ import React from "react";
 const Footer = () => {
   const { ministerio, contato } = useServicos();
   return (
-    <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 min-h-[210px] pt-10 pb-10">
+    <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 min-h-[210px] pt-10 pb-6">
       <div className="container mx-auto px-4 lg:px-8  flex flex-col md:flex-row justify-between items-start">
         {/* Seção da Logo e Informações */}
         {/* <div className="flex flex-col mb-8 md:mb-0">
@@ -35,23 +35,39 @@ const Footer = () => {
         {/* Seção de Contato */}
         <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-lg font-semibold">FALE CONNOSCO</h2>
-            <p className="mt-2 leading-8 gap-4 text-sm font-light">
-              Par qualquer informação ou solicitação dos nossos serviços.
-            </p>
+            <h2 className="text-lg font-semibold uppercase">
+              Nossa Localização
+            </h2>
+            <div className="mt-4 space-y-2 text-zinc-300">
+              <p className="text-sm">
+                Ministério do Planeamento, Finanças e Economia Azul, Largo das
+                Alfândegas
+              </p>
+              <p className="text-sm">Água Grande, São Tomé</p>
+              <p className="text-sm">Caixa Postal nº 168</p>
+              <p className="text-sm">São Tomé e Príncipe</p>
+            </div>
           </div>
           <div className="mt-8 md:mt-0">
-            <p className="text-md mb-4"> Nossos contatos</p>
-            <p className="text-sm mb-2">
-              Liga-nos: {contato.phone} / {contato.tel}
+            <h2 className="text-lg font-semibold">FALE CONNOSCO</h2>
+            <p className="mt-2 leading-8 gap-4 text-sm font-light text-zinc-300">
+              Par qualquer informação ou solicitação dos nossos serviços.
             </p>
-            <p className="text-sm"> Email: {contato.mail}</p>
+            <div className="mt-6 space-y-3">
+              <h3 className="text-md"> Nossos contatos:</h3>
+              <div className="space-y-2">
+                <p className="text-sm text-zinc-300">
+                  Liga-nos: {contato.phone} / {contato.tel}
+                </p>
+                <p className="text-sm text-zinc-300"> Email: {contato.mail}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Linha de separação e Crédito */}
-      <div className="border-t border-gray-600 mt-8 pt-4 text-center text-sm text-zinc-300">
+      <div className="border-t border-gray-600 mt-8 text-center text-sm text-zinc-300 pt-8">
         {/* Website Desenvolvido e Hospedado pela{" "}
         <span className="font-normal text-white">DITEI</span> */}
         Copyright © 2024 {ministerio.name} - Todos direitos Reservados
