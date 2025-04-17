@@ -122,6 +122,7 @@ export default function AllNews() {
                                     }
                                     width={1212}
                                     height={1212}
+                                    unoptimized
                                     alt="News Image"
                                     className="w-full h-[200px] md:h-[250px] object-cover"
                                 />

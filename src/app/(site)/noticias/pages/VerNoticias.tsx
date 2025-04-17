@@ -149,6 +149,7 @@ export default function VerNoticias({params}: { params: { documentId: string } }
                 <div className="col-span-2">
                     <div className="mb-8">
                         <Image
+                            unoptimized
                             src={news && news.image
                                 ? `${imageURLServer}${news.image.formats?.large?.url || news.image.formats?.medium?.url || news.image.url}`
                                 : "/images/ministry-logo.png"
@@ -205,6 +206,7 @@ export default function VerNoticias({params}: { params: { documentId: string } }
                                 <div key={index} className="flex items-center space-x-4">
                                     <div className="w-24 h-16 relative">
                                         <Image
+                                            unoptimized
                                             src={news && news.image
                                                 ? `${imageURLServer}${news.image.formats?.large?.url || news.image.formats?.medium?.url || news.image.url}`
                                                 : "/images/ministry-logo.png"
