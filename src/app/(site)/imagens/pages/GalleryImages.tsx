@@ -47,6 +47,7 @@ const GalleryImages = ({params} : {params : Promise<{documentId: string}>}) => {
 
   const itemTemplate = (item: TImage) => (
     <Image
+      unoptimized
       src={item.source}
       alt={item.alt}
       width={500} // Largura base
@@ -58,6 +59,7 @@ const GalleryImages = ({params} : {params : Promise<{documentId: string}>}) => {
 
   const thumbnailTemplate = (item: TImage) => (
     <Image
+      unoptimized
       src={item.source}
       alt={item.alt}
       width={500} // Largura base

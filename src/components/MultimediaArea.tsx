@@ -66,7 +66,7 @@ const MultimediaSection = () => {
           {videos.map((video, index) => (
             <div key={index} className="md:flex d-block items-center gap-9 lg:gap-5 md:gap-3 p-1 hover:bg-gray-100 transition">
               <div className="relative w-[216px] md:h-[80px] h-[150px] lg:h-[114px] overflow-hidden shadow-sm">
-                <Image src={video.thumbnailUrl} alt="Thumbnail do Vídeo" fill className="rounded object-cover" />
+                <Image unoptimized src={video.thumbnailUrl} alt="Thumbnail do Vídeo" fill className="rounded object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <button className="bg-white p-1 rounded-full shadow-md hover:bg-gray-200 transition overflow-hidden">
                     <svg className="w-4 h-4 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
