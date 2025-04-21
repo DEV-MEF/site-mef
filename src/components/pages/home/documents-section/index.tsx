@@ -90,7 +90,7 @@ export default function DocumentsSection() {
           href="/documentos"
           className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-8 ml-5"
         >
-          Mais documentos
+          Todos os documentos
           <ChevronsRight className="h-4 w-4 ml-1 " />
         </Link>
       </div>

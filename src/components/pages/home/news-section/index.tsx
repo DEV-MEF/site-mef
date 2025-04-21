@@ -113,7 +113,7 @@ export default function NewsSection() {
         href="/noticias"
         className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-10"
       >
-        Mais notícias
+        Todas as notícias
         <ChevronsRight className="h-4 w-4 ml-1 " />
       </Link>
     </section>
