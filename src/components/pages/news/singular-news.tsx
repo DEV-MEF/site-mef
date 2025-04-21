@@ -165,6 +165,7 @@ export default function SingularNews({params,}: { params: { documentId: string }
                             height={1212}
                             className="rounded-lg object-cover w-full"
                             layout="responsive"
+                            unoptimized
                         />
                     </div>
 
@@ -224,6 +225,7 @@ export default function SingularNews({params,}: { params: { documentId: string }
                                 <div key={index} className="flex items-center space-x-4">
                                     <div className="w-24 h-16 relative">
                                         <Image
+                                            unoptimized
                                             src={
                                                 news && news.image
                                                     ? `${imageURLServer}${

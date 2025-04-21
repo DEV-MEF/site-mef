@@ -44,7 +44,7 @@ export default function AllGalery() {
                         return <div key={index} className="relative w-full h-72 md:h-72 lg:h-72 rounded overflow-hidden shadow-md" onClick={() => {
                             route.push(`/imagens/${value.documentId}`)
                         }}>
-                            <Image src={imageURLServer+(value.cover?.formats?.medium || value.cover).url} alt="Vídeo Principal" fill className="rounded object-cover" />
+                            <Image unoptimized src={imageURLServer+(value.cover?.formats?.medium || value.cover).url} alt="Vídeo Principal" fill className="rounded object-cover" />
 
                             <div className="absolute bottom-0 flex flex-col items-start">
                                 <div className="bg-primary-blue text-white text-xs px-4 py-2 md:mx-3 lg:mx-5 mx-5 font-semibold">

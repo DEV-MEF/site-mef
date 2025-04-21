@@ -86,6 +86,7 @@ const GalleryVideos = ({params} : {params : Promise<{documentId: string}>}) => {
         return (
             <>
                 <Image
+                    unoptimized
                     src={item.source}
                     alt={item.alt}
                     width={500} // Largura base
@@ -118,6 +119,7 @@ const GalleryVideos = ({params} : {params : Promise<{documentId: string}>}) => {
 
     const thumbnailTemplate = (item: TImage) => (
         <Image
+            unoptimized
             src={item.source}
             alt={item.alt}
             width={500} // Largura base
