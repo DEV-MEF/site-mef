@@ -7,8 +7,8 @@ import React from "react";
 const Footer = () => {
   const { ministerio, contato } = useServicos();
   return (
-    <footer className="bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 min-h-[210px] pt-10 pb-6">
-      <div className="container mx-auto px-4 lg:px-8  flex flex-col md:flex-row justify-between items-start">
+    <footer className="w-full bg-[#2f353d] text-white md:px-10 lg:px-44 px-12 min-h-[210px] pt-10 pb-6">
+      <div className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-start">
         {/* Seção da Logo e Informações */}
         {/* <div className="flex flex-col mb-8 md:mb-0">
           <p className="leading-8 text-xs font-light">
