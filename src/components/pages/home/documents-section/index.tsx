@@ -21,6 +21,7 @@ type File = {
   name: string;
 };
 
+
 export default function DocumentsSection() {
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
@@ -86,14 +87,17 @@ export default function DocumentsSection() {
             </div>
           ))}
         </div>
-        <Link
+                  <div className="flex items-center justify-between">
+                  <Link
           href="/documentos"
-          className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-8 ml-5"
+          className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-4 ml-5"
         >
           Todos os documentos
           <ChevronsRight className="h-4 w-4 ml-1 " />
         </Link>
+                  </div>
       </div>
+      
     </section>
   );
 }

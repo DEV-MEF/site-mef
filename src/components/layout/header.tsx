@@ -140,7 +140,7 @@ export function Header() {
       </div>*/}
 
       {/* Main header */}
-      <div className="container mx-auto flex h-24 w-full items-center justify-between px-4">
+      <div className="container mx-auto flex h-24 w-full items-center justify-between px-8 max-full">
         {/* Logo */}
         <Link href="/" className="transition-transform hover:scale-105">
           <Image
