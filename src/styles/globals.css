@@ -70,6 +70,12 @@ body {
     border: none !important;
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .carousel-button {
+    display: none;
+  }
+}
 .p-menuitem .p-menuitem-content {
   font-size: 13px;
   font-weight: bold;
@@ -134,10 +140,10 @@ body {
 }
 
 .p-carousel-prev {
-  left: 4.6rem;
+  left: 3rem;
 }
 .p-carousel-next {
-  right: 4.6rem;
+  right: 3rem;
 }
 
 .custom-carousel .p-carousel-indicators {
