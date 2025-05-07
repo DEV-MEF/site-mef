@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MenuIcon, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 type MenuItem = {
   label: string;
@@ -34,6 +34,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { direcoes, setSelectedDirecao } = useServicos();
+  const [state, setState] = useState(false);
 
   // Track scroll for header shadow
   useEffect(() => {
@@ -222,21 +223,62 @@ export function Header() {
 
         {/* Mobile Navigation - Improved for smaller screens */}
         <div className="lg:hidden">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <Sheet
+            open={isOpen}
+            onOpenChange={(open) => {
+              setIsOpen(open);
+              setState(open);
+            }}
+          >
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white bg-primary-blue hover:text-white hover:bg-primary-blue/90 cursor-pointer w-10 h-10"
+                className="text-white outline-none p-2 rounded-md bg-primary-blue hover:bg-primary-blue border-2 cursor-pointer w-10 h-10"
+                onClick={() => setState(!state)}
               >
-                <MenuIcon className="h-8 w-8" />
+                {state ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 8h16M4 16h16"
+                    />
+                  </svg>
+                )}
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-10/12 max-w-xs bg-white">
               <div className="flex h-full flex-col">
                 <div className="mb-4 border-b flex items-center justify-between py-2 px-4 border-zinc-500/10">
-                  <Link href="/" onClick={() => setIsOpen(false)}>
+                  <Link
+                    href="/"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setState(false);
+                    }}
+                  >
                     <Image
                       src="/images/logo.new.png"
                       alt="Logo"
@@ -262,6 +304,9 @@ export function Header() {
                                   isActive(item.href, item.items) &&
                                     "text-primary-blue bg-primary-blue/5"
                                 )}
+                                onClick={() => {
+                                  setState(false);
+                                }}
                               >
                                 <span>{item.label}</span>
                                 <ChevronRight className="h-4 w-4 transition-transform group-data-[state=open]:rotate-90" />
@@ -288,6 +333,7 @@ export function Header() {
                                       router.push(subItem.href);
                                     }
                                     setIsOpen(false);
+                                    setState(false);
                                   }}
                                 >
                                   <div className="flex items-center">
@@ -316,6 +362,7 @@ export function Header() {
                                 router.push(item.href);
                               }
                               setIsOpen(false);
+                              setState(false);
                             }}
                           >
                             {item.label}
