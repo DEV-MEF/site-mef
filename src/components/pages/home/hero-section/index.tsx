@@ -1198,7 +1198,7 @@ export const HeroSection = () => {
   }
 
   return (
-    <div
+    <section
       className="relative w-full overflow-hidden mt-24"
       role="region"
       aria-roledescription="carousel"
@@ -1327,7 +1327,7 @@ export const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-blue/80 via-primary-blue/60 to-primary-blue/10" />
               </div>
               <div className="absolute inset-0 flex flex-col justify-center">
-                <div className="container mx-auto px-8 flex flex-col items-start justify-center text-white z-20">
+                <div className="container mx-auto px-4 flex flex-col items-start justify-center text-white z-20">
                   <div
                     className={cn(
                       "max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-7xl transition-all duration-700",
@@ -1383,6 +1383,6 @@ export const HeroSection = () => {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 };

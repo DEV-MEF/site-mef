@@ -140,7 +140,7 @@ export function Header() {
       </div>*/}
 
       {/* Main header */}
-      <div className="container mx-auto flex h-24 w-full items-center justify-between px-8 max-full">
+      <div className="w-full container mx-auto flex h-24 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="transition-transform hover:scale-105">
           <Image
@@ -154,7 +154,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:block">
+        <nav className="w-full hidden lg:block">
           <ul className="flex items-center space-x-1">
             {menuItems.map((item) => (
               <li key={item.label} className="relative group">
@@ -248,7 +248,7 @@ export function Header() {
                   </Link>
                 </div>
 
-                <div className="flex-1 overflow-y-auto">
+                <div className="w-full flex-1 overflow-y-auto">
                   <ul className="space-y-2">
                     {menuItems.map((item) => (
                       <li key={item.label}>
