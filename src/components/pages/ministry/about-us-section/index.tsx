@@ -3,7 +3,7 @@ import SectionTitle from "@/components/layout/title";
 import ContentRenderer from "@/lib/react-markdown-renderer";
 import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
-import "@/styles/react-markdown-rerender.css"
+import "@/styles/react-markdown-rerender.css";
 export default function AboutUsSection() {
   const [aboutUsData, setAboutUsData] = useState([]);
   useEffect(() => {

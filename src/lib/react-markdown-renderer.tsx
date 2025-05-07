@@ -68,7 +68,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({ content, type }) => {
               <h1 className="text-3xl font-bold text-pink-400">{children}</h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-2xl font-semibold text-blue-400">
+              <h2 className="text-xl font-semibold text-blue-400">
                 {children}
               </h2>
             ),
