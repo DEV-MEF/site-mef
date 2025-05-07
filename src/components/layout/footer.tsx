@@ -34,7 +34,7 @@ const Footer = () => {
 
         {/* Seção de Contato */}
         <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
+          <div className="md:-mt-9">
             <h2 className="text-lg font-semibold uppercase">
               Nossa Localização
             </h2>
@@ -67,10 +67,14 @@ const Footer = () => {
       </div>
 
       {/* Linha de separação e Crédito */}
-      <div className="w-full container px-4 border-t border-gray-600 mt-8 text-center text-sm text-zinc-300 pt-8">
+      <div className="w-full max-w-[88rem] mx-auto container px-4 mt-8 flex flex-col gap-8 items-center justify-center text-sm text-zinc-300 pt-8">
         {/* Website Desenvolvido e Hospedado pela{" "}
         <span className="font-normal text-white">DITEI</span> */}
-        Copyright © 2024 {ministerio.name} - Todos direitos Reservados
+        <div className="h-[.5px] w-full bg-gray-600"/>
+        <span>
+          {" "}
+          Copyright © 2024 {ministerio.name} - Todos direitos Reservados
+        </span>
       </div>
       <PdfViewer />
     </footer>

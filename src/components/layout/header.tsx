@@ -233,7 +233,7 @@ export function Header() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-10/12 max-w-xs bg-white">
+            <SheetContent side="left" className="w-10/12 max-w-xs bg-white">
               <div className="flex h-full flex-col">
                 <div className="mb-4 border-b flex items-center justify-between py-2 px-4 border-zinc-500/10">
                   <Link href="/" onClick={() => setIsOpen(false)}>
@@ -243,11 +243,10 @@ export function Header() {
                       width={1000}
                       height={1000}
                       unoptimized
-                      className="object-contain w-40 h-auto sm:w-52"
+                      className="object-contain w-44 h-auto sm:w-52 mb-1"
                     />
                   </Link>
                 </div>
-
                 <div className="w-full flex-1 overflow-y-auto">
                   <ul className="space-y-2">
                     {menuItems.map((item) => (
@@ -258,7 +257,7 @@ export function Header() {
                               <Button
                                 variant="ghost"
                                 className={cn(
-                                  "w-full justify-between text-lg uppercase px-4 py-3",
+                                  "w-full justify-between text-md uppercase px-4 py-3",
                                   "hover:bg-primary-blue/10 hover:text-primary-blue",
                                   isActive(item.href, item.items) &&
                                     "text-primary-blue bg-primary-blue/5"
@@ -271,14 +270,14 @@ export function Header() {
                             <DropdownMenuContent
                               align="start"
                               sideOffset={8}
-                              className="w-[calc(100vw-120px)] border-none shadow-none"
+                              className="bg-primary-blue w-[calc(100vw-120px)] border-none shadow-none ml-3"
                             >
                               {item.items.map((subItem, index) => (
                                 <DropdownMenuItem
                                   key={index}
                                   className={cn(
-                                    "text-md px-4 py-3",
-                                    "hover:bg-primary-blue/10 hover:text-primary-blue",
+                                    "text-md px-4 py-3 text-white",
+                                    "hover:bg-primary-blue/10 hover:text-white/90",
                                     isSubItemActive(subItem) &&
                                       "text-primary-blue bg-primary-blue/5"
                                   )}
@@ -305,7 +304,7 @@ export function Header() {
                           <Button
                             variant="ghost"
                             className={cn(
-                              "w-full justify-start text-lg uppercase px-4 py-3",
+                              "w-full justify-start text-md uppercase px-4 py-3 -ml-1",
                               "hover:bg-primary-blue/10 hover:text-primary-blue",
                               isActive(item.href) &&
                                 "text-primary-blue bg-primary-blue/5"

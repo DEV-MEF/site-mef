@@ -75,7 +75,6 @@ export default function CardsList() {
           <CarouselNext className="relative hidden md:flex items-center justify-center text-white bg-primary-blue cursor-pointer hover:bg-primary-blue/90 w-8 h-8 rounded-full" />
         </div>
       </div>
-
       <CarouselContent className="w-full flex flex-row gap-8">
         {service.map((item) => (
           <CarouselItem
