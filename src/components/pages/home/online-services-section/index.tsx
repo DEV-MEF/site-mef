@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
 export default function OnlineServicesSection() {
   return (
-    <section className="w-full container px-4 flex flex-col items-start justify-center mt-8">
+    <section className="w-full max-w-[88rem] container px-4 flex flex-col items-start justify-center mt-8">
       <SectionTitle text="SERVIÇOS ONLINE" />
       <CardsList />
       <Link

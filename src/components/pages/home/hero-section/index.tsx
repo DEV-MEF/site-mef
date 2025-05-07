@@ -1327,7 +1327,7 @@ export const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-blue/80 via-primary-blue/60 to-primary-blue/10" />
               </div>
               <div className="absolute inset-0 flex flex-col justify-center">
-                <div className="container mx-auto px-4 flex flex-col items-start justify-center text-white z-20">
+                <div className="w-full max-w-[88rem] container mx-auto px-4 flex flex-col items-start justify-center text-white z-20">
                   <div
                     className={cn(
                       "max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-7xl transition-all duration-700",
@@ -1366,7 +1366,7 @@ export const HeroSection = () => {
           <>
             <button
               onClick={prevSlide}
-              className="carousel-button absolute right-2 sm:right-3 md:right-4 top-[85%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer"
+             className="absolute right-2 sm:right-3 lg:left-3 top-[85%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer max-w-fit"
               aria-label="Slide anterior"
               disabled={isTransitioning}
             >
@@ -1374,7 +1374,7 @@ export const HeroSection = () => {
             </button>
             <button
               onClick={nextSlide}
-              className="carousel-button carousel-button absolute right-2 sm:right-3 md:right-4 top-[70%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer"
+              className="absolute right-2 sm:right-3 lg:right-3 top-[70%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer"
               aria-label="Próximo slide"
               disabled={isTransitioning}
             >

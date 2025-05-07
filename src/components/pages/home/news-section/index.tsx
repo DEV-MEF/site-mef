@@ -53,7 +53,7 @@ export default function NewsSection() {
   };
 
   return (
-    <section className="w-full container px-4 py-11 md:gap-3 lg:gap-11">
+    <section className="w-full max-w-[88rem]  container px-4 py-11 md:gap-3 lg:gap-11">
       <div className="flex justify-between py-5 items-center">
         <div className="flex flex-col mb-6 gap-2">
           <Title text="ÚLTIMAS NOTÍCIAS" />

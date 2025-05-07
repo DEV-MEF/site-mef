@@ -126,7 +126,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed z-50 w-full bg-white transition-all duration-300",
+        "w-full fixed z-50 bg-white transition-all duration-300",
         isScrolled ? "shadow-lg" : "shadow-sm"
       )}
     >
@@ -140,7 +140,7 @@ export function Header() {
       </div>*/}
 
       {/* Main header */}
-      <div className="w-full container mx-auto flex h-24 items-center justify-between px-4">
+      <div className="w-full container max-w-[88rem]  mx-auto flex h-24 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="transition-transform hover:scale-105">
           <Image
@@ -154,7 +154,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="w-full hidden lg:block">
+        <nav className="hidden lg:block">
           <ul className="flex items-center space-x-1">
             {menuItems.map((item) => (
               <li key={item.label} className="relative group">
@@ -326,12 +326,6 @@ export function Header() {
                     ))}
                   </ul>
                 </div>
-                {/*
-                <div className="mt-auto border-t pt-4">
-                  <div className="px-4 text-sm text-gray-500">
-                    {ministerio.name} © {new Date().getFullYear()}
-                  </div>
-                </div> */}
               </div>
             </SheetContent>
           </Sheet>
