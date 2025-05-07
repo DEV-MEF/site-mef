@@ -1336,7 +1336,7 @@ export const HeroSection = () => {
                         : "translate-y-8 opacity-0"
                     )}
                   >
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 leading-tight max-w-full line-clamp-1 md:line-clamp-2">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 leading-tight max-w-full line-clamp-1 md:line-clamp-2">
                       {image.title}
                     </h2>
                     <p className="text-sm sm:text-base md:text-lg lg:text-xl font-light mb-4 sm:mb-6 md:mb-8 opacity-90 max-w-full line-clamp-2 sm:line-clamp-3 md:line-clamp-none">
@@ -1344,7 +1344,7 @@ export const HeroSection = () => {
                     </p>
                     <button
                       onClick={() => handleSlideClick(image)}
-                      className="group flex items-center gap-1 sm:gap-2 bg-transparent text-white border-2 font-medium border-white py-2 sm:py-2.5 md:py-3 cursor-pointer px-4 sm:px-6 md:px-8 rounded-md hover:bg-white hover:text-primary-blue transition-all duration-300 text-sm sm:text-base"
+                      className="group flex items-center gap-1 sm:gap-2 bg-transparent text-white border-2 font-medium border-white py-2 sm:py-2.5 md:py-3 cursor-pointer px-4 sm:px-6 md:px-10 rounded-md hover:bg-white hover:text-primary-blue transition-all duration-300 text-sm sm:text-base"
                     >
                       <span>Ler Mais</span>
                       {image.isExternal && (
@@ -1366,7 +1366,7 @@ export const HeroSection = () => {
           <>
             <button
               onClick={prevSlide}
-             className="absolute right-2 sm:right-3 lg:left-3 top-[85%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer max-w-fit"
+              className="absolute right-2 sm:right-3 lg:left-3 top-[85%] lg:top-1/2 -translate-y-1/2 bg-black/30 text-white p-1.5 sm:p-2 md:p-3 rounded-full hover:bg-black/50 transition-all z-20 backdrop-blur-sm cursor-pointer max-w-fit"
               aria-label="Slide anterior"
               disabled={isTransitioning}
             >
