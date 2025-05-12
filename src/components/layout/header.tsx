@@ -323,8 +323,7 @@ export function Header() {
                                   className={cn(
                                     "text-md px-4 py-3 text-white",
                                     "hover:bg-primary-blue/10 hover:text-white/90",
-                                    isSubItemActive(subItem) &&
-                                      "underline"
+                                    isSubItemActive(subItem) && "underline"
                                   )}
                                   onClick={() => {
                                     if (subItem.command) {
