@@ -7,7 +7,7 @@ import React from "react";
 const Footer = () => {
   const { ministerio, contato } = useServicos();
   return (
-    <footer className="w-full bg-[#2f353d] text-white min-h-[210px] pt-14 pb-6">
+    <footer className="w-full bg-[#2f353d] text-white min-h-[210px] pt-14 pb-12">
       <div className="container max-w-[88rem]  mx-auto px-4 flex flex-col md:flex-row justify-between items-start">
         {/* Seção da Logo e Informações */}
         {/* <div className="flex flex-col mb-8 md:mb-0">
@@ -67,12 +67,11 @@ const Footer = () => {
       </div>
 
       {/* Linha de separação e Crédito */}
-      <div className="w-full max-w-[88rem] mx-auto container px-4 mt-8 flex flex-col gap-8 items-center justify-center text-sm text-zinc-300 pt-8">
+      <div className="w-full max-w-[88rem] mx-auto container px-4 mt-3 flex flex-col gap-8 items-center justify-center text-sm text-zinc-300 pt-8">
         {/* Website Desenvolvido e Hospedado pela{" "}
         <span className="font-normal text-white">DITEI</span> */}
         <div className="h-[.5px] w-full bg-gray-600"/>
         <span>
-          {" "}
           Copyright © 2024 {ministerio.name} - Todos direitos Reservados
         </span>
       </div>

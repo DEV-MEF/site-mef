@@ -82,25 +82,25 @@ export function Header() {
       // href: "/ministerio",
       items: [
         {
-          label: "Sobre Nós",
+          label: "SOBRE NÓS",
           href: "/ministerio/sobre-nos",
         },
         {
-          label: "O que fazemos",
+          label: "O QUE FAZEMOS",
           href: "/ministerio/o-que-fazemos",
         },
         {
-          label: "Nossa Equipa",
+          label: "NOSSA EQUIPA",
           href: "/ministerio/nossa-equipa",
         },
         {
-          label: "Mensagem do Ministro",
+          label: "A MENSAGEM DO MINISTRO",
           href: "/ministerio/o-ministro",
         },
       ],
     },
     {
-      label: "Instituições",
+      label: "INSTITUIÇÕES",
       // href: "/servicos",
       items:
         direcoes.length > 0
@@ -111,11 +111,11 @@ export function Header() {
       label: "PUBLICAÇÕES",
       // href: "/publicacoes",
       items: [
-        { label: "Notícias", href: "/noticias" },
-        { label: "Imagens", href: "/imagens" },
-        { label: "Vídeos", href: "/videos" },
-        { label: "Documentos", href: "/documentos" },
-        { label: "Legislação", href: "/legislacao" },
+        { label: "NOTÍCIAS", href: "/noticias" },
+        { label: "iMAGENS", href: "/imagens" },
+        { label: "VÍDEOS", href: "/videos" },
+        { label: "DOCUMENTOS", href: "/documentos" },
+        { label: "LEGISLAÇÕES", href: "/legislacao" },
       ],
     },
     {
@@ -174,7 +174,7 @@ export function Header() {
                     >
                       {item.label}
                     </Button>
-                    <div className="absolute left-0 top-full z-50 hidden min-w-[220px] rounded-md border border-gray-100 bg-white p-1 shadow-lg group-hover:block animate-in fade-in slide-in-from-top-2">
+                    <div className="absolute left-0 top-full z-50 hidden min-w-[220px] rounded-md border border-gray-100 bg-white p-1 shadow-lg group-hover:block animate-in fade-in slide-in-from-top-2 space-y-1">
                       {item.items.map((subItem, index) => (
                         <Button
                           key={index}
@@ -324,7 +324,7 @@ export function Header() {
                                     "text-md px-4 py-3 text-white",
                                     "hover:bg-primary-blue/10 hover:text-white/90",
                                     isSubItemActive(subItem) &&
-                                      "text-primary-blue bg-primary-blue/5"
+                                      "underline"
                                   )}
                                   onClick={() => {
                                     if (subItem.command) {
