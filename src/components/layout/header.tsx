@@ -269,7 +269,7 @@ export function Header() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-10/12 max-w-xs bg-white">
+            <SheetContent side="left" className="w-full bg-white">
               <div className="flex h-full flex-col">
                 <div className="mb-4 border-b flex items-center justify-between py-2 px-4 border-zinc-500/10">
                   <Link

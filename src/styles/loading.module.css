@@ -11,21 +11,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .govLogoWrapper {
-    margin-bottom: 2rem;
-  }
-  
-  .govLogoPlaceholder {
-    width: 80px;
-    height: 80px;
-    background-color: #003366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-  }
   
   .loadingContent {
     display: flex;
@@ -113,34 +98,6 @@
     }
   }
   
-  .financeElements {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
-  }
-  
-  .coins {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .coin {
-    width: 20px;
-    height: 20px;
-    background-color: #ffd700;
-    border-radius: 50%;
-    animation: coinSpin 2s infinite linear;
-  }
-  
-  .coin:nth-child(2) {
-    animation-delay: 0.3s;
-    background-color: #c0c0c0;
-  }
-  
-  .coin:nth-child(3) {
-    animation-delay: 0.6s;
-    background-color: #cd7f32;
-  }
   
   @keyframes coinSpin {
     0% {
@@ -189,9 +146,3 @@
     }
   }
   
-  .footerNote {
-    margin-top: 3rem;
-    font-size: 0.8rem;
-    text-align: center;
-    color: #666;
-  }

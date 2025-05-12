@@ -7,7 +7,7 @@ export default function WhatWeDo() {
     <main className="w-full">
       <section className="w-full">
         <Banner text_1="Ministério" text_2="O que fazemos" />
-        <div className="w-full container mx-auto px-4 py-20 flex flex-col lg:flex-row gap-12">
+        <div className="w-full max-w-[88rem] container mx-auto px-4 py-20 flex flex-col lg:flex-row gap-12">
           <WhatWeDoSection />
           <MinistrySidebar />
         </div>
