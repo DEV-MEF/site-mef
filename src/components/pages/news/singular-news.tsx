@@ -219,7 +219,7 @@ export default function SingularNews({
 
           {/* Coluna de Cards (1x) */}
           <div className="col-span-2 flex flex-col space-y-8">
-            <div className="bg-[#F1F1FF] p-6 rounded-lg">
+            <div className="bg-[#f1f1ffd7] p-6 rounded-lg">
               <h4 className="text-lg font-semibold text-primary mb-4">
                 Categorias
               </h4>
@@ -240,7 +240,7 @@ export default function SingularNews({
               </ul>
             </div>
 
-            <div className="bg-[#F1F1FF] p-6 rounded-lg">
+            <div className="bg-[#f1f1ffd7] p-6 rounded-lg">
               <h4 className="text-lg font-semibold text-primary mb-4">
                 Notícias Recentes
               </h4>
