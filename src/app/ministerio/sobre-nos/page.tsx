@@ -6,7 +6,7 @@ export default function AboutUs() {
   return (
     <main className="w-full">
       <div className="w-full mb-20">
-        <Banner text_1="Ministério" text_2="Sobre nós" />
+        <Banner text_1="Ministério" text_2="Sobre nós" link_1="/ministerio" />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-20 flex flex-col lg:flex-row gap-12">
           <AboutUsSection />
           <MinistrySidebar />
