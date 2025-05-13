@@ -6,9 +6,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/ministerio/sobre-nos", request.url));
   }
 
+  if (request.nextUrl.pathname === "/publicacoes") {
+    return NextResponse.redirect(new URL("/publicacoes/noticias", request.url));
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: "/ministerio/:path*",
+  matcher: ["/ministerio/:path*", "/publicacoes/:path*"],
 };

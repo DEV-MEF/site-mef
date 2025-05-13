@@ -111,11 +111,11 @@ export function Header() {
       label: "PUBLICAÇÕES",
       // href: "/publicacoes",
       items: [
-        { label: "NOTÍCIAS", href: "/noticias" },
-        { label: "iMAGENS", href: "/imagens" },
-        { label: "VÍDEOS", href: "/videos" },
-        { label: "DOCUMENTOS", href: "/documentos" },
-        { label: "LEGISLAÇÕES", href: "/legislacao" },
+        { label: "NOTÍCIAS", href: "/publicacoes/noticias" },
+        { label: "iMAGENS", href: "/publicacoes/imagens" },
+        { label: "VÍDEOS", href: "/publicacoes/videos" },
+        { label: "DOCUMENTOS", href: "/publicacoes/documentos" },
+        { label: "LEGISLAÇÕES", href: "/publicacoes/legislacoes" },
       ],
     },
     {

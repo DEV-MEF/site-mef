@@ -7,7 +7,7 @@ import Banner from "@/components/pages/banner";
 import InstitutionsSidebar from "@/components/pages/institutions/sidebar";
 
 export default function Servicos() {
-  const {selectedDirecao } = useServicos();
+  const { selectedDirecao } = useServicos();
 
   return (
     <main className="w-full mb-20">

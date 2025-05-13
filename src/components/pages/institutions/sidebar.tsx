@@ -1,3 +1,4 @@
+"use client";
 import { useServicos } from "@/components/contexts/servicos";
 import { twMerge } from "tailwind-merge";
 
