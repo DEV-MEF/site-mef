@@ -170,9 +170,9 @@ export default function SingularNews({
         </div>
 
         {/* Conteúdo Principal */}
-        <div className="grid grid-cols-3 gap-12">
+        <div className="w-full flex flex-col md:flex-row gap-12">
           {/* Coluna de Texto (2x) */}
-          <div className="col-span-2">
+          <div className="w-full lg:w-8/12">
             <div className="mb-8">
               <Image
                 src={
@@ -218,7 +218,7 @@ export default function SingularNews({
           </div>
 
           {/* Coluna de Cards (1x) */}
-          <div className="col-span-1 flex flex-col space-y-8">
+          <div className="col-span-2 flex flex-col space-y-8">
             <div className="bg-[#F1F1FF] p-6 rounded-lg">
               <h4 className="text-lg font-semibold text-primary mb-4">
                 Categorias
