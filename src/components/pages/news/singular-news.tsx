@@ -22,7 +22,7 @@ interface CountFileInFolder {
 export default function SingularNews({
   params,
 }: {
-  params: { documentId: string };
+  params: Promise<{ documentId: string }>;
 }) {
   const router = useRouter();
   const [news, setNews] = useState<NewsItem>();
