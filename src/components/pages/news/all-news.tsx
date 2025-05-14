@@ -12,6 +12,7 @@ import { MdDateRange } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { RiSearchLine } from "react-icons/ri";
 import PaginationComponent from "./pagination";
+import { X } from "lucide-react";
 
 moment.locale("pt");
 
@@ -27,7 +28,7 @@ type Meta = {
 export default function AllNews() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
   const [news, setNews] = useState<NewsItem[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
 
@@ -90,6 +91,15 @@ export default function AllNews() {
     });
   };
 
+  const deleteSearch = () => {
+    setSearch("");
+    const newParams = new URLSearchParams(window.location.search);
+    newParams.delete("search");
+    router.push(`/publicacoes/noticias`, {
+      scroll: false,
+    });
+  };
+
   const readMore = (documentId: string) => {
     router.push(`/publicacoes/noticias/${documentId}`);
   };
@@ -109,8 +119,16 @@ export default function AllNews() {
             onChange={handleSearch}
             onKeyDown={(e) => e.key === "Enter" && applySearch()}
             placeholder="Pesquisar..."
-            className="w-full h-12 pl-5 pr-12 rounded-md border border-zinc-300 focus:border-primary-blue focus-visible:ring-0 focus:ring-0 focus:outline-none text-zinc-800"
+            className={`${
+              search ? "pl-9" : "pl-5"
+            } w-full h-12  pr-12 rounded-md border border-zinc-300 focus:border-primary-blue transition-all duration-100 focus-visible:ring-0 focus:ring-0 focus:outline-none text-zinc-800`}
           />
+          {search && (
+            <X
+              onClick={() => deleteSearch()}
+              className="absolute w-5 text-red-400 hover:text-red-500 left-3 top-3 cursor-pointer transition-colors"
+            />
+          )}
           <RiSearchLine
             size={24}
             onClick={applySearch}
