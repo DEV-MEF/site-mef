@@ -315,7 +315,7 @@ export function Header() {
                             <DropdownMenuContent
                               align="start"
                               sideOffset={8}
-                              className="bg-primary-blue pr-20 border-none shadow-none ml-3"
+                              className="bg-primary-blue pr-10 sm:pr-20 border-none shadow-none ml-3"
                             >
                               {item.items.map((subItem, index) => (
                                 <DropdownMenuItem
