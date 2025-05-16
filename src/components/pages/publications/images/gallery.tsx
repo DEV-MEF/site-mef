@@ -7,7 +7,6 @@
 // import { ChevronLeft, ChevronRight } from "lucide-react";
 // import Banner from "../../banner";
 // import useEmblaCarousel from "embla-carousel-react";
-// // import Autoplay from "embla-carousel-autoplay";
 
 // type ImageType = {
 //   name: string;
@@ -33,12 +32,11 @@
 //   const [images, setImages] = useState<TImage[]>([]);
 //   const [galleryDescription, setGalleryDescription] = useState<string>("");
 //   const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true });
-//   // const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true }, [
-//   //   Autoplay({ delay: 10000 }),
-//   // ]);
 //   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
 //     containScroll: "keepSnaps",
 //     dragFree: true,
+//     axis: "x",
+//     align: "start",
 //   });
 //   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -112,7 +110,7 @@
 //           <>
 //             <div className="relative">
 //               <div
-//                 className="embla overflow-hidden rounded-xl bg-text-primary"
+//                 className="embla overflow-hidden rounded-xl"
 //                 ref={emblaMainRef}
 //               >
 //                 <div className="embla__container flex">
@@ -136,13 +134,13 @@
 //               {/* Navigation buttons */}
 //               <button
 //                 onClick={scrollPrev}
-//                 className="hidden lg:block cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/70 text-primary-blue p-2 rounded-full backdrop-blur transition"
+//                 className="hidden lg:block cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full backdrop-blur transition"
 //               >
 //                 <ChevronLeft size={28} />
 //               </button>
 //               <button
 //                 onClick={scrollNext}
-//                 className="hidden lg:block cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/70 text-primary-blue p-2 rounded-full backdrop-blur transition"
+//                 className="hidden lg:block cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full backdrop-blur transition"
 //               >
 //                 <ChevronRight size={28} />
 //               </button>
@@ -150,30 +148,32 @@
 
 //             {/* Thumbnails */}
 //             {images.length > 1 && (
-//               <div className="embla-thumbs mt-10">
+//               <div className="embla-thumbs mt-10 px-4">
 //                 <div
-//                   className="embla-thumbs__viewport"
+//                   className="embla-thumbs__viewport overflow-hidden"
 //                   ref={emblaThumbsRef}
 //                 >
-//                   <div className="embla-thumbs__container flex gap-3">
+//                   <div className="embla-thumbs__container flex gap-3 w-auto">
 //                     {images.map((image, index) => (
 //                       <button
 //                         key={index}
 //                         onClick={() => onThumbClick(index)}
-//                         className={`embla-thumbs__slide w-20 h-16 rounded-md border-2 transition duration-200 ${
+//                         className={`embla-thumbs__slide flex-[0_0_80px] min-w-0 h-16 rounded-md border-2 transition duration-200 ${
 //                           index === selectedIndex
 //                             ? "border-primary-blue/80 scale-105 shadow"
 //                             : "border-transparent opacity-70 hover:opacity-100"
 //                         }`}
 //                         type="button"
 //                       >
-//                         <Image
-//                           src={image.source}
-//                           alt={image.alt}
-//                           width={80}
-//                           height={80}
-//                           className="object-cover w-full h-full"
-//                         />
+//                         <div className="relative w-full h-full">
+//                           <Image
+//                             src={image.source}
+//                             alt={image.alt}
+//                             fill
+//                             className="object-cover"
+//                             sizes="80px"
+//                           />
+//                         </div>
 //                       </button>
 //                     ))}
 //                   </div>
@@ -189,7 +189,15 @@
 //       </div>
 
 //       <style jsx global>{`
+//         .embla-thumbs__viewport {
+//           margin: 0 -16px; /* Compensa o padding do container pai */
+//         }
+//         .embla-thumbs__container {
+//           padding: 0 16px; /* Adiciona padding para não cortar as miniaturas */
+//         }
 //         .embla-thumbs__slide {
+//           flex: 0 0 80px;
+//           min-width: 0;
 //           position: relative;
 //         }
 //         .embla-thumbs__slide button {
@@ -197,16 +205,17 @@
 //           display: block;
 //           text-decoration: none;
 //         }
+//         @media (min-width: 640px) {
+//           .embla-thumbs__slide {
+//             flex: 0 0 100px;
+//           }
+//         }
 //       `}</style>
 //     </section>
 //   );
 // };
 
 // export default ImagesGallery;
-
-
-
-
 
 "use client";
 
@@ -318,12 +327,12 @@ const ImagesGallery = ({
 
         {images.length > 0 ? (
           <>
-            <div className="relative">
+            <div className="relative mb-5">
               <div
-                className="embla overflow-hidden rounded-xl bg-text-primary"
+                className="embla overflow-hidden rounded-xl"
                 ref={emblaMainRef}
               >
-                <div className="embla__container flex">
+                <div className="embla__container flex max-h-[500px]">
                   {images.map((image, index) => (
                     <div
                       className="embla__slide flex-[0_0_100%] min-w-0 relative aspect-[16/9]"
@@ -340,25 +349,27 @@ const ImagesGallery = ({
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Navigation buttons */}
+            {/* Navigation container */}
+            <div className="hidden md:flex justify-end items-center gap-2 mb-5">
               <button
                 onClick={scrollPrev}
-                className="hidden lg:block cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/70 text-primary-blue p-2 rounded-full backdrop-blur transition"
+                className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
               >
-                <ChevronLeft size={28} />
+                <ChevronLeft size={20} />
               </button>
               <button
                 onClick={scrollNext}
-                className="hidden lg:block cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/70 text-primary-blue p-2 rounded-full backdrop-blur transition"
+                className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
               >
-                <ChevronRight size={28} />
+                <ChevronRight size={20} />
               </button>
             </div>
 
             {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="embla-thumbs mt-10 px-4">
+              <div className="embla-thumbs px-4">
                 <div
                   className="embla-thumbs__viewport overflow-hidden"
                   ref={emblaThumbsRef}
