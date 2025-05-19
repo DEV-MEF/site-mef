@@ -327,7 +327,7 @@ const ImagesGallery = ({
 
         {images.length > 0 ? (
           <>
-            <div className="relative mb-5">
+            <div className="relative mb-5 bg-primary-blue/90 rounded-md">
               <div
                 className="embla overflow-hidden rounded-xl"
                 ref={emblaMainRef}
@@ -379,9 +379,9 @@ const ImagesGallery = ({
                       <button
                         key={index}
                         onClick={() => onThumbClick(index)}
-                        className={`embla-thumbs__slide flex-[0_0_80px] min-w-0 h-16 rounded-md border-2 transition duration-200 ${
+                        className={`embla-thumbs__slide flex-[0_0_80px] min-w-0 h-16 rounded-sm border-4 transition duration-200 ${
                           index === selectedIndex
-                            ? "border-primary-blue/80 scale-105 shadow"
+                            ? "border-primary-blue/70 scale-105 shadow-md"
                             : "border-transparent opacity-70 hover:opacity-100"
                         }`}
                         type="button"
