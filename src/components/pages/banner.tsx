@@ -38,7 +38,7 @@ export default function Banner({
             </Link>
             <ChevronRight className="w-4 md:w-5" />
             {/* <small className="font-light w-[110px] md:w-auto line-clamp-1">{text_3}</small> */}
-            <small className="font-light max-w-[100px] line-clamp-1">{text_3}</small>
+            <small className="font-light max-w-[100px] md:max-w-[400px] line-clamp-1">{text_3}</small>
           </div>
         )}
         {text_1 && !text_2 && (

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import { useRouter } from "next/navigation";
 import { imageURLServer } from "@/lib/utils";
+
 type ImageType = {
   name: string;
   documentId: string;
@@ -20,7 +21,7 @@ type TImageApi = {
   cover: ImageType;
 };
 
-export default function Multimedia() {
+export default function VideoGalleriesContainer() {
   const [multimedia, setMultimedia] = useState<TImageApi[]>();
   const route = useRouter();
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Multimedia() {
             key={index}
             className="relative w-full h-72 md:h-72 lg:h-80 rounded overflow-hidden shadow-md"
             onClick={() => {
-              route.push(`/videos/${value.documentId}`);
+              route.push(`/publicacoes/videos/${value.documentId}`);
             }}
           >
             <Image

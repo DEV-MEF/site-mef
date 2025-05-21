@@ -258,7 +258,6 @@ const ImagesGallery = ({
     align: "start",
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
-
   const onThumbClick = useCallback(
     (index: number) => {
       if (!emblaMainApi || !emblaThumbsApi) return;
@@ -315,7 +314,7 @@ const ImagesGallery = ({
       <Banner
         text_1="Publicações"
         text_2="Imagens"
-        text_3="Galeria"
+        text_3={galleryDescription}
         link_1="/publicacoes"
         link_2="/publicacoes/imagens"
       />
