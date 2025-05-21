@@ -225,24 +225,26 @@ function GalleryCard({
       {/* Overlay gradiente */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 transition-opacity duration-300" />
 
-      <div className="absolute inset-0 p-6 flex flex-col justify-end">
-        <div className="bg-primary-blue text-white text-xs px-3 py-1.5 rounded-full w-fit font-medium mb-3 flex items-center gap-1">
+      <div className="absolute inset-0 flex flex-col justify-end">
+        <div className="ml-6 bg-primary-blue text-white text-xs px-3 py-1.5 rounded-full w-fit font-medium mb-3 flex items-center gap-1">
           <Camera className="w-3.5 h-3.5" />
           <span>Galeria</span>
         </div>
+        <div className="p-6 w-full bg-gradient-to-t from-primary-blue/80 via-primary-blue/60 to-transparent opacity-80 transition-opacity duration-300">
+          <h3 className="text-white font-semibold text-xl mb-2 line-clamp-2">
+            {gallery.description || "Galeria de imagens"}
+          </h3>
 
-        <h3 className="text-white font-semibold text-xl mb-2 line-clamp-2">
-          {gallery.description || "Galeria de imagens"}
-        </h3>
+          <div className="flex items-center justify-between text-white">
+            <span className="text-sm font-medium">
+              {gallery.medias.length} Foto
+              {gallery.medias.length === 1 ? "" : "s"}
+            </span>
 
-        <div className="flex items-center justify-between text-white">
-          <span className="text-sm font-medium">
-            {gallery.medias.length} Foto{gallery.medias.length === 1 ? "" : "s"}
-          </span>
-
-          <div className="flex items-center gap-1 text-sm font-medium opacity-80 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all">
-            <span>Ver galeria</span>
-            <ChevronRight className="w-4 h-4" />
+            <div className="flex items-center gap-1 text-sm font-medium opacity-80 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all">
+              <span>Ver galeria</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
           </div>
         </div>
       </div>
