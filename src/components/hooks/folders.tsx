@@ -6,12 +6,12 @@ const APIS = {
   document: {
     filesApi: "docs",
     categoriesApi: "docs-categories",
-    linkToFiles: "documentos",
+    linkToFiles: "publicacoes/documentos",
   },
   legislation: {
     filesApi: "legislations",
     categoriesApi: "legislation-folders",
-    linkToFiles: "legislacao",
+    linkToFiles: "publicacoes/legislacao",
   },
 };
 export const useHookFolders = (api: "document" | "legislation") => {
