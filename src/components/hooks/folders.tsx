@@ -11,7 +11,7 @@ const APIS = {
   legislation: {
     filesApi: "legislations",
     categoriesApi: "legislation-folders",
-    linkToFiles: "publicacoes/legislacao",
+    linkToFiles: "publicacoes/legislacoes",
   },
 };
 export const useHookFolders = (api: "document" | "legislation") => {
