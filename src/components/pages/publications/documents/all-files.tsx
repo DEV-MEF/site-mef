@@ -96,7 +96,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           {files.map((doc, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8]"
+              className="flex flex-col lg:flex-row items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8]"
             >
               {/* Ícone do documento */}
               <div className="flex items-center space-x-4">
@@ -106,12 +106,12 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                 {/* Títulos */}
                 <div>
                   <p className="text-[#1E293B]/90 font-semibold">{doc.name}</p>
-                  <p className="text-[#64748B] text-sm">{doc.files.name}</p>
+                  {/* <p className="text-[#64748B] text-sm">{doc.files.name}</p> */}
                 </div>
               </div>
 
               {/* Ações */}
-              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+              <div className="flex items-center space-x-4 mt-4 lg:mt-0">
                 <button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
                   title="Visualizar"

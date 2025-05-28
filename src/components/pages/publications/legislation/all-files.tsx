@@ -5,9 +5,10 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
 import { AxiosHttpClient } from "@/settings/axios";
 import { usePdfViewer } from "@/components/contexts/pdf-viewer";
-import { useHookFolders } from "@/components/hooks/folders";
+// import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
-import SectionTitle from "@/components/layout/title";
+import { CornerUpLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 type File = {
   url: string;
   name: string;
@@ -20,19 +21,21 @@ type Doc = {
 };
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
-  const { onClickFolder, folders, listCountByDocumentId } =
-    useHookFolders("document");
+  // const { onClickFolder, folders, listCountByDocumentId } =
+  //   useHookFolders("legislation");
 
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
-
+  const [folderName, setFolderName] = useState<string>("");
+  const router = useRouter();
   useEffect(() => {
     (async () => {
       const { documentId } = await params;
       AxiosHttpClient.get(
-        `/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`
+        `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
       ).then(({ data: { data } }) => {
         setFiles(data);
+        if (data.length > 0) setFolderName(data[0].folder.name);
       });
     })();
   }, [params]);
@@ -44,12 +47,16 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Legislações"
         link_1="/publicacoes"
         link_2="/publicacoes/legislacoes"
-        text_3="Repositorio qq"
+        text_3={folderName}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
         <div className="flex justify-between items-center my-12">
-          <SectionTitle text="REPOSITÓRIO"/>
+          <CornerUpLeft
+            className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
+            onClick={() => router.back()}
+            xlinkTitle="Voltar"
+          />
           <p className="text-sm text-[#3b4158a8] flex items-center">
             <i className="pi pi-inbox mr-2"></i> {files.length} Resultado
             {files.length === 1 ? "" : "s"}
@@ -57,7 +64,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         </div>
 
         {/* Grid of Folders */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {folders.map((folder, index) => {
             const count = listCountByDocumentId[folder.documentId];
             return (
@@ -84,28 +91,27 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
               </div>
             );
           })}
-        </div>
-
+        </div> */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-14">
           {files.map((doc, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8]"
+              className="flex flex-col lg:flex-row items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8]"
             >
               {/* Ícone do documento */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 ">
                 <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#F8FAFC]">
                   <i className="pi pi-file text-[#5151F8] text-2xl"></i>
                 </div>
                 {/* Títulos */}
                 <div>
                   <p className="text-[#1E293B]/90 font-semibold">{doc.name}</p>
-                  <p className="text-[#64748B] text-sm">{doc.files.name}</p>
+                  {/* <p className="text-[#64748B] text-sm">{doc.files.name}</p> */}
                 </div>
               </div>
 
               {/* Ações */}
-              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+              <div className="flex items-center space-x-4 mt-4 lg:mt-0">
                 <button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
                   title="Visualizar"
