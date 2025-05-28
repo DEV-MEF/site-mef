@@ -5,8 +5,10 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
 import { AxiosHttpClient } from "@/settings/axios";
 import { usePdfViewer } from "@/components/contexts/pdf-viewer";
-import { useHookFolders } from "@/components/hooks/folders";
+// import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
+import { CornerUpLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type File = {
   url: string;
@@ -20,12 +22,12 @@ type Doc = {
 };
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
-  const { onClickFolder, folders, listCountByDocumentId } =
-    useHookFolders("document");
-
+  // const { onClickFolder, folders, listCountByDocumentId } =
+  //   useHookFolders("document");
+  const [folderName, setFolderName] = useState<string>("");
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
-
+  const router = useRouter();
   useEffect(() => {
     (async () => {
       const { documentId } = await params;
@@ -33,6 +35,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         `/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`
       ).then(({ data: { data } }) => {
         setFiles(data);
+        setFolderName(data[0].folder.name);
       });
     })();
   }, [params]);
@@ -44,20 +47,24 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Documentos"
         link_1="/publicacoes"
         link_2="/publicacoes/documentos"
-        text_3="Repositorio qq"
+        text_3={folderName}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
         <div className="flex justify-between items-center my-12">
-          <h1 className="text-xl font-semibold text-[#3B4158]">REPOSITÓRIO</h1>
+          {/* <SectionTitle text="REPOSITÓRIO"/> */}
+          <CornerUpLeft
+            className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
+            onClick={() => router.back()}
+            xlinkTitle="Voltar"
+          />
           <p className="text-sm text-[#3b4158a8] flex items-center">
             <i className="pi pi-inbox mr-2"></i> {files.length} Resultado
             {files.length === 1 ? "" : "s"}
           </p>
         </div>
-
         {/* Grid of Folders */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {folders.map((folder, index) => {
             const count = listCountByDocumentId[folder.documentId];
             return (
@@ -84,8 +91,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
               </div>
             );
           })}
-        </div>
-
+        </div> */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-14">
           {files.map((doc, index) => (
             <div

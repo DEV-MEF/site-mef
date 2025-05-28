@@ -18,6 +18,7 @@ export const useHookFolders = (api: "document" | "legislation") => {
   const router = useRouter();
   const [updateCount, setUpdateCount] = useState<boolean>(true);
   const [folders, setFolders] = useState<Folders[]>([]);
+  // const[folderName]
   const [listCountByDocumentId, setListCountByDocumentId] =
     useState<CountFileInFolder>({});
 

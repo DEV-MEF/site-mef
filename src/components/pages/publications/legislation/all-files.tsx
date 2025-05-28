@@ -7,7 +7,7 @@ import { AxiosHttpClient } from "@/settings/axios";
 import { usePdfViewer } from "@/components/contexts/pdf-viewer";
 import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
-
+import SectionTitle from "@/components/layout/title";
 type File = {
   url: string;
   name: string;
@@ -49,7 +49,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
         <div className="flex justify-between items-center my-12">
-          <h1 className="text-xl font-semibold text-[#3B4158]">REPOSITÓRIO</h1>
+          <SectionTitle text="REPOSITÓRIO"/>
           <p className="text-sm text-[#3b4158a8] flex items-center">
             <i className="pi pi-inbox mr-2"></i> {files.length} Resultado
             {files.length === 1 ? "" : "s"}
