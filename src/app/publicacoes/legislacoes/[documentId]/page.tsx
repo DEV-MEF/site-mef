@@ -1,5 +1,5 @@
 import "primeicons/primeicons.css";
-import AllFiles from "@/components/pages/publications/legislation/all-files";
+import AllFiles from "@/components/pages/publications/legislations/all-files";
 
 export default function Documents({ params }: never) {
   return (

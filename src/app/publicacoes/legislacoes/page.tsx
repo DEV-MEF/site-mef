@@ -1,6 +1,6 @@
 import "primeicons/primeicons.css";
 import Banner from "@/components/pages/banner";
-import AllFolders from "@/components/pages/publications/legislation/all-folders";
+import AllFolders from "@/components/pages/publications/legislations/all-folders";
 
 export default function ministerio() {
   return (

@@ -1,10 +1,10 @@
-"use client"
-import {useServicos} from "@/components/contexts/servicos";
+"use client";
+import { useServicos } from "@/components/contexts/servicos";
 
 export default function ContactMap() {
-    const {contato} = useServicos();
+  const { contato } = useServicos();
   return (
-    <section className="w-full">
+    <section className="w-full container px-4 max-w-[88rem] mx-auto">
       <iframe
         title="Mapa do Ministério das Finanças e do Plano"
         src={contato.linkmap}

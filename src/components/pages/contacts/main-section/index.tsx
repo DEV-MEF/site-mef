@@ -29,7 +29,7 @@ export default function ContactMainSection() {
 
   return (
     <section className="w-full flex flex-col gap-28 py-32">
-      <div className="w-full flex flex-col lg:flex-row gap-20 lg:gap-6">
+      <div className="w-full container px-4 max-w-[88rem] flex flex-col lg:flex-row gap-20 lg:gap-6 mx-auto">
         <div className="w-full">
           <h6 className="text-md text-primary-blue font-semibold">
             Contacte-nos
@@ -159,40 +159,6 @@ export default function ContactMainSection() {
             </Button>
           </form>
         </div>
-
-        {/* <div className=" bg-light-gray rounded-lg p-6 space-y-4">
-          <Image
-            width={300}
-            height={300}
-            src={
-              urlPhotoContact
-                ? imageURLServer + "" + urlPhotoContact
-                : "/images/contacts/ministerio.jpg"
-            }
-            alt="Ministério"
-            className="w-full h-40 object-cover rounded-lg mb-4"
-          />
-          <div className="space-y-4">
-            <p className="text-sm font-semibold">{ministerio.name}</p>
-            <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Endereço:</strong>
-              {contato.location}
-            </p>
-            <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Telefone:</strong>
-              {contato.tel} / {contato.phone}
-            </p>
-            <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Email:</strong> {contato.mail}
-            </p>
-            <p className="text-sm font-light mt-2">
-              <strong className="font-semibold">Website:</strong>{" "}
-              <a href="#">{contato.webpage}</a>
-            </p>
-          </div>
-        </div> */}
-
-        {/* Informações de Contato - Componente Melhorado */}
         <div className="w-auto">
           <Card className="h-full border-none">
             <div className="relative w-full">
@@ -208,13 +174,6 @@ export default function ContactMainSection() {
                 alt="Ministério"
                 className="w-full h-[160px] object-cover rounded-t-lg"
               />
-              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                <div className="p-4 text-white">
-                  <h3 className="font-bold text-xl">
-                    Ministério da Economia e Finanças
-                  </h3>
-                </div>
-              </div> */}
             </div>
             <CardContent className="space-y-6 pt-4">
               <div className="space-y-4">
