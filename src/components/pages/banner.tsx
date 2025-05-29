@@ -68,10 +68,10 @@ export default function Banner({
           </div>
         )}
         {text_1 && !text_2 && (
-          <h1 className="text-white text-md font-bold">{text_1}</h1>
+          <h1 className="text-white text-lg font-bold">{text_1}</h1>
         )}
         {text_2 && !text_1 && (
-          <h1 className="text-white text-md font-bold">{text_2}</h1>
+          <h1 className="text-white text-lg font-bold">{text_2}</h1>
         )}
       </div>
     </div>
