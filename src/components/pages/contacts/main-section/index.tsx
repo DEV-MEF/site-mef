@@ -320,7 +320,7 @@ export default function ContactMainSection() {
             <div className="w-full flex flex-col md:flex-row gap-6">
               <div className="w-full flex flex-col gap-2">
                 <Label className="text-sm text-zinc-600 font-medium">
-                  Primeiro Nome *
+                  Primeiro Nome <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   type="text"
@@ -341,7 +341,7 @@ export default function ContactMainSection() {
               </div>
               <div className="w-full flex flex-col gap-2">
                 <Label className="text-sm text-zinc-600 font-medium">
-                  Último Nome *
+                  Último Nome <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   type="text"
@@ -364,7 +364,7 @@ export default function ContactMainSection() {
             <div className="w-full flex flex-col md:flex-row gap-6">
               <div className="w-full flex flex-col gap-2">
                 <Label className="text-sm text-zinc-600 font-medium">
-                  Email *
+                  Email <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   type="email"
