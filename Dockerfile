@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM node:20-alpine AS final
 
-RUN apk add --no-cache bash
+RUN apk add --no-cache postgresql-client bash
 
 
 WORKDIR /opt/app
