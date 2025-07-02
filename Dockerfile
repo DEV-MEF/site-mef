@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM node:20-alpine AS final
 
-RUN apk add --no-cache postgresql-client bash
+RUN apk add --no-cache postgresql-client bash curl
 
 
 WORKDIR /opt/app
@@ -22,4 +22,5 @@ COPY --from=builder /opt/app/node_modules /opt/app/node_modules
 COPY --from=builder /opt/app/.next /opt/app/.next
 # Copiar o restante dos arquivos necessários
 COPY . .
+
 CMD ["/bin/sh", "/opt/app/bin/start.sh"]
