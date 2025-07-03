@@ -9,7 +9,7 @@ export default function OnlineServicesSection() {
       <SectionTitle text="SERVIÇOS ONLINE" />
       <CardsList />
       <Link
-        href="/documentos"
+        href="/servicos"
         className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-10"
       >
         Todos os serviços
