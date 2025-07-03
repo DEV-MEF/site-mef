@@ -5,8 +5,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    background-color: #f8f9fa;
+    height: auto;
+    background-color: transparent;
     color: #003366;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }

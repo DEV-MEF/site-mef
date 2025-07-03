@@ -49,7 +49,7 @@ export default function NewsSection() {
   }, []);
 
   const readMore = (documentId: string) => {
-    router.push(`/noticias/${documentId}`);
+    router.push(`/publicacoes/noticias/${documentId}`);
   };
 
   return (
@@ -110,7 +110,7 @@ export default function NewsSection() {
         ))}
       </div>
       <Link
-        href="/noticias"
+        href="/publicacoes/noticias"
         className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-10"
       >
         Todas as notícias

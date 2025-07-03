@@ -91,7 +91,7 @@ import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import { imageURLServer } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { Camera, Loader2, ChevronRight } from "lucide-react";
+import { Camera, ChevronRight } from "lucide-react";
 import SectionTitle from "@/components/layout/title";
 
 type ImageType = {
@@ -142,11 +142,7 @@ export default function GaleriesSection() {
   };
 
   if (isLoading) {
-    return (
-      <div className="w-full min-h-[300px] flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-primary-blue animate-spin" />
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 
   if (error) {

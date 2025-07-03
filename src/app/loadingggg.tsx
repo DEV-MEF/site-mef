@@ -13,11 +13,11 @@ export default function Loading() {
           <div className={`${styles.bar} ${styles.bar4}`}></div>
           <div className={`${styles.bar} ${styles.bar5}`}></div>
         </div>
-        <div className={styles.loadingText}>
+        {/* <div className={styles.loadingText}>
           <div className={styles.progressContainer}>
             <div className={styles.progressBar}></div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

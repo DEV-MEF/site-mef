@@ -16,6 +16,7 @@
   --color-text-light: #9497a1;
   --color-dark-gray: #263238;
   --color-text-gray-footer: #f5f7fa;
+  --color-accent: #4040401e;
 }
 
 body {
@@ -28,6 +29,7 @@ body {
 .active {
   color: #3a3b7b;
   border-bottom: 2.5px solid #3a3b7b;
+  border-bottom: 2.5px solid #4040401e;
   padding: 1rem 0;
 }
 
@@ -83,7 +85,6 @@ body {
 
 .p-focus .p-menuitem-content {
   background-color: #ffffff;
-  
 }
 /* .p-menuitem .p-menuitem-content:hover {
   background-color: #3a3b7b;
