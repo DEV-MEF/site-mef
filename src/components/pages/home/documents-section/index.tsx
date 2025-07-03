@@ -88,7 +88,7 @@ export default function DocumentsSection() {
         </div>
         <div className="flex items-center justify-between">
           <Link
-            href="/documentos"
+            href="/publicacoes/documentos"
             className="text-sm hover:underline flex items-center transition-colors text-primary-blue/80 mt-4 ml-5"
           >
             Todos os documentos

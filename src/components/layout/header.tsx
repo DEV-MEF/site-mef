@@ -271,7 +271,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-full bg-white">
               <div className="flex h-full flex-col">
-                <div className="mb-4 border-b flex items-center justify-between py-2 px-4 border-zinc-500/10">
+                <div className="-mt-2 border-b flex items-center justify-between py-2 px-4 border-zinc-500/10">
                   <Link
                     href="/"
                     onClick={() => {
@@ -285,7 +285,7 @@ export function Header() {
                       width={1000}
                       height={1000}
                       unoptimized
-                      className="object-contain w-44 h-auto sm:w-52 mb-1"
+                      className="object-contain w-52 h-auto sm:w-64 lg:w-80 mb-1"
                     />
                   </Link>
                 </div>
