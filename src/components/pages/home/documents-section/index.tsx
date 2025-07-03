@@ -66,11 +66,11 @@ export default function DocumentsSection() {
                   });
                 }}
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2">
                   <FileText className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary-blue" />
                   <div>
                     <div className="flex items-center gap-3">
-                      <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline">
+                      <h3 className="font-medium group-hover:text-primary transition-colors text-text-primary hover:underline max-w-full line-clamp-1 md:line-clamp-2">
                         {value.name}
                       </h3>
                       <span className="text-xs text-text-light/90">
