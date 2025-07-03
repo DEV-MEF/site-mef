@@ -412,7 +412,7 @@ export default function ContactMainSection() {
             </div>
             <div className="w-full flex flex-col gap-2">
               <Label className="text-sm text-zinc-600 font-medium">
-                Mensagem *
+                Mensagem <span className="text-red-500">*</span>
               </Label>
               <textarea
                 className="w-full placeholder:text-sm border resize-y rounded-md pl-4 pt-4 h-40 placeholder:text-zinc-400 outline-none border-zinc-300 focus:border-primary-blue focus-visible:ring-0"
