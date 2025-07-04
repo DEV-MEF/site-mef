@@ -93,6 +93,7 @@ import { imageURLServer } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Camera, ChevronRight } from "lucide-react";
 import SectionTitle from "@/components/layout/title";
+import { ImagesGallerySkeleton } from "@/components/layout/skeleton/images-gallery";
 
 type ImageType = {
   name: string;
@@ -113,13 +114,13 @@ type TImageApi = {
 export default function GaleriesSection() {
   const router = useRouter();
   const [galleries, setGalleries] = useState<TImageApi[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchGalleries = async () => {
+      setLoading(true);
       try {
-        setIsLoading(true);
         const {
           data: { data },
         } = await AxiosHttpClient.get("/galleries?&populate=*");
@@ -130,7 +131,7 @@ export default function GaleriesSection() {
         );
         console.error("Erro ao carregar galerias:", err);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
@@ -141,26 +142,34 @@ export default function GaleriesSection() {
     router.push(`/publicacoes/imagens/${galleryId}`);
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return (
-      <div className="w-full min-h-[300px] flex flex-col items-center justify-center text-red-500">
-        <p>{error}</p>
+      <section className="w-full px-4 max-w-[88rem] container min-h-[300px] flex flex-col items-center justify-center text-red-500">
+        <h1 className="mb-14">Houve um erro!</h1>
         <button
           onClick={() => window.location.reload()}
-          className="mt-4 px-4 py-2 bg-primary-blue text-white rounded hover:bg-primary-blue/90 transition-colors"
+          className=" px-4 py-2 bg-primary-blue text-white rounded hover:bg-primary-blue/90 transition-colors"
         >
           Tentar novamente
         </button>
-      </div>
+      </section>
     );
   }
 
+  if (loading) {
+    return <ImagesGallerySkeleton />;
+  }
+
+  if (galleries.length === 0) {
+    return (
+      <section className="w-full min-h-[200px] flex items-center justify-center text-text-second">
+        <p>Nenhuma galeria disponível no momento.</p>
+      </section>
+    );
+  }
+  //ImagesGallerySkeleton
   return (
-    <section className="w-full py-8">
+    <section className="w-full py-8 mb-10">
       <div className="flex flex-col mb-8 gap-3">
         <div className="flex items-center gap-2">
           <SectionTitle text="Galeria de Imagens" />
@@ -169,21 +178,15 @@ export default function GaleriesSection() {
           Veja a nossa Galeria de Imagens e acompanhe as nossas actividades!
         </p>
       </div>
-      {galleries?.length === 0 ? (
-        <div className="w-full min-h-[200px] flex items-center justify-center text-text-second">
-          <p>Nenhuma galeria disponível no momento.</p>
-        </div>
-      ) : (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {galleries.map((gallery, index) => (
-            <GalleryCard
-              key={gallery.documentId || index}
-              gallery={gallery}
-              onClick={() => navigateToGallery(gallery.documentId)}
-            />
-          ))}
-        </div>
-      )}
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {galleries.map((gallery, index) => (
+          <GalleryCard
+            key={gallery.documentId || index}
+            gallery={gallery}
+            onClick={() => navigateToGallery(gallery.documentId)}
+          />
+        ))}
+      </div>
     </section>
   );
 }

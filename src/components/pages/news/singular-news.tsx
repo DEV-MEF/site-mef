@@ -12,7 +12,7 @@ import ContentRenderer, {
 import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 import Banner from "../banner";
-import { NewsArticleSkeleton } from "@/components/layout/skeleton/singular-news-skeleton";
+import { NewsArticleSkeleton } from "@/components/layout/skeleton/singular-news";
 
 moment.locale("pt");
 

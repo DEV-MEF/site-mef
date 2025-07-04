@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { RiSearchLine } from "react-icons/ri";
 import PaginationComponent from "./pagination";
 import { X } from "lucide-react";
-import { NewsSkeleton } from "@/components/layout/skeleton/news-skeleton";
+import { NewsSkeleton } from "@/components/layout/skeleton/news";
 
 moment.locale("pt");
 
