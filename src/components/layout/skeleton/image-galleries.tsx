@@ -15,12 +15,12 @@ export function ImagesGallerySkeleton() {
             className="relative rounded-xl overflow-hidden shadow-md"
           >
             <Skeleton className="h-48 w-full rounded-xl" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent rounded-xl p-4 flex flex-col justify-end">
-              <Skeleton className="h-5 w-28 mb-2" /> {/* Label Galeria */}
-              <Skeleton className="h-6 w-40 mb-1" /> {/* Título da galeria */}
+            <div className="absolute inset-0 bg-gradient-to-t from-accent/50 via-accent/30 to-transparent rounded-xl p-4 flex flex-col justify-end">
+              <Skeleton className="h-5 bg-accent w-28 mb-2" /> {/* Label Galeria */}
+              <Skeleton className="h-6 bg-accent w-40 mb-1" /> {/* Título da galeria */}
               <div className="flex items-center justify-between text-white">
-                <Skeleton className="h-4 w-16" /> {/* Nº de fotos */}
-                <Skeleton className="h-4 w-20" /> {/* Ver galeria */}
+                <Skeleton className="h-4 bg-accent w-16" /> {/* Nº de fotos */}
+                <Skeleton className="h-4 bg-accent w-20" /> {/* Ver galeria */}
               </div>
             </div>
           </div>
