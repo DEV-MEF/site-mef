@@ -8,7 +8,8 @@ import { usePdfViewer } from "@/components/contexts/pdf-viewer";
 // import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
+import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/repository-documents-skeleton";
 
 type File = {
   url: string;
@@ -26,19 +27,53 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   //   useHookFolders("document");
   const [folderName, setFolderName] = useState<string>("");
   const [files, setFiles] = useState<Doc[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState<string | null>(null);
   const { openNewDocument } = usePdfViewer();
   const router = useRouter();
   useEffect(() => {
     (async () => {
-      const { documentId } = await params;
-      AxiosHttpClient.get(
-        `/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`
-      ).then(({ data: { data } }) => {
-        setFiles(data);
-        setFolderName(data[0].folder.name);
-      });
+      try {
+        const { documentId } = await params;
+        AxiosHttpClient.get(
+          `/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`
+        ).then(({ data: { data } }) => {
+          if (
+            !data ||
+            data.length === 0 ||
+            data === undefined ||
+            data === null
+          ) {
+            return notFound();
+          }
+          setFiles(data);
+          setFolderName(data[0].folder.name);
+        });
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Erro ao carregar documentos"
+        );
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [params]);
+
+  if (loading) {
+    return (
+      <section className=" w-full">
+        <Banner
+          text_1="Publicaçoes"
+          text_2="Documentos"
+          link_1="/publicacoes"
+          link_2="/publicacoes/documentos"
+          text_3={folderName}
+        />
+        <RepositoryDocumentsSkeleton />
+      </section>
+    );
+  }
 
   return (
     <section className=" w-full">
@@ -105,7 +140,12 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                 </div>
                 {/* Títulos */}
                 <div>
-                  <p className="text-[#1E293B]/90 font-semibold">{doc.name}</p>
+                  <p
+                    className="text-[#1E293B]/90 font-semibold line-clamp-1"
+                    title={doc.name}
+                  >
+                    {doc.name}
+                  </p>
                   {/* <p className="text-[#64748B] text-sm">{doc.files.name}</p> */}
                 </div>
               </div>
@@ -113,7 +153,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
               {/* Ações */}
               <div className="flex items-center space-x-4 mt-4 lg:mt-0">
                 <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
+                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
                   title="Visualizar"
                   onClick={() => {
                     openNewDocument({
@@ -126,13 +166,13 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                   <i className="pi pi-eye"></i>
                 </button>
                 <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
+                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
                   title="Informação"
                 >
                   <i className="pi pi-info-circle"></i>
                 </button>
                 <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
+                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
                   title="Download"
                 >
                   <i className="pi pi-download"></i>

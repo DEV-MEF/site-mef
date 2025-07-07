@@ -184,7 +184,7 @@ const ImagesGallery = ({
 
             {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="embla-thumbs px-4">
+              <div className="embla-thumbs px-4 w-full mx-auto">
                 <div
                   className="embla-thumbs__viewport overflow-hidden"
                   ref={emblaThumbsRef}

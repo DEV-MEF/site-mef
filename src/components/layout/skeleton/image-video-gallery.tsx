@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function Gallerykeleton() {
   return (
-    <section className="w-full max-w-[88rem]l mx-auto container px-4 py-12">
+    <section className="w-full max-w-[88rem] mx-auto container px-4 py-12">
       {/* Imagem principal com botões laterais */}
       <div className="relative w-[60%] aspect-video rounded-xl overflow-hidden bg-muted mt-12 mx-auto">
         <Skeleton className="absolute inset-0 w-full h-[85%] rounded-xl" />
