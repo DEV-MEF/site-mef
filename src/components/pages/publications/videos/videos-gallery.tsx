@@ -165,6 +165,7 @@ import { AxiosHttpClient } from "@/settings/axios";
 import { imageURLServer } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import { Gallerykeleton } from "@/components/layout/skeleton/image-video-gallery";
 
 interface ImageType {
   name: string;
@@ -200,9 +201,11 @@ interface TImage {
 }
 
 export const VideosGallery = ({ documentId }: { documentId: string }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [videos, setVideos] = useState<TImage[]>([]);
   const [galleryDescription, setGalleryDescription] = useState<string>("");
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [error, setError] = useState<string>("");
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "center" },
@@ -233,24 +236,35 @@ export const VideosGallery = ({ documentId }: { documentId: string }) => {
   }, [emblaApi, thumbEmblaApi]);
 
   useEffect(() => {
-    AxiosHttpClient.get(
-      `/towatches?filters[documentId][$eq]=${documentId}&populate=media.cover&populate=cover`
-    ).then(({ data: { data } }) => {
-      const collection: ApiResponse = data[0];
-      setGalleryDescription(collection.description);
+    try {
+      setIsLoading(true);
+      AxiosHttpClient.get(
+        `/towatches?filters[documentId][$eq]=${documentId}&populate=media.cover&populate=cover`
+      ).then(({ data: { data } }) => {
+        const collection: ApiResponse = data[0];
+        setGalleryDescription(collection.description);
 
-      const mapped = (collection?.media || []).map((video) => {
-        const img =
-          video.cover?.formats?.medium || video.cover || collection.cover;
-        return {
-          title: video.description,
-          alt: video.description,
-          source: imageURLServer + img.url,
-          linkVideo: video.link,
-        };
+        const mapped = (collection?.media || []).map((video) => {
+          const img =
+            video.cover?.formats?.medium || video.cover || collection.cover;
+          return {
+            title: video.description,
+            alt: video.description,
+            source: imageURLServer + img.url,
+            linkVideo: video.link,
+          };
+        });
+        setVideos(mapped);
       });
-      setVideos(mapped);
-    });
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Ocorreu um erro ao carregar os vídeos. Tente novamente mais tarde."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }, [documentId]);
 
   const getYoutubeId = (url: string) => {
@@ -258,6 +272,41 @@ export const VideosGallery = ({ documentId }: { documentId: string }) => {
     return match ? match[1] : "";
   };
 
+  if (error) {
+    return (
+      <section className="w-full h-screen flex flex-col items-center justify-center text-red-500">
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-12 py-4 bg-primary-blue text-white rounded hover:bg-primary-blue/90 transition-colors"
+        >
+          Tentar novamente
+        </button>
+      </section>
+    );
+  }
+
+  if (!isLoading && videos.length === 0) {
+    return (
+      <section className="w-full h-[500px] flex flex-col items-center justify-center">
+        <p>Nenhum vídeo disponível no momento.</p>
+      </section>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <section className="w-full h-full pb-10">
+        <Banner
+          text_1="Publicações"
+          text_2="Vídeos"
+          text_3={galleryDescription || "...."}
+          link_1="/publicacoes"
+          link_2="/publicacoes/videos"
+        />
+        <Gallerykeleton />
+      </section>
+    );
+  }
   return (
     <section className="w-full h-full">
       <Banner
@@ -273,49 +322,48 @@ export const VideosGallery = ({ documentId }: { documentId: string }) => {
           {galleryDescription}
         </h1>
 
-        {videos.length > 0 ? (
-          <>
-            <div
-              className="w-full mx-auto md:w-10/12 lg:w-8/12 2xl:w-6/12 relative"
-              ref={emblaRef}
-            >
-              <div className="flex touch-pan-y">
-                {videos.map((video, index) => (
-                  <div
-                    key={index}
-                    className="min-w-full relative aspect-video flex items-center justify-center px-2"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${getYoutubeId(
-                        video.linkVideo
-                      )}?autoplay=0`}
-                      title={video.title}
-                      allow="autoplay; encrypted-media"
-                      allowFullScreen
-                      className="rounded-xl shadow"
-                    ></iframe>
-                  </div>
-                ))}
-              </div>
+        <>
+          <div
+            className="w-full mx-auto md:w-10/12 lg:w-8/12 2xl:w-6/12 relative"
+            ref={emblaRef}
+          >
+            <div className="flex touch-pan-y">
+              {videos.map((video, index) => (
+                <div
+                  key={index}
+                  className="min-w-full relative aspect-video flex items-center justify-center px-2"
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${getYoutubeId(
+                      video.linkVideo
+                    )}?autoplay=0`}
+                    title={video.title}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    className="rounded-xl shadow"
+                  ></iframe>
+                </div>
+              ))}
+            </div>
 
-              {/* Navigation container */}
-              <div className="flex justify-end items-center gap-2 mb-5 mt-5">
-                <button
-                  onClick={() => emblaApi?.scrollPrev()}
-                  className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={() => emblaApi?.scrollNext()}
-                  className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              </div>
-              {/* <button
+            {/* Navigation container */}
+            <div className="flex justify-end items-center gap-2 mb-5 mt-5">
+              <button
+                onClick={() => emblaApi?.scrollPrev()}
+                className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={() => emblaApi?.scrollNext()}
+                className="cursor-pointer text-white bg-primary-blue hover:bg-primary-blue/90 p-2 rounded-full transition"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+            {/* <button
                 onClick={() => emblaApi?.scrollPrev()}
                 className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/80 text-primary-blue p-2 rounded-full shadow backdrop-blur"
               >
@@ -327,42 +375,37 @@ export const VideosGallery = ({ documentId }: { documentId: string }) => {
               >
                 <ChevronRight size={24} />
               </button> */}
-            </div>
+          </div>
 
-            {/* Miniaturas */}
-            <div
-              ref={thumbEmblaRef}
-              className="overflow-hidden mt-6 md:w-10/12 lg:w-6/12 mx-auto"
-            >
-              <div className="flex gap-3">
-                {videos.map((video, i) => (
-                  <button
-                    key={i}
-                    onClick={() => scrollTo(i)}
-                    className={twMerge(
-                      "w-28 h-16 rounded-md overflow-hidden border-3 transition duration-200",
-                      selectedIndex === i
-                        ? "border-primary-blue scale-105 shadow"
-                        : "border-transparent opacity-70 hover:opacity-100"
-                    )}
-                  >
-                    <Image
-                      src={video.source}
-                      alt={video.alt}
-                      width={112}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </button>
-                ))}
-              </div>
+          {/* Miniaturas */}
+          <div
+            ref={thumbEmblaRef}
+            className="overflow-hidden mt-6 md:w-10/12 lg:w-6/12 mx-auto"
+          >
+            <div className="flex gap-3">
+              {videos.map((video, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollTo(i)}
+                  className={twMerge(
+                    "w-28 h-16 rounded-md overflow-hidden border-3 transition duration-200",
+                    selectedIndex === i
+                      ? "border-primary-blue scale-105 shadow"
+                      : "border-transparent opacity-70 hover:opacity-100"
+                  )}
+                >
+                  <Image
+                    src={video.source}
+                    alt={video.alt}
+                    width={112}
+                    height={64}
+                    className="object-cover w-full h-full"
+                  />
+                </button>
+              ))}
             </div>
-          </>
-        ) : (
-          <p className="text-center text-gray-500 text-lg">
-            Nenhum vídeo encontrado.
-          </p>
-        )}
+          </div>
+        </>
       </div>
     </section>
   );

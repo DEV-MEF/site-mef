@@ -7,7 +7,7 @@ import { imageURLServer } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Banner from "../../banner";
 import useEmblaCarousel from "embla-carousel-react";
-import { Gallerykeleton } from "@/components/layout/skeleton/image-gallery";
+import { Gallerykeleton } from "@/components/layout/skeleton/image-video-gallery";
 
 type ImageType = {
   name: string;
@@ -142,12 +142,12 @@ const ImagesGallery = ({
 
         {images.length > 0 && (
           <>
-            <div className="relative mb-5 bg-primary-blue/90 rounded-md">
+            <div className="relative mb-5  rounded-md">
               <div
                 className="embla overflow-hidden rounded-xl"
                 ref={emblaMainRef}
               >
-                <div className="embla__container flex max-h-[500px]">
+                <div className="embla__container flex max-h-[450px]">
                   {images.map((image, index) => (
                     <div
                       className="embla__slide flex-[0_0_100%] min-w-0 relative aspect-[16/9]"

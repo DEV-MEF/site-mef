@@ -93,8 +93,9 @@ import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import { useRouter } from "next/navigation";
 import { imageURLServer } from "@/lib/utils";
-import { Camera, Loader2, ChevronRight } from "lucide-react";
+import { Camera, ChevronRight } from "lucide-react";
 import SectionTitle from "@/components/layout/title";
+import { ImagesGallerySkeleton } from "@/components/layout/skeleton/image-video-galleries";
 
 type ImageType = {
   name: string;
@@ -127,9 +128,10 @@ export default function VideoGalleriesContainer() {
         } = await AxiosHttpClient.get(`/towatches?populate=*`);
         setMultimedia(data);
       } catch (err) {
-        console.error("Erro ao carregar vídeos:", err);
         setError(
-          "Não foi possível carregar os vídeos. Tente novamente mais tarde."
+          err instanceof Error
+            ? err.message
+            : "Ocorreu um erro ao carregar os videos. Tente novamente mais tarde."
         );
       } finally {
         setIsLoading(false);
@@ -143,25 +145,26 @@ export default function VideoGalleriesContainer() {
     router.push(`/publicacoes/videos/${id}`);
   };
 
-  if (isLoading) {
-    return (
-      <div className="w-full min-h-[300px] flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-primary-blue animate-spin" />
-      </div>
-    );
-  }
-
   if (error) {
     return (
-      <div className="w-full min-h-[300px] flex flex-col items-center justify-center text-red-500">
-        <p>{error}</p>
+      <section className="w-full h-screen flex flex-col items-center justify-center text-red-500">
         <button
           onClick={() => window.location.reload()}
-          className="mt-4 px-4 py-2 bg-primary-blue text-white rounded hover:bg-primary-blue/90 transition-colors"
+          className="mt-4 px-12 py-4 bg-primary-blue text-white rounded hover:bg-primary-blue/90 transition-colors"
         >
           Tentar novamente
         </button>
-      </div>
+      </section>
+    );
+  }
+  if (isLoading) {
+    return <ImagesGallerySkeleton />;
+  }
+  if (multimedia.length === 0) {
+    return (
+      <section className="w-full h-[500px] flex flex-col items-center justify-center">
+        <p>Nenhum vídeo disponível no momento.</p>
+      </section>
     );
   }
 
@@ -174,11 +177,7 @@ export default function VideoGalleriesContainer() {
         </p>
       </div>
 
-      {multimedia.length === 0 ? (
-        <div className="w-full min-h-[200px] flex items-center justify-center text-text-second">
-          <p>Nenhum vídeo disponível no momento.</p>
-        </div>
-      ) : (
+      {multimedia.length > 0 && (
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {multimedia.map((video, index) => {
             const imageSrc =

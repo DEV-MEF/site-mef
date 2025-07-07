@@ -93,7 +93,7 @@ import { imageURLServer } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Camera, ChevronRight } from "lucide-react";
 import SectionTitle from "@/components/layout/title";
-import { ImagesGallerySkeleton } from "@/components/layout/skeleton/image-galleries";
+import { ImagesGallerySkeleton } from "@/components/layout/skeleton/image-video-galleries";
 
 type ImageType = {
   name: string;
