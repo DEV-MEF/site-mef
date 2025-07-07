@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function NewsArticleSkeleton() {
   return (
-    <div className="container grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div className="w-full max-w-[88rem] container grid grid-cols-1 lg:grid-cols-12 gap-8">
       {/* Conteúdo principal */}
       <div className="lg:col-span-8 space-y-4">
         <Skeleton className="h-6 w-3/4" />

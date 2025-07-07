@@ -5,10 +5,15 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
 import { useHookFolders } from "@/components/hooks/folders";
 import SectionTitle from "@/components/layout/title";
-
+import { DocumentsRepositorySkeleton } from "@/components/layout/skeleton/documents-repository";
+//DocumentsRepositorySkeleton
 const AllFolders = () => {
-  const { onClickFolder, folders, listCountByDocumentId } =
+  const { onClickFolder, folders, listCountByDocumentId, loading } =
     useHookFolders("document");
+
+  if (loading) {
+    return <DocumentsRepositorySkeleton />;
+  }
   return (
     <section className="w-full container max-w-[88rem] mx-auto px-4 py-10">
       {/* Title and Results */}

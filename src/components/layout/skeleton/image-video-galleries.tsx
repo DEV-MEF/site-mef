@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function ImagesGallerySkeleton() {
   return (
-    <section className="w-full max-w-6xl mx-auto container py-10 space-y-6">
+    <section className="w-full max-w-[88rem] mx-auto container py-10 space-y-6">
       <div className="space-y-2">
         <Skeleton className="h-6 w-48" /> {/* Título */}
         <Skeleton className="h-4 w-80" /> {/* Subtítulo */}

@@ -18,6 +18,8 @@ export const useHookFolders = (api: "document" | "legislation") => {
   const router = useRouter();
   const [updateCount, setUpdateCount] = useState<boolean>(true);
   const [folders, setFolders] = useState<Folders[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   // const[folderName]
   const [listCountByDocumentId, setListCountByDocumentId] =
     useState<CountFileInFolder>({});
@@ -25,25 +27,41 @@ export const useHookFolders = (api: "document" | "legislation") => {
   const { filesApi, categoriesApi, linkToFiles } = APIS[api];
 
   useEffect(() => {
-    AxiosHttpClient.get(`/${categoriesApi}/?populate=*`).then(
-      ({ data: { data } }) => {
-        setFolders(data);
-      }
-    );
+    try {
+      AxiosHttpClient.get(`/${categoriesApi}/?populate=*`).then(
+        ({ data: { data } }) => {
+          setFolders(data);
+        }
+      );
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "Erro ao carregar pastas"
+      );
+    } finally {
+      setLoading(false);
+    }
   }, [categoriesApi]);
 
   useEffect(() => {
     if (updateCount && folders.length > 0) {
-      folders.forEach(({ documentId }) => {
-        AxiosHttpClient.get(
-          `/${filesApi}?filters[folder][documentId][$eq]=${documentId}&pagination[limit]=1 `
-        ).then(({ data: { meta } }) => {
-          listCountByDocumentId[documentId] = meta.pagination.total;
-          setListCountByDocumentId(listCountByDocumentId);
-          setFolders([...folders]);
+      try {
+        folders.forEach(({ documentId }) => {
+          AxiosHttpClient.get(
+            `/${filesApi}?filters[folder][documentId][$eq]=${documentId}&pagination[limit]=1 `
+          ).then(({ data: { meta } }) => {
+            listCountByDocumentId[documentId] = meta.pagination.total;
+            setListCountByDocumentId(listCountByDocumentId);
+            setFolders([...folders]);
+          });
         });
-      });
-      setUpdateCount(false);
+        setUpdateCount(false);
+      } catch (error) {
+        setError(
+          error instanceof Error ? error.message : "Erro ao carregar documentos"
+        );
+      } finally {
+        setLoading(false);
+      }
     }
   }, [filesApi, folders, updateCount, listCountByDocumentId]);
 
@@ -63,6 +81,8 @@ export const useHookFolders = (api: "document" | "legislation") => {
   };
 
   return {
+    loading,
+    error,
     updateCount,
     setUpdateCount,
     folders,
