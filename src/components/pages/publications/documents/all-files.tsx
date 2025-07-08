@@ -9,7 +9,7 @@ import { usePdfViewer } from "@/components/contexts/pdf-viewer";
 import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
 import { notFound, useRouter } from "next/navigation";
-import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/repository-documents-skeleton";
+import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
 
 type File = {
   url: string;
