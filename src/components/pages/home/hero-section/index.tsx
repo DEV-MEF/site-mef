@@ -880,6 +880,7 @@ import {
 import { cn } from "@/lib/utils";
 import { AxiosHttpClient } from "@/settings/axios";
 import { imageURLServer } from "@/lib/utils";
+import HeroBannerSkeleton from "@/components/layout/skeleton/hero-section";
 
 type ImageItem = {
   src: string;
@@ -1187,8 +1188,8 @@ export const HeroSection = () => {
 
   if (isLoading) {
     return (
-      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] bg-gray-100 animate-pulse flex items-center justify-center">
-        <div className="text-gray-400">Carregando...</div>
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] animate-pulse flex items-center justify-center mt-24 md:top-0">
+        <HeroBannerSkeleton />
       </div>
     );
   }
