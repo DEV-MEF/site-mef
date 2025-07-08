@@ -9,14 +9,14 @@ import { imageURLServer, NewsItem } from "@/lib/utils";
 import moment from "moment";
 import "moment/locale/pt";
 import { MdDateRange } from "react-icons/md";
-import { useRouter } from "next/navigation"; // Importando useRouter para navegação
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
 moment.locale("pt");
 
 export default function NewsSection() {
   const [news, setNews] = useState<NewsItem[]>([]);
-  const router = useRouter(); // Substituindo useNavigate por useRouter
+  const router = useRouter();
 
   useEffect(() => {
     const query = qs.stringify(
@@ -24,7 +24,7 @@ export default function NewsSection() {
         populate: "*",
         pagination: {
           start: 0,
-          limit: 3,
+          limit: 4,
         },
         sort: ["createdAt:desc"],
       },
@@ -40,7 +40,6 @@ export default function NewsSection() {
         } = await AxiosHttpClient.get(`/news?${query}`);
         if (data) {
           setNews(data);
-          console.log(data);
         }
       } catch (error) {
         console.error("Erro ao buscar dados das notícias:", error);
@@ -64,7 +63,7 @@ export default function NewsSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-4">
         {news.map((item, index) => (
           <div
             key={index}
@@ -88,7 +87,7 @@ export default function NewsSection() {
                 className="w-full h-[200px] md:h-[250px] object-cover"
               />
             </div>
-            <div className="px-4 md:px-6 lg:px-7 py-4 flex flex-col gap-2">
+            <div className="px-4 md:px-6 lg:px-7 py-3 flex flex-col gap-2">
               <div className="flex items-center text-text-light/90 text-xs mb-2">
                 <MdDateRange size={16} className="mb-1 mr-1" />
                 {moment(item.createdAt, moment.ISO_8601).format("LL")}
