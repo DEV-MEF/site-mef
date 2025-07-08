@@ -168,8 +168,21 @@ export default function VideoGalleriesContainer() {
     );
   }
 
+  if (!isLoading && multimedia.length === 0) {
+    return (
+      <section className="w-full">
+        <div className="w-full container max-w-[88rem] mx-auto px-4 py-10 min-h-[500px]">
+          <SectionTitle text="Galeria de Vídeos" />
+          <p className="text-sm text-[#3b4158a8] flex items-center my-12 mt-10">
+            <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="w-full py-8 px-4">
+    <section className="w-full py-8 px-4 min-h-[600px]">
       <div className="flex flex-col mb-8 gap-3">
         <SectionTitle text="Galeria de Vídeos" />
         <p className="text-text-second font-light">
@@ -188,7 +201,7 @@ export default function VideoGalleriesContainer() {
             return (
               <div
                 key={video.documentId || index}
-                className="group relative w-full h-80 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                className="group relative w-full h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
                 onClick={() => navigateToVideoGallery(video.documentId)}
               >
                 {imageSrc ? (

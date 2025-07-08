@@ -9,6 +9,7 @@ import { usePdfViewer } from "@/components/contexts/pdf-viewer";
 import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
 type File = {
   url: string;
   name: string;
@@ -27,18 +28,63 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
   const [folderName, setFolderName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   useEffect(() => {
     (async () => {
-      const { documentId } = await params;
-      AxiosHttpClient.get(
-        `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
-      ).then(({ data: { data } }) => {
-        setFiles(data);
-        if (data.length > 0) setFolderName(data[0].folder.name);
-      });
+      try {
+        const { documentId } = await params;
+        AxiosHttpClient.get(
+          `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
+        ).then(({ data: { data } }) => {
+          setFiles(data);
+          if (data.length > 0) setFolderName(data[0].folder.name);
+        });
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Erro ao carregar os dados"
+        );
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [params]);
+
+  if (files && files.length === 0 && !loading) {
+    return (
+      <section className="w-full">
+        <Banner
+          text_1="Publicaçoes"
+          text_2="Legislações"
+          link_1="/publicacoes"
+          link_2="/publicacoes/legislacoes"
+          text_3={folderName}
+        />
+        <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
+          <p className="text-sm text-[#3b4158a8] flex items-center my-12 mt-10">
+            <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section className=" w-full">
+        <Banner
+          text_1="Publicaçoes"
+          text_2="Legislações"
+          link_1="/publicacoes"
+          link_2="/publicacoes/legislacoes"
+          text_3={folderName}
+        />
+        <RepositoryDocumentsSkeleton />
+      </section>
+    );
+  }
 
   return (
     <section className=" w-full">

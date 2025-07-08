@@ -160,16 +160,21 @@ export default function GaleriesSection() {
     return <ImagesGallerySkeleton />;
   }
 
-  if (galleries.length === 0) {
+  if (galleries.length === 0 && !loading) {
     return (
-      <section className="w-full min-h-[200px] flex items-center justify-center text-text-second">
-        <p>Nenhuma galeria disponível no momento.</p>
+      <section className="w-full">
+        <div className="w-full container max-w-[88rem] mx-auto px-4 py-10 min-h-[500px]">
+          <SectionTitle text="Galeria de Imagens" />
+          <p className="text-sm text-[#3b4158a8] flex items-center my-12 mt-10">
+            <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
+          </p>
+        </div>
       </section>
     );
   }
   //ImagesGallerySkeleton
   return (
-    <section className="w-full py-8 mb-10">
+    <section className="w-full py-8 mb-10 min-h-[600px]">
       <div className="flex flex-col mb-8 gap-3">
         <div className="flex items-center gap-2">
           <SectionTitle text="Galeria de Imagens" />
@@ -200,7 +205,7 @@ function GalleryCard({
 }) {
   return (
     <div
-      className="group relative w-full h-80 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+      className="group relative w-full h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
       onClick={onClick}
     >
       {gallery.cover ? (

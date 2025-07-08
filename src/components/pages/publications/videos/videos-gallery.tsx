@@ -131,8 +131,19 @@ export const VideosGallery = ({ documentId }: { documentId: string }) => {
 
   if (!isLoading && videos.length === 0) {
     return (
-      <section className="w-full h-[500px] flex flex-col items-center justify-center">
-        <p>Nenhum vídeo disponível no momento.</p>
+      <section className="w-full">
+        <Banner
+          text_1="Publicações"
+          text_2="Vídeos"
+          text_3={galleryDescription || "...."}
+          link_1="/publicacoes"
+          link_2="/publicacoes/videos"
+        />
+        <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
+          <p className="text-sm text-[#3b4158a8] flex items-center my-12 mt-10">
+            <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
+          </p>
+        </div>
       </section>
     );
   }

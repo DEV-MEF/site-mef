@@ -14,8 +14,21 @@ const AllFolders = () => {
   if (loading) {
     return <DocumentsRepositorySkeleton />;
   }
+
+  if (folders.length === 0 && !loading) {
+    return (
+      <section className="w-full container max-w-[88rem] mx-auto px-4 py-10">
+        <div className="mt-10">
+          <SectionTitle text="REPOSITÓRIO" />
+        </div>
+        <p className="text-sm text-[#3b4158a8] flex items-center my-12">
+          <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
+        </p>
+      </section>
+    );
+  }
   return (
-    <section className="w-full container max-w-[88rem] mx-auto px-4 py-10">
+    <section className="w-full container max-w-[88rem] mx-auto px-4 py-10 min-h-[700px]">
       {/* Title and Results */}
       <div className="w-full flex justify-between items-center my-12">
         <SectionTitle text="REPOSITÓRIO" />
