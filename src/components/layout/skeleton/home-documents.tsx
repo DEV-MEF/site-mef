@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DocumentListSkeleton() {
   return (
-    <div className="space-y-10 mt-10 mb-6">
+    <section className="space-y-10 mt-10 mb-6">
       {[...Array(4)].map((_, index) => (
         <div key={index} className="flex items-start space-x-4">
           {/* Ícone do documento */}
@@ -17,6 +17,6 @@ export default function DocumentListSkeleton() {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 }

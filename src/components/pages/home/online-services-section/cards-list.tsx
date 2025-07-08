@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import qs from "qs";
 import { AxiosHttpClient } from "@/settings/axios";
 import { imageURLServer } from "@/lib/utils";
+import ServicesListSkeleton from "@/components/layout/skeleton/home-services";
 
 interface ServiceItem {
   id: number;
@@ -45,6 +46,10 @@ interface ServiceItem {
 
 export default function CardsList() {
   const [service, setService] = useState<ServiceItem[]>([]);
+  //ServicesListSkeleton
+  const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const query = qs.stringify(
@@ -58,11 +63,18 @@ export default function CardsList() {
     );
 
     (async () => {
-      AxiosHttpClient.get(`/onlines?${query}`).then(({ data: { data } }) => {
-        if (data) {
-          setService(data);
-        }
-      });
+      setLoading(true);
+      try {
+        AxiosHttpClient.get(`/onlines?${query}`).then(({ data: { data } }) => {
+          if (data) {
+            setService(data);
+          }
+        });
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -75,24 +87,28 @@ export default function CardsList() {
           <CarouselNext className="relative hidden md:flex items-center justify-center text-white bg-primary-blue cursor-pointer hover:bg-primary-blue/90 w-8 h-8 rounded-full" />
         </div>
       </div>
-      <CarouselContent className="w-full flex flex-row gap-8">
-        {service.map((item) => (
-          <CarouselItem
-            className="pl-1 basis-1/2 md:basis-2/4 lg:basis-2/8 xl:basis-1/5 h-[220px] pt-5"
-            key={item.id}
-          >
-            <Card
-              imagePath={
-                item.logo?.formats?.large?.url
-                  ? `${imageURLServer}${item.logo.formats.large.url}`
-                  : `${imageURLServer}${item.logo.url}`
-              }
-              title={item.name}
-              href={item.link || "#"}
-            />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+      {loading ? (
+        <ServicesListSkeleton />
+      ) : (
+        <CarouselContent className="w-full flex flex-row gap-8">
+          {service.map((item) => (
+            <CarouselItem
+              className="pl-1 basis-1/2 md:basis-2/4 lg:basis-2/8 xl:basis-1/5 h-[220px] pt-5"
+              key={item.id}
+            >
+              <Card
+                imagePath={
+                  item.logo?.formats?.large?.url
+                    ? `${imageURLServer}${item.logo.formats.large.url}`
+                    : `${imageURLServer}${item.logo.url}`
+                }
+                title={item.name}
+                href={item.link || "#"}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      )}
     </Carousel>
   );
 }
