@@ -35,7 +35,7 @@ export default function AllNews() {
 
   useEffect(() => {
     const page = Number(searchParams.get("page")) || 1;
-    const pageSize = 6;
+    const pageSize = 8;
 
     const filters = {
       ...(searchParams.get("tag") && {
