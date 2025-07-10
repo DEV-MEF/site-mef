@@ -144,7 +144,7 @@ export default function ServicosPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <CardTitle className="text-lg mb-3">
+                    <CardTitle className="text-lg mb-3 text-primary-blue">
                       {service.name}
                     </CardTitle>
                     <p className="text-sm text-muted-foreground text-zinc-700">
