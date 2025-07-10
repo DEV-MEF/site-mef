@@ -8,7 +8,6 @@ import { Header } from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { PdfViewerProvider } from "@/components/contexts/pdf-viewer";
 import { ServicosProvider } from "@/components/contexts/servicos";
-import { Suspense } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -73,15 +72,13 @@ export default async function RootLayout({
   return (
     <html lang="pt">
       <body className={`${poppins.className}`}>
-        <Suspense fallback={null}>
-          <ServicosProvider>
-            <PdfViewerProvider>
-              <Header />
-              {children}
-              <Footer />
-            </PdfViewerProvider>
-          </ServicosProvider>
-        </Suspense>
+        <ServicosProvider>
+          <PdfViewerProvider>
+            <Header />
+            {children}
+            <Footer />
+          </PdfViewerProvider>
+        </ServicosProvider>
       </body>
     </html>
   );

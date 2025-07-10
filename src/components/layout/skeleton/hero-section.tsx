@@ -24,8 +24,8 @@ export default function HeroBannerSkeleton() {
       </div>
 
       {/* Botões de navegação laterais simulados */}
-      <Skeleton className="absolute top-[90%] md:top-[60%] right-4 md:left-4 transform -translate-y-1/2 h-10 w-10 rounded-full bg-gray-500/30" />
-      <Skeleton className="absolute top-[75%] md:top-[60%] right-4 transform -translate-y-1/2 h-10 w-10 rounded-full bg-gray-500/30" />
+      <Skeleton className="absolute top-[90%] md:top-[50%] right-4 md:left-4 transform -translate-y-1/2 h-10 w-10 rounded-full bg-gray-500/30" />
+      <Skeleton className="absolute top-[75%] md:top-[50%] right-4 transform -translate-y-1/2 h-10 w-10 rounded-full bg-gray-500/30" />
     </div>
   );
 }

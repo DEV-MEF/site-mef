@@ -68,6 +68,7 @@ export default function CardsList() {
         AxiosHttpClient.get(`/onlines?${query}`).then(({ data: { data } }) => {
           if (data) {
             setService(data);
+            console.log("Online Services Data:", data);
           }
         });
       } catch (err) {

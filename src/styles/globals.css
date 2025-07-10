@@ -240,3 +240,8 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
+.pag-hover:hover {
+  background-color: #3a3b7be6;
+  color: white;
+}

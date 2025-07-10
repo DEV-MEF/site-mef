@@ -82,11 +82,10 @@ const ImagesGallery = ({
           alt: img.alternativeText || img.name,
           source: imageURLServer + (img?.formats?.medium || img).url,
         }));
-
+        console.log("Mapped images:", mapped);
         setImages(mapped);
         setGalleryDescription(collection.description);
       } catch (error) {
-        console.error("Error fetching gallery:");
         setError(error instanceof Error ? error.message : "Erro desconhecido");
       } finally {
         setLoading(false);

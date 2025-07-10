@@ -59,10 +59,9 @@ export default function PaginationComponent({ pagination }: PaginationProps) {
       ) : (
         <PaginationItem key={page}>
           <PaginationLink
-            className={`text-primary-blue ${
-              currentPage === page
-                ? "text-white bg-primary-blue hover:bg-primary-blue/90 rounded-md"
-                : ""
+            className={`text-primary-blue hover:bg-primary-blue/90 ${
+              currentPage === page &&
+              "text-white hover:text-primary-blue bg-primary-blue hover:bg-primary-blue rounded-md pag-hover"
             }`}
             href="#"
             onClick={() => changePage(Number(page))}
