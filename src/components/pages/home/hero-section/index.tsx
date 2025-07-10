@@ -1135,7 +1135,7 @@ export const HeroSection = () => {
         setImages(
           (data as ImageData[]).map((image) => {
             const link = image?.news?.documentId
-              ? `noticias/${image.news.documentId}`
+              ? `publicacoes/noticias/${image.news.documentId}`
               : image?.link || "#";
 
             return {
