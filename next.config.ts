@@ -9,9 +9,14 @@ const nextConfig: NextConfig = {
     images:{
         remotePatterns: [
             {
-                protocol:"http",
+                protocol: "http",
                 hostname: "217.76.55.123",
-                port:"8091"
+                port: "8091"
+            },
+            {
+                protocol: "https",
+                hostname: "bemef.financas.st",
+                port: ""
             }
         ]
     }
