@@ -20,7 +20,7 @@ export default function Banner({
   link_3,
 }: BreadcrumbBannerProps) {
   return (
-    <div className="w-full h-[300px] banner-page flex items-center justify-center">
+    <div className="w-full h-[250px] md:h-[300px] banner-page flex items-center justify-center">
       <div className="w-full h-full max-w-[88rem] px-4 container flex items-end justify-start pb-10">
         {text_1 && text_2 && !text_3 && !text_4 && (
           <div className="text-white text-md font-semibold flex items-center gap-2">

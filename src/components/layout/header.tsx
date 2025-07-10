@@ -234,7 +234,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white outline-none p-2 rounded-md bg-primary-blue hover:bg-primary-blue border-2 cursor-pointer w-10 h-10"
+                className="text-white outline-none p-2 rounded-md bg-primary-blue pag-hover hover:bg-primary-blue border-2 cursor-pointer w-10 h-10"
                 onClick={() => setState(!state)}
               >
                 {state ? (
