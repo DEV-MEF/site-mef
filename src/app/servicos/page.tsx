@@ -133,7 +133,7 @@ export default function ServicosPage() {
               >
                 <Card className="border-accent transition hover:shadow-lg h-80 cursor-pointer p-0">
                   <CardHeader className="w-full p-0">
-                    <div className="w-full h-40 relative rounded-xl rounded-br-none rounded-bl-none p-0">
+                    <div className="w-full h-40 relative rounded-xl rounded-br-none rounded-bl-none p-0 bg-primary-blue/20">
                       <Image
                         src={`${imageUrl}`}
                         alt={service.name}
