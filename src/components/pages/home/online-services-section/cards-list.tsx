@@ -94,7 +94,7 @@ export default function CardsList() {
         <CarouselContent className="w-full flex flex-row gap-8">
           {service.map((item) => (
             <CarouselItem
-              className="pl-1 basis-2/3 md:basis-2/4 lg:basis-2/8 xl:basis-1/5 h-[220px] pt-5"
+              className="pl-1 basis-2/3 md:basis-2/4 lg:basis-2/8 xl:basis-1/5 h-[220px] pt-5 cursor-grab"
               key={item.id}
             >
               <Card
