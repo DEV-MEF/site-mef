@@ -154,16 +154,16 @@ export default function SingularNews({
           <>
             {" "}
             <div className="mb-10">
-              <div className="text-sm text-gray-500 flex items-center space-x-6">
-                <p className="flex items-center">
+              <div className="text-sm text-gray-500 flex items-center flex-wrap gap-4">
+                <p className="flex items-center text-xs sm:text-sm">
                   <i className="pi pi-user text-primary mr-2 text-primary-blue" />
                   Por: {news ? news.service?.name : "MEF"}
                 </p>
-                <p className="flex items-center">
+                <p className="flex items-center text-xs sm:text-sm">
                   <i className="pi pi-calendar text-primary mr-2 text-primary-blue" />
                   {news ? moment(news.createdAt).format("LL") : "Carregando..."}
                 </p>
-                <p className="flex items-center">
+                <p className="flex items-center text-xs sm:text-sm">
                   <i className="pi pi-clock text-primary mr-2 text-primary-blue"></i>{" "}
                   10 Min Leitura
                 </p>
