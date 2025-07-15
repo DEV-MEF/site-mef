@@ -197,7 +197,7 @@ export const PdfViewer: React.FC = () => {
 
                         <iframe
                             id="pdfIframe"
-                            src={urlServer + selectedDocument?.uri + '#navpanes=0&scrollbar=0'}
+                            src={"https://docs.google.com/gview?url="+urlServer + selectedDocument?.uri + '&embedded=true#navpanes=0&scrollbar=0'}
                             className="w-full flex-grow border-none" // flex-grow to take available height
                             title={selectedDocument?.name}
                         ></iframe>
