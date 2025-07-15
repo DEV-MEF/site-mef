@@ -5,13 +5,13 @@ const { Modal } = require('./modal');
 import { FaWindowClose, FaRedo, FaMinus, FaFileAlt, FaBars } from 'react-icons/fa'; // Added FaBars for mobile menu
 import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
 
-/*let urlServer = "";
+let urlServer = "";
 if (typeof window !== "undefined" && window.location?.origin) {
     urlServer = window.location.origin;
-}*/
+}
 
 export const PdfViewer: React.FC = () => {
-    const urlServer = process.env.WEB_BASE_SERVER;
+    // const urlServer = process.env.WEB_BASE_SERVER;
     const {
         listDocument,
         setListDocument,
@@ -197,7 +197,7 @@ export const PdfViewer: React.FC = () => {
 
                         <iframe
                             id="pdfIframe"
-                            src={urlServer +""+ selectedDocument?.uri + '#navpanes=0&scrollbar=0'}
+                            src={urlServer + selectedDocument?.uri + '#navpanes=0&scrollbar=0'}
                             className="w-full flex-grow border-none" // flex-grow to take available height
                             title={selectedDocument?.name}
                         ></iframe>
