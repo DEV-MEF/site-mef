@@ -1,3 +1,5 @@
+"use client";
+
 import "primeicons/primeicons.css";
 import AllNews from "@/components/pages/news/all-news";
 import Banner from "@/components/pages/banner";
