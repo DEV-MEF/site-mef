@@ -54,7 +54,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Legislações"
           link_1="/publicacoes"
           link_2="/publicacoes/legislacoes"
-          text_3={folderName}
+          text_3={folderName || documentId}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
             {/* Title and Results */}
