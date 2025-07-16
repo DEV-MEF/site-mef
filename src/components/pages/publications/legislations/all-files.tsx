@@ -4,7 +4,7 @@ import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
 import { AxiosHttpClient } from "@/settings/axios";
-import { usePdfViewer } from "@/components/contexts/pdf-viewer";
+import {Documents, usePdfViewer} from "@/components/contexts/pdf-viewer";
 // import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
@@ -20,6 +20,11 @@ type Doc = {
   name: string;
   files: File;
 };
+
+let urlServer = "";
+if (typeof window !== "undefined" && window.location?.origin) {
+  urlServer = window.location.origin;
+}
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   // const { onClickFolder, folders, listCountByDocumentId } =
@@ -84,6 +89,19 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         <RepositoryDocumentsSkeleton />
       </section>
     );
+  }
+
+  const handleDownload = (file: Documents) => {
+    if (file?.uri) {
+      console.log({selectedDocument: urlServer + file.uri});
+      const downloadUrl = urlServer + file.uri;
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = file.name || 'document.pdf'; // Use document name or a default
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 
   return (
@@ -171,15 +189,21 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                 >
                   <i className="pi pi-eye"></i>
                 </button>
-                <button
+                {/*<button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
                   title="Informação"
                 >
                   <i className="pi pi-info-circle"></i>
-                </button>
+                </button>*/}
                 <button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
                   title="Download"
+                  onClick={() => {
+                    handleDownload({
+                      name: doc.name,
+                      uri: doc.files.url,
+                    })
+                  }}
                 >
                   <i className="pi pi-download"></i>
                 </button>

@@ -25,7 +25,7 @@ export function RepositoryDocumentsSkeleton() {
 
             {/* Direita: ações */}
             <div className="flex items-center gap-3">
-              <Skeleton className="h-8 w-8 rounded-full" />
+              {/*<Skeleton className="h-8 w-8 rounded-full" />*/}
               <Skeleton className="h-8 w-8 rounded-full" />
               <Skeleton className="h-8 w-8 rounded-full" />
             </div>

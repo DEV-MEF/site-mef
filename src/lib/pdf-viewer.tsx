@@ -2,7 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const { Modal } = require('./modal');
-import { FaWindowClose, FaRedo, FaMinus, FaFileAlt, FaBars } from 'react-icons/fa'; // Added FaBars for mobile menu
+import { FaWindowClose, FaRedo, FaMinus, FaFileAlt, FaBars, FaDownload } from 'react-icons/fa';
 import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
 
 let urlServer = "";
@@ -11,7 +11,6 @@ if (typeof window !== "undefined" && window.location?.origin) {
 }
 
 export const PdfViewer: React.FC = () => {
-    // const urlServer = process.env.WEB_BASE_SERVER;
     const {
         listDocument,
         setListDocument,
@@ -23,13 +22,35 @@ export const PdfViewer: React.FC = () => {
         setIsDocumentMinimized
     } = usePdfViewer();
 
-    // State for mobile: to toggle document list visibility
     const [isMobileDocListOpen, setIsMobileDocListOpen] = React.useState(false);
+    const [isLoadingIframe, setIsLoadingIframe] = React.useState(true);
+
+    // Resetar o estado de loading sempre que o documento selecionado mudar
+    React.useEffect(() => {
+        setIsLoadingIframe(true);
+    }, [selectedDocument]);
+
+    // Efeito para controlar o scroll da página principal
+    React.useEffect(() => {
+        if (isDocumentModalOpen && !isDocumentMinimized) {
+            // Adiciona a classe 'overflow-hidden' ao body quando o modal está aberto
+            document.body.classList.add('overflow-hidden');
+        } else {
+            // Remove a classe 'overflow-hidden' quando o modal está fechado ou minimizado
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Função de cleanup para garantir que a classe seja removida ao desmontar o componente
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [isDocumentModalOpen, isDocumentMinimized]);
+
 
     const openModal = (document?: Documents) => {
         setIsDocumentModalOpen(true);
         setIsDocumentMinimized(false);
-        setIsMobileDocListOpen(false); // Close mobile doc list when opening modal
+        setIsMobileDocListOpen(false);
         if (document?.name) {
             setSelectedDocument(document);
         }
@@ -53,7 +74,7 @@ export const PdfViewer: React.FC = () => {
             setIsDocumentModalOpen(false);
             setIsDocumentMinimized(false);
             setSelectedDocument(undefined);
-            setIsMobileDocListOpen(false); // Ensure closed on full modal close
+            setIsMobileDocListOpen(false);
         }
     };
 
@@ -61,7 +82,20 @@ export const PdfViewer: React.FC = () => {
 
     const reloadIframe = () => {
         if (selectedDocument) {
+            setIsLoadingIframe(true);
             setSelectedDocument({ ...selectedDocument });
+        }
+    };
+
+    const handleDownload = () => {
+        if (selectedDocument?.uri) {
+            const downloadUrl = urlServer + selectedDocument.uri;
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = selectedDocument.name || 'document.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     };
 
@@ -80,20 +114,20 @@ export const PdfViewer: React.FC = () => {
                         backgroundColor: 'rgba(0, 0, 0, 0.75)'
                     },
                     content: {
-                        top: '0', // Full screen on mobile
+                        top: '0',
                         left: '0',
                         right: '0',
                         bottom: '0',
                         display: 'flex',
-                        flexDirection: 'column', // Stack elements vertically on mobile
+                        flexDirection: 'column',
                         padding: 0,
                         border: 'none',
                         height: '100vh',
-                        width: '100vw' // Full width on mobile
+                        width: '100vw'
                     }
                 }}
             >
-                <div className="flex flex-col w-full h-full lg:flex-row"> {/* flex-col on mobile, flex-row on larger screens */}
+                <div className="flex flex-col w-full h-full lg:flex-row">
                     {/* Mobile: Header for document list and controls */}
                     <div className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 lg:hidden border-b border-gray-300 dark:border-gray-700">
                         <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center">
@@ -114,6 +148,13 @@ export const PdfViewer: React.FC = () => {
                                 className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
                             >
                                 <FaRedo className="text-gray-500 dark:text-gray-300 text-lg" />
+                            </button>
+                            <button
+                                title="Download"
+                                onClick={handleDownload}
+                                className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+                            >
+                                <FaDownload className="text-blue-500 dark:text-blue-300 text-lg" />
                             </button>
                             <button
                                 title="Fechar"
@@ -137,20 +178,20 @@ export const PdfViewer: React.FC = () => {
                         w-full bg-gray-100 dark:bg-gray-800 p-4 border border-gray-300 dark:border-gray-700 shadow-sm
                         lg:w-1/5 lg:block
                         ${isMobileDocListOpen ? 'block' : 'hidden'}
-                        ${isMobileDocListOpen ? 'absolute inset-x-0 top-0 h-full overflow-y-auto z-20' : ''} /* Full screen overlay for mobile list */
+                        ${isMobileDocListOpen ? 'absolute inset-x-0 top-0 h-full overflow-y-auto z-20' : ''}
                     `}>
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 hidden lg:flex items-center"> {/* Hidden on mobile, shown on larger screens */}
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 hidden lg:flex items-center">
                             <FaFileAlt className="mr-2 text-blue-600 dark:text-blue-400" />
                             <span>Lista de Documentos</span>
                         </h3>
-                        <div className="border-b-2 border-blue-500 dark:border-blue-300 mb-4 hidden lg:block"></div> {/* Hidden on mobile, shown on larger screens */}
+                        <div className="border-b-2 border-blue-500 dark:border-blue-300 mb-4 hidden lg:block"></div>
                         <ul className="space-y-2">
                             {listDocument.map((document, index) => (
                                 <li
                                     key={index}
                                     onClick={() => {
                                         openModal(document);
-                                        setIsMobileDocListOpen(false); // Close list after selection
+                                        setIsMobileDocListOpen(false);
                                     }}
                                     className={`cursor-pointer flex items-center p-3 rounded-md border border-gray-300 dark:border-gray-600 transition-all duration-300 text-sm
                                         ${selectedDocument?.id === document.id ? 'bg-blue-50 dark:bg-blue-700 text-blue-600 dark:text-white border-blue-500' : 'bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
@@ -167,7 +208,7 @@ export const PdfViewer: React.FC = () => {
                     </div>
 
                     {/* PDF Viewer Area */}
-                    <div className="w-full relative lg:w-4/5 flex flex-col h-full"> {/* Adjust width for mobile, flex-col to stack controls */}
+                    <div className="w-full relative lg:w-4/5 flex flex-col h-full">
                         {/* Desktop Controls (hidden on mobile) */}
                         <div className="hidden lg:flex absolute top-4 right-4 flex-col space-y-2 z-10">
                             <div
@@ -185,6 +226,13 @@ export const PdfViewer: React.FC = () => {
                                 <FaRedo className="text-gray-500 dark:text-gray-300 text-lg" />
                             </div>
                             <div
+                                title="Download"
+                                onClick={handleDownload}
+                                className="cursor-pointer p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+                            >
+                                <FaDownload className="text-blue-500 dark:text-blue-300 text-lg" />
+                            </div>
+                            <div
                                 title="Fechar"
                                 onClick={() => {
                                     closeModal();
@@ -195,11 +243,19 @@ export const PdfViewer: React.FC = () => {
                             </div>
                         </div>
 
+                        {isLoadingIframe && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                                <span className="sr-only">Carregando...</span>
+                            </div>
+                        )}
+
                         <iframe
                             id="pdfIframe"
                             src={"https://docs.google.com/gview?url="+urlServer + selectedDocument?.uri + '&embedded=true#navpanes=0&scrollbar=0'}
-                            className="w-full flex-grow border-none" // flex-grow to take available height
+                            className={`w-full flex-grow border-none ${isLoadingIframe ? 'invisible' : 'visible'}`}
                             title={selectedDocument?.name}
+                            onLoad={() => setIsLoadingIframe(false)}
                         ></iframe>
                     </div>
                 </div>
@@ -207,7 +263,7 @@ export const PdfViewer: React.FC = () => {
 
             {isDocumentMinimized && (
                 <div
-                    className="fixed bottom-4 right-4 w-40 h-10 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-sm flex justify-between items-center p-2 z-[3000] shadow-lg" // Adjusted size and shadow for minimized button
+                    className="fixed bottom-4 right-4 w-40 h-10 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-sm flex justify-between items-center p-2 z-[3000] shadow-lg"
                     onClick={() => {
                         openModal();
                     }}
@@ -220,7 +276,7 @@ export const PdfViewer: React.FC = () => {
                             e.stopPropagation();
                             closeModal(true);
                         }}
-                        className="text-red-500 dark:text-red-300 cursor-pointer text-base" // Adjusted icon size
+                        className="text-red-500 dark:text-red-300 cursor-pointer text-base"
                     />
                 </div>
             )}
