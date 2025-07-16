@@ -29,7 +29,6 @@ if (typeof window !== "undefined" && window.location?.origin) {
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const {documentId} = React.use(params);
-  const { onClickFolder, folders, listCountByDocumentId } = useHookFolders("legislation", documentId);
 
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
@@ -58,6 +57,19 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_3={folderName}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
+            {/* Title and Results */}
+            <div className="flex justify-between items-center my-12">
+                <CornerUpLeft
+                    className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
+                    onClick={() => router.back()}
+                    xlinkTitle="Voltar"
+                />
+                <p className="text-sm text-[#3b4158a8] flex items-center">
+                    <i className="pi pi-inbox mr-2"></i> {files.length} Resultados
+                </p>
+            </div>
+
+            <FolderChildren documentId={documentId} />
           <p className="text-sm text-[#3b4158a8] flex items-center my-12 mt-10">
             <i className="pi pi-inbox mr-2"></i> Nenhum resultado encontrado.
           </p>
@@ -117,37 +129,8 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           </p>
         </div>
 
-        {/* Grid of Folders */}
-          {folders.length > 0 &&
-              <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {folders.map((folder, index) => {
-                const count = listCountByDocumentId[folder.documentId];
-                return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      onClickFolder(folder);
-                    }}
-                    className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
-                  >
-                    <i
-                      className="pi pi-folder text-3xl text-[#5151F8] mb-3"
-                      style={{ display: "block" }}
-                    ></i>
-                    <p className="text-[#3B4158] text-sm font-semibold mb-2">
-                      {folder.name}
-                    </p>
-                    <div
-                      className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
-                      style={{ fontSize: "12px" }}
-                    >
-                      {count} Documento{count === 1 ? "" : "s"}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          }
+        <FolderChildren documentId={documentId} />
+
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-14">
           {files.map((doc, index) => (
             <div
@@ -207,5 +190,41 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
     </section>
   );
 };
+
+
+const FolderChildren = ({documentId}: {documentId: string}) => {
+    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders("legislation", documentId);
+
+    {/* Grid of Folders */}
+    return folders.length > 0 &&
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {folders.map((folder, index) => {
+                const count = listCountByDocumentId[folder.documentId];
+                return (
+                    <div
+                        key={index}
+                        onClick={() => {
+                            onClickFolder(folder);
+                        }}
+                        className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
+                    >
+                        <i
+                            className="pi pi-folder text-3xl text-[#5151F8] mb-3"
+                            style={{display: "block"}}
+                        ></i>
+                        <p className="text-[#3B4158] text-sm font-semibold mb-2">
+                            {folder.name}
+                        </p>
+                        <div
+                            className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
+                            style={{fontSize: "12px"}}
+                        >
+                            {count} Documento{count === 1 ? "" : "s"}
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+}
 
 export default AllFiles;
