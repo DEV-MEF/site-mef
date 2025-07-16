@@ -74,9 +74,7 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   }
 
   const onClickFolder = ({ documentId }: Folders) => {
-    if (listCountByDocumentId[documentId] > 0) {
       router.push(`/${linkToFiles}/${documentId}`);
-    }
   };
 
   return {
