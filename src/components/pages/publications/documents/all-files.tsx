@@ -30,7 +30,6 @@ if (typeof window !== "undefined" && window.location?.origin) {
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const {documentId} = React.use(params);
-  const { onClickFolder, folders, listCountByDocumentId } = useHookFolders("document", documentId);
   const [folderName, setFolderName] = useState<string>("");
   const [files, setFiles] = useState<Doc[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
