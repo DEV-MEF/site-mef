@@ -56,7 +56,7 @@ export const ServicosProvider = ({ children }: ServicosProvider) => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
       const index = direcoes.findIndex(
-        ({ acronym }) => hash.toLowerCase() === acronym?.toString()
+        ({ acronym }) => hash.toLowerCase() === acronym?.toLowerCase()
       );
 
       if (hash === "") {
