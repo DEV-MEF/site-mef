@@ -2,7 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const { Modal } = require('./modal');
-import { FaWindowClose, FaRedo, FaMinus, FaFileAlt, FaBars, FaDownload } from 'react-icons/fa';
+import { FaWindowClose, FaMinus, FaFileAlt, FaBars, FaDownload } from 'react-icons/fa';
 import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
 
 let urlServer = "";
