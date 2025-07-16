@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
-import { useRouter } from "next/navigation";
+import {notFound, useRouter} from "next/navigation";
 
 const APIS = {
   document: {
@@ -44,11 +44,19 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   useEffect(() => {
     if (updateCount && folders.length > 0) {
       try {
-        folders.forEach(({ documentId }) => {
+        folders.forEach(({ documentId, id }) => {
           AxiosHttpClient.get(
-            `/${filesApi}?filters[folder][documentId][$eq]=${documentId}&pagination[limit]=1 `
+            `/${filesApi}?filters[folder][documentId][$eq]=${documentId}&pagination[limit]=1`
           ).then(({ data: { meta } }) => {
-            listCountByDocumentId[documentId] = meta.pagination.total;
+            listCountByDocumentId[documentId] = (listCountByDocumentId[documentId] || 0) + meta.pagination.total;
+            setListCountByDocumentId(listCountByDocumentId);
+            setFolders([...folders]);
+          });
+
+          AxiosHttpClient.get(
+              `/${categoriesApi}?filters[superfolder][$eq]=${id}&&pagination[limit]=1`
+          ).then(({ data: { meta } }) => {
+            listCountByDocumentId[documentId] =  (listCountByDocumentId[documentId] || 0) + meta.pagination.total;
             setListCountByDocumentId(listCountByDocumentId);
             setFolders([...folders]);
           });
@@ -62,11 +70,12 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
         setLoading(false);
       }
     }
-  }, [filesApi, folders, updateCount, listCountByDocumentId]);
+  }, [filesApi, folders, updateCount, listCountByDocumentId, categoriesApi]);
 
   interface Folders {
     documentId: string;
     name: string;
+    id: string;
   }
 
   interface CountFileInFolder {

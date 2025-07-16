@@ -35,6 +35,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const [folderName, setFolderName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
+  const {folders} = useHookFolders("legislation", documentId);
 
   useEffect(() => {
       AxiosHttpClient.get(
@@ -46,7 +47,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
       });
   }, [documentId]);
 
-  if (files && files.length === 0 && !loading) {
+  if (files && (files.length+folders.length) === 0 && !loading) {
     return (
       <section className="w-full">
         <Banner
@@ -65,7 +66,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                     xlinkTitle="Voltar"
                 />
                 <p className="text-sm text-[#3b4158a8] flex items-center">
-                    <i className="pi pi-inbox mr-2"></i> {files.length} Resultados
+                    <i className="pi pi-inbox mr-2"></i> {files.length+folders.length} Resultados
                 </p>
             </div>
 
@@ -124,8 +125,8 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
             xlinkTitle="Voltar"
           />
           <p className="text-sm text-[#3b4158a8] flex items-center">
-            <i className="pi pi-inbox mr-2"></i> {files.length} Resultado
-            {files.length === 1 ? "" : "s"}
+            <i className="pi pi-inbox mr-2"></i> {files.length+folders.length} Resultado
+            {(files.length+folders.length) === 1 ? "" : "s"}
           </p>
         </div>
 
