@@ -80,13 +80,6 @@ export const PdfViewer: React.FC = () => {
 
     const minimizeModal = () => setIsDocumentMinimized(true);
 
-    const reloadIframe = () => {
-        if (selectedDocument) {
-            setIsLoadingIframe(true);
-            setSelectedDocument({ ...selectedDocument });
-        }
-    };
-
     const handleDownload = () => {
         if (selectedDocument?.uri) {
             const downloadUrl = urlServer + selectedDocument.uri;
@@ -141,13 +134,6 @@ export const PdfViewer: React.FC = () => {
                                 className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
                             >
                                 <FaMinus className="text-gray-500 dark:text-gray-300 text-lg" />
-                            </button>
-                            <button
-                                title="Recarregar"
-                                onClick={reloadIframe}
-                                className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
-                            >
-                                <FaRedo className="text-gray-500 dark:text-gray-300 text-lg" />
                             </button>
                             <button
                                 title="Download"
@@ -217,13 +203,6 @@ export const PdfViewer: React.FC = () => {
                                 className="cursor-pointer p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
                             >
                                 <FaMinus className="text-gray-500 dark:text-gray-300 text-lg" />
-                            </div>
-                            <div
-                                title="Recarregar"
-                                onClick={reloadIframe}
-                                className="cursor-pointer p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
-                            >
-                                <FaRedo className="text-gray-500 dark:text-gray-300 text-lg" />
                             </div>
                             <div
                                 title="Download"
