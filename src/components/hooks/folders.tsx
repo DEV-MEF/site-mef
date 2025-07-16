@@ -14,13 +14,12 @@ const APIS = {
     linkToFiles: "publicacoes/legislacoes",
   },
 };
-export const useHookFolders = (api: "document" | "legislation") => {
+export const useHookFolders = (api: "document" | "legislation", superfolder: string | null = null) => {
   const router = useRouter();
   const [updateCount, setUpdateCount] = useState<boolean>(true);
   const [folders, setFolders] = useState<Folders[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // const[folderName]
   const [listCountByDocumentId, setListCountByDocumentId] =
     useState<CountFileInFolder>({});
 
@@ -28,10 +27,10 @@ export const useHookFolders = (api: "document" | "legislation") => {
 
   useEffect(() => {
     try {
-      AxiosHttpClient.get(`/${categoriesApi}/?populate=*`).then(
-        ({ data: { data } }) => {
-          setFolders(data);
-        }
+      AxiosHttpClient.get(`/${categoriesApi}/?filters[superfolder]${superfolder ? `[documentId][$eq]=${superfolder}` : `[$null]=true`}&populate=*`).then(
+          ({data: {data}}) => {
+            setFolders(data);
+          }
       );
     } catch (error) {
       setError(
@@ -40,7 +39,7 @@ export const useHookFolders = (api: "document" | "legislation") => {
     } finally {
       setLoading(false);
     }
-  }, [categoriesApi]);
+  }, [categoriesApi, superfolder]);
 
   useEffect(() => {
     if (updateCount && folders.length > 0) {

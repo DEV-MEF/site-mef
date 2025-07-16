@@ -10,6 +10,7 @@ import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
+import {useHookFolders} from "@/components/hooks/folders";
 type File = {
   url: string;
   name: string;
@@ -27,35 +28,24 @@ if (typeof window !== "undefined" && window.location?.origin) {
 }
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
-  // const { onClickFolder, folders, listCountByDocumentId } =
-  //   useHookFolders("legislation");
+  const {documentId} = React.use(params);
+  const { onClickFolder, folders, listCountByDocumentId } = useHookFolders("legislation", documentId);
 
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
   const [folderName, setFolderName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
   useEffect(() => {
-    (async () => {
-      try {
-        const { documentId } = await params;
-        AxiosHttpClient.get(
-          `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
-        ).then(({ data: { data } }) => {
-          setFiles(data);
-          if (data.length > 0) setFolderName(data[0].folder.name);
-        });
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Erro ao carregar os dados"
-        );
-      } finally {
+      AxiosHttpClient.get(
+        `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
+      ).then(({ data: { data } }) => {
+        setFiles(data);
+        if (data.length > 0) setFolderName(data[0].folder.name);
         setLoading(false);
-      }
-    })();
-  }, [params]);
+      });
+  }, [documentId]);
 
   if (files && files.length === 0 && !loading) {
     return (
@@ -128,34 +118,36 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         </div>
 
         {/* Grid of Folders */}
-        {/* <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {folders.map((folder, index) => {
-            const count = listCountByDocumentId[folder.documentId];
-            return (
-              <div
-                key={index}
-                onClick={() => {
-                  onClickFolder(folder);
-                }}
-                className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
-              >
-                <i
-                  className="pi pi-folder text-3xl text-[#5151F8] mb-3"
-                  style={{ display: "block" }}
-                ></i>
-                <p className="text-[#3B4158] text-sm font-semibold mb-2">
-                  {folder.name}
-                </p>
-                <div
-                  className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
-                  style={{ fontSize: "12px" }}
-                >
-                  {count} Documento{count === 1 ? "" : "s"}
-                </div>
-              </div>
-            );
-          })}
-        </div> */}
+          {folders.length > 0 &&
+              <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {folders.map((folder, index) => {
+                const count = listCountByDocumentId[folder.documentId];
+                return (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      onClickFolder(folder);
+                    }}
+                    className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
+                  >
+                    <i
+                      className="pi pi-folder text-3xl text-[#5151F8] mb-3"
+                      style={{ display: "block" }}
+                    ></i>
+                    <p className="text-[#3B4158] text-sm font-semibold mb-2">
+                      {folder.name}
+                    </p>
+                    <div
+                      className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
+                      style={{ fontSize: "12px" }}
+                    >
+                      {count} Documento{count === 1 ? "" : "s"}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          }
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-14">
           {files.map((doc, index) => (
             <div
