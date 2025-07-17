@@ -20,7 +20,7 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   const [updateCount, setUpdateCount] = useState<boolean>(true);
   const [folders, setFolders] = useState<Folders[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const {folderSelected, setFolderSelected} = usePdfViewer();
+  const {setFoldersSelected, foldersSelected} = usePdfViewer();
   const [error, setError] = useState<string | null>(null);
   const [listCountByDocumentId, setListCountByDocumentId] =
     useState<CountFileInFolder>({});
@@ -85,8 +85,8 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   }
 
   const onClickFolder = (folder: Folders) => {
-    console.log({folder});
-    setFolderSelected(folder);
+    foldersSelected.push(folder);
+    setFoldersSelected(foldersSelected);
     router.push(`/${linkToFiles}/${folder.documentId}`);
   };
 
@@ -100,6 +100,7 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     listCountByDocumentId,
     setListCountByDocumentId,
     onClickFolder,
-    folderSelected,
+    foldersSelected,
+    setFoldersSelected
   };
 };

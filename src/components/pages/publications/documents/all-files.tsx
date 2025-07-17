@@ -33,10 +33,10 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const [files, setFiles] = useState<Doc[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { openNewDocument } = usePdfViewer();
-  const {folders, folderSelected} = useHookFolders("document", documentId);
+  const {folders, foldersSelected, setFoldersSelected} = useHookFolders("document", documentId);
   const router = useRouter();
 
-  console.log({folderSelected})
+  console.log({foldersSelected})
 
   useEffect(() => {
       AxiosHttpClient.get(
@@ -58,13 +58,17 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Documentos"
           link_1="/publicacoes"
           link_2="/publicacoes/documentos"
-          text_3={folderSelected?.name || documentId}
+          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
           <div className="flex justify-between items-center my-12">
             <CornerUpLeft
                 className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
-                onClick={() => router.back()}
+                onClick={() => {
+                  foldersSelected.pop();
+                  setFoldersSelected(foldersSelected)
+                  router.back()
+                }}
                 xlinkTitle="Voltar"
             />
             <p className="text-sm text-[#3b4158a8] flex items-center">
@@ -89,7 +93,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Documentos"
           link_1="/publicacoes"
           link_2="/publicacoes/documentos"
-          text_3={folderSelected?.name || documentId}
+          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
         />
         <RepositoryDocumentsSkeleton />
       </section>
@@ -116,7 +120,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Documentos"
         link_1="/publicacoes"
         link_2="/publicacoes/documentos"
-        text_3={folderSelected?.name || documentId}
+        text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
@@ -124,7 +128,11 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           {/* <SectionTitle text="REPOSITÓRIO"/> */}
           <CornerUpLeft
             className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
-            onClick={() => router.back()}
+            onClick={() => {
+              foldersSelected.pop();
+              setFoldersSelected(foldersSelected)
+              router.back()
+            }}
             xlinkTitle="Voltar"
           />
           <p className="text-sm text-[#3b4158a8] flex items-center">

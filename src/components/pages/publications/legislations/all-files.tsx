@@ -34,7 +34,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const { openNewDocument } = usePdfViewer();
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
-  const {folders, folderSelected} = useHookFolders("legislation", documentId);
+  const {folders, foldersSelected, setFoldersSelected} = useHookFolders("legislation", documentId);
 
   useEffect(() => {
       AxiosHttpClient.get(
@@ -53,18 +53,22 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Legislações"
           link_1="/publicacoes"
           link_2="/publicacoes/legislacoes"
-          text_3={folderSelected?.name || documentId}
+          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
             {/* Title and Results */}
             <div className="flex justify-between items-center my-12">
                 <CornerUpLeft
                     className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
-                    onClick={() => router.back()}
+                    onClick={() => {
+                        foldersSelected.pop();
+                        setFoldersSelected(foldersSelected)
+                        router.back()
+                    }}
                     xlinkTitle="Voltar"
                 />
                 <p className="text-sm text-[#3b4158a8] flex items-center">
-                    <i className="pi pi-inbox mr-2"></i> {files.length+folders.length} Resultados
+                    <i className="pi pi-inbox mr-2"></i> {files.length+folders.length} Resultado
                 </p>
             </div>
 
@@ -85,7 +89,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Legislações"
           link_1="/publicacoes"
           link_2="/publicacoes/legislacoes"
-          text_3={folderSelected?.name || documentId}
+          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
         />
         <RepositoryDocumentsSkeleton />
       </section>
@@ -94,7 +98,6 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
 
   const handleDownload = (file: Documents) => {
     if (file?.uri) {
-      console.log({selectedDocument: urlServer + file.uri});
       const downloadUrl = urlServer + file.uri;
       const link = document.createElement('a');
       link.href = downloadUrl;
@@ -112,14 +115,18 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Legislações"
         link_1="/publicacoes"
         link_2="/publicacoes/legislacoes"
-        text_3={folderSelected?.name || documentId}
+        text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
         <div className="flex justify-between items-center my-12">
           <CornerUpLeft
             className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
-            onClick={() => router.back()}
+            onClick={() => {
+                foldersSelected.pop();
+                setFoldersSelected(foldersSelected)
+                router.back()
+            }}
             xlinkTitle="Voltar"
           />
           <p className="text-sm text-[#3b4158a8] flex items-center">
