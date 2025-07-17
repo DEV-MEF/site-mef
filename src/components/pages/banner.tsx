@@ -32,7 +32,7 @@ export default function Banner({
           </div>
         )}
         {text_1 && text_2 && text_3 && (
-          <div className="text-white text-md font-bold flex items-center justify-center gap-2">
+          <div className="w-full text-white text-md font-bold flex items-center justify-start gap-2">
             <Link className="hover:underline" href={link_1}>
               {text_1}
             </Link>
@@ -42,13 +42,13 @@ export default function Banner({
             </Link>
             <ChevronRight className="w-4 md:w-5" />
             {/* <small className="font-light w-[110px] md:w-auto line-clamp-1">{text_3}</small> */}
-            <small className="font-light max-w-[100px] md:max-w-[400px] line-clamp-1">
+            <small className="font-light line-clamp-1">
               {text_3}
             </small>
           </div>
         )}
         {text_1 && text_2 && text_3 && text_4 && (
-          <div className="text-white text-md font-bold flex items-center justify-center gap-2">
+          <div className="w-full text-white text-md font-bold flex items-center justify-start gap-2">
             <Link className="hover:underline" href={link_1}>
               {text_1}
             </Link>
@@ -62,7 +62,7 @@ export default function Banner({
             </Link>
             <ChevronRight className="w-4 md:w-5" />
             {/* <small className="font-light w-[110px] md:w-auto line-clamp-1">{text_3}</small> */}
-            <small className="font-light max-w-[100px] md:max-w-[400px] line-clamp-1">
+            <small className="font-light line-clamp-1">
               {text_4}
             </small>
           </div>

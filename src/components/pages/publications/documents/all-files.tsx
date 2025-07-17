@@ -130,7 +130,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         link_2="/publicacoes/documentos"
         text_3={foldersSelected[foldersSelected.length - 1]?.name || documentId}
       />
-      <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
+      <div className="w-full container px-4 max-w-[88rem] mx-auto py-10 -mt-8 md:mt-0">
         {/* Title and Results */}
         <div className="flex justify-between items-center my-12">
           {/* <SectionTitle text="REPOSITÓRIO"/> */}
@@ -156,10 +156,10 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           {files.map((doc, index) => (
             <div
               key={index}
-              className="flex flex-col lg:flex-row items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-[14px] efects hover:border-[#5151F8]"
+              className="flex items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-[14px] efects hover:border-[#5151F8]"
             >
               {/* Ícone do documento */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 md:space-x-4">
                 <div className="flex items-center justify-center w-auto h-auto rounded-lg bg-[#F8FAFC] p-2">
                   <FileText className=" text-[#5151F8] size-5" />
                 </div>
@@ -176,9 +176,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
               </div>
 
               {/* Ações */}
-              <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+              <div className="flex items-center space-x-2 md:space-x-4 mt-2 lg:mt-0 ml-2">
                 <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
+                  className="cursor-pointer flex items-center justify-center w-7 h-7 md:w-8 md:h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
                   title="Visualizar"
                   onClick={() => {
                     openNewDocument({
@@ -188,7 +188,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                     });
                   }}
                 >
-                  <Eye size={17} />
+                  <Eye className="size-4 md:size-5"  />
                 </button>
                 {/*<button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
@@ -197,7 +197,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                   <i className="pi pi-info-circle"></i>
                 </button>*/}
                 <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8  border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
+                  className="cursor-pointer flex items-center justify-center w-7 h-7 md:w-8 md:h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
                   title="Descarregar"
                   onClick={() => {
                     handleDownload({
@@ -206,7 +206,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                     });
                   }}
                 >
-                  <ArrowDownToLine size={16} />
+                  <ArrowDownToLine className="size-4 md:size-4" />
                 </button>
               </div>
             </div>
