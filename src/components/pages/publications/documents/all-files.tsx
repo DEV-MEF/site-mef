@@ -8,11 +8,8 @@ import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
 // import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
 import { ArrowDownToLine, CornerUpLeft, Eye, FileText } from "lucide-react";
-import { notFound, useRouter } from "next/navigation";
-import { CornerUpLeft } from "lucide-react";
 import {useRouter, useSearchParams} from "next/navigation";
 import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
-import { useHookFolders } from "@/components/hooks/folders";
 import {useHookFolders} from "@/components/hooks/folders";
 import PaginationComponent from "@/components/pages/news/pagination";
 
@@ -283,9 +280,7 @@ const FolderChildren = ({documentId}: {documentId: string}) => {
             </div>
           );
         })}
-      </div>
-    )
-  );
+      </div>;
 };
 
 export default AllFiles;
