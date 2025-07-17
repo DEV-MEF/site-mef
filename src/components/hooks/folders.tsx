@@ -5,12 +5,10 @@ import {usePdfViewer} from "@/components/contexts/pdf-viewer";
 
 const APIS = {
   document: {
-    filesApi: "docs",
     categoriesApi: "docs-categories",
     linkToFiles: "publicacoes/documentos",
   },
   legislation: {
-    filesApi: "legislations",
     categoriesApi: "legislation-folders",
     linkToFiles: "publicacoes/legislacoes",
   },
@@ -22,10 +20,8 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   const [loading, setLoading] = useState<boolean>(true);
   const {setFoldersSelected, foldersSelected} = usePdfViewer();
   const [error, setError] = useState<string | null>(null);
-  const [listCountByDocumentId, setListCountByDocumentId] =
-    useState<CountFileInFolder>({});
 
-  const { filesApi, categoriesApi, linkToFiles } = APIS[api];
+  const { categoriesApi, linkToFiles } = APIS[api];
 
   useEffect(() => {
     try {
@@ -42,46 +38,12 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
       setLoading(false);
     }
   }, [categoriesApi, superfolder]);
-
-  useEffect(() => {
-    if (updateCount && folders.length > 0) {
-      try {
-        folders.forEach(({ documentId, id }) => {
-          AxiosHttpClient.get(
-            `/${filesApi}?filters[folder][documentId][$eq]=${documentId}&pagination[limit]=1`
-          ).then(({ data: { meta } }) => {
-            listCountByDocumentId[documentId] = (listCountByDocumentId[documentId] || 0) + meta.pagination.total;
-            setListCountByDocumentId(listCountByDocumentId);
-            setFolders([...folders]);
-          });
-
-          AxiosHttpClient.get(
-              `/${categoriesApi}?filters[superfolder][$eq]=${id}&&pagination[limit]=1`
-          ).then(({ data: { meta } }) => {
-            listCountByDocumentId[documentId] =  (listCountByDocumentId[documentId] || 0) + meta.pagination.total;
-            setListCountByDocumentId(listCountByDocumentId);
-            setFolders([...folders]);
-          });
-        });
-        setUpdateCount(false);
-      } catch (error) {
-        setError(
-          error instanceof Error ? error.message : "Erro ao carregar documentos"
-        );
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [filesApi, folders, updateCount, listCountByDocumentId, categoriesApi]);
-
   interface Folders {
     documentId: string;
     name: string;
     id: string;
-  }
-
-  interface CountFileInFolder {
-    [k: string]: number;
+    docs: number
+    children: number
   }
 
   const onClickFolder = (folder: Folders) => {
@@ -97,8 +59,6 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     setUpdateCount,
     folders,
     setFolders,
-    listCountByDocumentId,
-    setListCountByDocumentId,
     onClickFolder,
     foldersSelected,
     setFoldersSelected

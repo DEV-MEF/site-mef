@@ -8,9 +8,10 @@ import {Documents, usePdfViewer} from "@/components/contexts/pdf-viewer";
 // import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
 import { CornerUpLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
 import {useHookFolders} from "@/components/hooks/folders";
+import PaginationComponent from "@/components/pages/news/pagination";
 type File = {
   url: string;
   name: string;
@@ -20,6 +21,9 @@ type Doc = {
   documentId: string;
   name: string;
   files: File;
+  folder: {
+    path: string;
+  }
 };
 
 let urlServer = "";
@@ -27,23 +31,45 @@ if (typeof window !== "undefined" && window.location?.origin) {
   urlServer = window.location.origin;
 }
 
+type Meta = {
+    pagination: {
+        page: number;
+        pageSize: number;
+        pageCount: number;
+        total: number;
+    };
+};
+
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const {documentId} = React.use(params);
 
   const [files, setFiles] = useState<Doc[]>([]);
+  const [meta, setMeta] = useState<Meta>();
   const { openNewDocument } = usePdfViewer();
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
   const {folders, foldersSelected, setFoldersSelected} = useHookFolders("legislation", documentId);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+      const page = Number(searchParams.get("page")) || 1;
+      const pageSize = 10;
+
       AxiosHttpClient.get(
-        `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
-      ).then(({ data: { data } }) => {
+        `/legislations?filters[folder][documentId][$eq]=${documentId}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`
+      ).then(({ data: { data, meta} }) => {
         setFiles(data);
         setLoading(false);
+        setMeta(meta);
       });
-  }, [documentId]);
+  }, [documentId, searchParams]);
+
+    useEffect(() => {
+        if(files.length && !foldersSelected.length){
+            const {folder: {path}} = files[0];
+            setFoldersSelected(path.trim().split("/").map((name) => ({name})));
+        }
+    }, [files, setFoldersSelected, foldersSelected]);
 
   if (files && (files.length+folders.length) === 0 && !loading) {
     return (
@@ -51,9 +77,16 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         <Banner
           text_1="Publicaçoes"
           text_2="Legislações"
-          link_1="/publicacoes"
+          link_1="#"
           link_2="/publicacoes/legislacoes"
-          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
+          items={foldersSelected.map((folder) => ({
+              name: folder.name || documentId,
+              link: "#"
+          }))}
+          onItemClick={(index) => {
+              const updated = foldersSelected.slice(0, index + 1);
+              setFoldersSelected(updated);
+          }}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
             {/* Title and Results */}
@@ -87,9 +120,16 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         <Banner
           text_1="Publicaçoes"
           text_2="Legislações"
-          link_1="/publicacoes"
+          link_1="#"
           link_2="/publicacoes/legislacoes"
-          text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
+          items={foldersSelected.map((folder) => ({
+              name: folder.name || documentId,
+              link: "#"
+          }))}
+          onItemClick={(index) => {
+              const updated = foldersSelected.slice(0, index + 1);
+              setFoldersSelected(updated);
+          }}
         />
         <RepositoryDocumentsSkeleton />
       </section>
@@ -109,13 +149,20 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   }
 
   return (
-    <section className=" w-full">
+    <section className="w-full">
       <Banner
         text_1="Publicaçoes"
         text_2="Legislações"
-        link_1="/publicacoes"
+        link_1="#"
         link_2="/publicacoes/legislacoes"
-        text_3={foldersSelected[foldersSelected.length -1]?.name || documentId}
+        items={foldersSelected.map((folder) => ({
+            name: folder.name || documentId,
+            link: "#"
+        }))}
+        onItemClick={(index) => {
+            const updated = foldersSelected.slice(0, index + 1);
+            setFoldersSelected(updated);
+        }}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
@@ -170,12 +217,6 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                 >
                   <i className="pi pi-eye"></i>
                 </button>
-                {/*<button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
-                  title="Informação"
-                >
-                  <i className="pi pi-info-circle"></i>
-                </button>*/}
                 <button
                   className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
                   title="Download"
@@ -193,19 +234,20 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           ))}
         </div>
       </div>
+        {meta && <PaginationComponent pagination={meta.pagination} />}
     </section>
   );
 };
 
 
 const FolderChildren = ({documentId}: {documentId: string}) => {
-    const {onClickFolder, folders, listCountByDocumentId} = useHookFolders("legislation", documentId);
+    const {onClickFolder, folders} = useHookFolders("legislation", documentId);
 
     {/* Grid of Folders */}
     return folders.length > 0 &&
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {folders.map((folder, index) => {
-                const count = listCountByDocumentId[folder.documentId];
+                const count = folder.docs+folder.children;
                 return (
                     <div
                         key={index}

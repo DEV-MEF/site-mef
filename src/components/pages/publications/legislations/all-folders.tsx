@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
@@ -8,8 +8,11 @@ import SectionTitle from "@/components/layout/title";
 import { DocumentsRepositorySkeleton } from "@/components/layout/skeleton/documents-repository";
 
 const AllFolders = () => {
-  const { onClickFolder, folders, listCountByDocumentId, loading } =
-    useHookFolders("legislation");
+  const { onClickFolder, folders, loading, setFoldersSelected } = useHookFolders("legislation");
+
+    useEffect(() => {
+        setFoldersSelected([])
+    }, [setFoldersSelected]);
 
   if (loading) {
     return <DocumentsRepositorySkeleton />;
@@ -42,7 +45,7 @@ const AllFolders = () => {
       {/* Grid of Folders */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
         {folders.map((folder, index) => {
-          const count = listCountByDocumentId[folder.documentId];
+          const count = folder.docs+folder.children;
           return (
             <div
               key={index}
