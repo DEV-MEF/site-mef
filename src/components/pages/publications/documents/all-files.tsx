@@ -30,12 +30,14 @@ if (typeof window !== "undefined" && window.location?.origin) {
 
 const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const {documentId} = React.use(params);
-  const [folderName, setFolderName] = useState<string>("");
   const [files, setFiles] = useState<Doc[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { openNewDocument } = usePdfViewer();
-  const {folders} = useHookFolders("document", documentId);
+  const {folders, folderSelected} = useHookFolders("document", documentId);
   const router = useRouter();
+
+  console.log({folderSelected})
+
   useEffect(() => {
       AxiosHttpClient.get(
         `/docs?filters[folder][documentId][$eq]=${documentId}&populate=*`
@@ -45,7 +47,6 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           return notFound();
         }
         setFiles(data);
-        setFolderName(data[0].folder.name);
       });
   }, [documentId]);
 
@@ -57,7 +58,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Documentos"
           link_1="/publicacoes"
           link_2="/publicacoes/documentos"
-          text_3={folderName || documentId}
+          text_3={folderSelected?.name || documentId}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
           <div className="flex justify-between items-center my-12">
@@ -88,7 +89,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Documentos"
           link_1="/publicacoes"
           link_2="/publicacoes/documentos"
-          text_3={folderName}
+          text_3={folderSelected?.name || documentId}
         />
         <RepositoryDocumentsSkeleton />
       </section>
@@ -115,7 +116,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Documentos"
         link_1="/publicacoes"
         link_2="/publicacoes/documentos"
-        text_3={folderName}
+        text_3={folderSelected?.name || documentId}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
@@ -227,7 +228,7 @@ const FolderChildren = ({documentId}: {documentId: string}) => {
                     className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                     style={{fontSize: "12px"}}
                 >
-                  {count} Documento{count === 1 ? "" : "s"}
+                  {count} Ite{count === 1 ? "m" : "ns"}
                 </div>
               </div>
           );

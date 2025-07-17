@@ -231,7 +231,7 @@ export const PdfViewer: React.FC = () => {
 
                         <iframe
                             id="pdfIframe"
-                            src={(isMobileDocListOpen) ? "https://docs.google.com/gview?url=" : "" + urlServer + selectedDocument?.uri + '&embedded=true#navpanes=0&scrollbar=0'}
+                            src={((isMobileDocListOpen) ? "https://docs.google.com/gview?url=" : "") + urlServer + selectedDocument?.uri + '&embedded=true#navpanes=0&scrollbar=0'}
                             className={`w-full flex-grow border-none ${isLoadingIframe ? 'invisible' : 'visible'}`}
                             title={selectedDocument?.name}
                             onLoad={() => setIsLoadingIframe(false)}

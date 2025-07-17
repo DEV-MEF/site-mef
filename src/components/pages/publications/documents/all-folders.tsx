@@ -61,7 +61,7 @@ const AllFolders = () => {
                 className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                 style={{ fontSize: "12px" }}
               >
-                {count ?? "--"} Documento{count === 1 ? "" : "s"}
+                {count ?? "--"} Ite{count === 1 ? "m" : "ns"}
               </div>
             </div>
           );

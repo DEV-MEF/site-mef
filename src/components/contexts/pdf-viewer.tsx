@@ -17,6 +17,7 @@ export const PdfViewerProvider = ({ children }: PdfViewerProvider) => {
         Documents | undefined
     >()
     const [isDocumentMinimized, setIsDocumentMinimized] = useState<boolean>(false)
+    const [folderSelected, setFolderSelected] = useState<Folders>({});
 
     const openNewDocument = (document: Documents) => {
         setIsDocumentModalOpen(true)
@@ -43,7 +44,9 @@ export const PdfViewerProvider = ({ children }: PdfViewerProvider) => {
                 selectedDocument,
                 setSelectedDocument,
                 isDocumentMinimized,
-                setIsDocumentMinimized
+                setIsDocumentMinimized,
+                folderSelected,
+                setFolderSelected
             }}
         >
             {children}
@@ -67,6 +70,8 @@ interface PdfViewerContext {
     setSelectedDocument: Dispatch<SetStateAction<Documents | undefined>>
     isDocumentMinimized: boolean
     setIsDocumentMinimized: Dispatch<SetStateAction<boolean>>
+    folderSelected: Folders
+    setFolderSelected: Dispatch<SetStateAction<Folders>>
 }
 
 export interface State {
@@ -82,4 +87,10 @@ export interface Documents {
     id?: number | string
     uri: string
     name: string
+}
+
+interface Folders {
+    documentId?: string;
+    name?: string;
+    id?: string;
 }

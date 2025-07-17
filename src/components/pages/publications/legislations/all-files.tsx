@@ -32,17 +32,15 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
 
   const [files, setFiles] = useState<Doc[]>([]);
   const { openNewDocument } = usePdfViewer();
-  const [folderName, setFolderName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
-  const {folders} = useHookFolders("legislation", documentId);
+  const {folders, folderSelected} = useHookFolders("legislation", documentId);
 
   useEffect(() => {
       AxiosHttpClient.get(
         `/legislations?filters[folder][documentId][$eq]=${documentId}&populate=*`
       ).then(({ data: { data } }) => {
         setFiles(data);
-        if (data.length > 0) setFolderName(data[0].folder.name);
         setLoading(false);
       });
   }, [documentId]);
@@ -55,7 +53,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Legislações"
           link_1="/publicacoes"
           link_2="/publicacoes/legislacoes"
-          text_3={folderName || documentId}
+          text_3={folderSelected?.name || documentId}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
             {/* Title and Results */}
@@ -87,7 +85,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           text_2="Legislações"
           link_1="/publicacoes"
           link_2="/publicacoes/legislacoes"
-          text_3={folderName}
+          text_3={folderSelected?.name || documentId}
         />
         <RepositoryDocumentsSkeleton />
       </section>
@@ -114,7 +112,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         text_2="Legislações"
         link_1="/publicacoes"
         link_2="/publicacoes/legislacoes"
-        text_3={folderName}
+        text_3={folderSelected?.name || documentId}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
         {/* Title and Results */}
@@ -220,7 +218,7 @@ const FolderChildren = ({documentId}: {documentId: string}) => {
                             className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                             style={{fontSize: "12px"}}
                         >
-                            {count} Documento{count === 1 ? "" : "s"}
+                            {count} Ite{count === 1 ? "m" : "ns"}
                         </div>
                     </div>
                 );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AxiosHttpClient } from "@/settings/axios";
-import {notFound, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
+import {usePdfViewer} from "@/components/contexts/pdf-viewer";
 
 const APIS = {
   document: {
@@ -19,6 +20,7 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
   const [updateCount, setUpdateCount] = useState<boolean>(true);
   const [folders, setFolders] = useState<Folders[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const {folderSelected, setFolderSelected} = usePdfViewer();
   const [error, setError] = useState<string | null>(null);
   const [listCountByDocumentId, setListCountByDocumentId] =
     useState<CountFileInFolder>({});
@@ -82,8 +84,10 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     [k: string]: number;
   }
 
-  const onClickFolder = ({ documentId }: Folders) => {
-      router.push(`/${linkToFiles}/${documentId}`);
+  const onClickFolder = (folder: Folders) => {
+    console.log({folder});
+    setFolderSelected(folder);
+    router.push(`/${linkToFiles}/${folder.documentId}`);
   };
 
   return {
@@ -96,5 +100,6 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     listCountByDocumentId,
     setListCountByDocumentId,
     onClickFolder,
+    folderSelected,
   };
 };
