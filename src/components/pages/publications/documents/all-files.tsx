@@ -5,7 +5,6 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
 import { AxiosHttpClient } from "@/settings/axios";
 import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
-// import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
 import { ArrowDownToLine, CornerUpLeft, Eye, FileText } from "lucide-react";
 import {useRouter, useSearchParams} from "next/navigation";
