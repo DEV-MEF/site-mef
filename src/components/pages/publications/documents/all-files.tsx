@@ -52,7 +52,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
 
   useEffect(() => {
       const page = Number(searchParams.get("page")) || 1;
-      const pageSize = 10;
+      const pageSize = 15;
 
       AxiosHttpClient.get(
         `/docs?filters[folder][documentId][$eq]=${documentId}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`
