@@ -103,6 +103,20 @@ export const PdfViewer: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        if (!selectedDocument?.uri) return;
+
+        const timeout = setTimeout(() => {
+            const iframe = document.getElementById("pdfIframe") as HTMLIFrameElement;
+            if (iframe && isLoadingIframe) {
+                // Força o recarregamento
+                iframe.src = iframe.src+"#";
+            }
+        }, 10000); // 10 segundos
+
+        return () => clearTimeout(timeout);
+    }, [selectedDocument, isLoadingIframe]);
+
     return (
         <div className="bg-white dark:bg-gray-900 transition-colors">
             <Modal
@@ -133,7 +147,7 @@ export const PdfViewer: React.FC = () => {
             >
                 <div className="flex flex-col w-full h-full lg:flex-row">
                     {/* Mobile: Header for document list and controls */}
-                    <div className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 lg:hidden border-b border-gray-300 dark:border-gray-700">
+                    <div className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 lg:hidden border-b border-gray-300 dark:border-gray-700 z-50">
                         <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center">
                             <FaFileAlt className="mr-2 text-blue-600 dark:text-blue-400" />
                             <span>Documentos</span>
@@ -214,7 +228,7 @@ export const PdfViewer: React.FC = () => {
                     {/* PDF Viewer Area */}
                     <div className="w-full relative lg:w-4/5 flex flex-col h-full">
                         {/* Desktop Controls (hidden on mobile) */}
-                        <div className="hidden lg:flex absolute top-4 right-4 flex-col space-y-2 z-10">
+                        <div className="hidden lg:flex absolute top-4 right-4 flex-col space-y-2 z-50">
                             <div
                                 title="Copiar Link"
                                 onClick={handleCopyLink}
