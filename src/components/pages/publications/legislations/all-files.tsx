@@ -7,7 +7,7 @@ import { AxiosHttpClient } from "@/settings/axios";
 import {Documents, usePdfViewer} from "@/components/contexts/pdf-viewer";
 // import { useHookFolders } from "@/components/hooks/folders";
 import Banner from "../../banner";
-import { CornerUpLeft } from "lucide-react";
+import {ArrowDownToLine, CornerUpLeft, Eye, FileText} from "lucide-react";
 import {useRouter, useSearchParams} from "next/navigation";
 import { RepositoryDocumentsSkeleton } from "@/components/layout/skeleton/documents-repositories";
 import {useHookFolders} from "@/components/hooks/folders";
@@ -196,55 +196,60 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
 
         <FolderChildren documentId={documentId} />
 
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-14">
-          {files.map((doc, index) => (
-            <div
-              key={index}
-              className="flex flex-col lg:flex-row items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-4 efects hover:border-[#5151F8]"
-            >
-              {/* Ícone do documento */}
-              <div className="flex items-center space-x-4 ">
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#F8FAFC]">
-                  <i className="pi pi-file text-[#5151F8] text-2xl"></i>
-                </div>
-                {/* Títulos */}
-                <div>
-                  <p className="text-[#1E293B]/90 font-semibold">{doc.name}</p>
-                  {/* <p className="text-[#64748B] text-sm">{doc.files.name}</p> */}
-                </div>
-              </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
+              {files.map((doc, index) => (
+                  <div
+                      key={index}
+                      className="flex items-start lg:items-center justify-between bg-white border border-[#E2E8F0] rounded-lg p-[14px] efects hover:border-[#5151F8]"
+                  >
+                      {/* Ícone do documento */}
+                      <div className="flex items-center space-x-2 md:space-x-4">
+                          <div className="flex items-center justify-center w-auto h-auto rounded-lg bg-[#F8FAFC] p-2">
+                              <FileText className=" text-[#5151F8] size-5" />
+                          </div>
+                          {/* Títulos */}
+                          <div>
+                              <p
+                                  className="text-[#1E293B]/90 font-semibold line-clamp-1 text-sm md:text-base"
+                                  title={doc.name}
+                              >
+                                  {doc.name}
+                              </p>
+                              {/* <p className="text-[#64748B] text-sm">{doc.files.name}</p> */}
+                          </div>
+                      </div>
 
-              {/* Ações */}
-              <div className="flex items-center space-x-4 mt-4 lg:mt-0">
-                <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
-                  title="Visualizar"
-                  onClick={() => {
-                    openNewDocument({
-                      name: doc.name,
-                      uri: doc.files.url,
-                      id: doc.documentId,
-                    });
-                  }}
-                >
-                  <i className="pi pi-eye"></i>
-                </button>
-                <button
-                  className="cursor-pointer flex items-center justify-center w-8 h-8 border border-[#E2E8F0] rounded-full text-[#64748B]"
-                  title="Download"
-                  onClick={() => {
-                    handleDownload({
-                      name: doc.name,
-                      uri: doc.files.url,
-                    })
-                  }}
-                >
-                  <i className="pi pi-download"></i>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+                      {/* Ações */}
+                      <div className="flex items-center space-x-2 md:space-x-4 mt-2 lg:mt-0 ml-2">
+                          <button
+                              className="cursor-pointer flex items-center justify-center w-7 h-7 md:w-8 md:h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
+                              title="Visualizar"
+                              onClick={() => {
+                                  openNewDocument({
+                                      name: doc.name,
+                                      uri: doc.files.url,
+                                      id: doc.documentId,
+                                  });
+                              }}
+                          >
+                              <Eye className="size-4 md:size-5"  />
+                          </button>
+                          <button
+                              className="cursor-pointer flex items-center justify-center w-7 h-7 md:w-8 md:h-8 border border-[#E2E8F0] hover:border-[#5151F8] rounded-full text-[#64748B] hover:text-[#5151F8]"
+                              title="Descarregar"
+                              onClick={() => {
+                                  handleDownload({
+                                      uri: doc.files.url,
+                                      name: doc.name,
+                                  });
+                              }}
+                          >
+                              <ArrowDownToLine className="size-4 md:size-4" />
+                          </button>
+                      </div>
+                  </div>
+              ))}
+          </div>
       </div>
         {meta && <PaginationComponent pagination={meta.pagination} />}
     </section>
