@@ -1,8 +1,8 @@
 "use client";
-import React from 'react';
+import React, {useEffect} from 'react';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const { Modal } = require('./modal');
-import { FaWindowClose, FaMinus, FaFileAlt, FaBars, FaDownload } from 'react-icons/fa';
+import {FaWindowClose, FaMinus, FaFileAlt, FaBars, FaDownload, FaLink} from 'react-icons/fa';
 import { Documents, usePdfViewer } from "@/components/contexts/pdf-viewer";
 
 let urlServer = "";
@@ -24,6 +24,8 @@ export const PdfViewer: React.FC = () => {
 
     const [isMobileDocListOpen, setIsMobileDocListOpen] = React.useState(false);
     const [isLoadingIframe, setIsLoadingIframe] = React.useState(true);
+    const [toast, setToast] = React.useState<{ message: string; type?: "success" | "error" | "info" } | null>(null);
+
 
     // Resetar o estado de loading sempre que o documento selecionado mudar
     React.useEffect(() => {
@@ -92,6 +94,15 @@ export const PdfViewer: React.FC = () => {
         }
     };
 
+    const handleCopyLink = () => {
+        if (selectedDocument?.uri) {
+            const linkToCopy = urlServer + selectedDocument.uri;
+            navigator.clipboard.writeText(linkToCopy)
+                .then(() => setToast({ message: "Link copiado com sucesso!", type: "success" }))
+                .catch(() => setToast({ message: "Erro ao copiar link", type: "error" }));
+        }
+    };
+
     return (
         <div className="bg-white dark:bg-gray-900 transition-colors">
             <Modal
@@ -128,6 +139,13 @@ export const PdfViewer: React.FC = () => {
                             <span>Documentos</span>
                         </h3>
                         <div className="flex space-x-3">
+                            <button
+                                title="Copiar Link"
+                                onClick={handleCopyLink}
+                                className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+                            >
+                                <FaLink className="text-green-600 dark:text-green-400 text-lg" />
+                            </button>
                             <button
                                 title="Minimizar"
                                 onClick={minimizeModal}
@@ -198,6 +216,13 @@ export const PdfViewer: React.FC = () => {
                         {/* Desktop Controls (hidden on mobile) */}
                         <div className="hidden lg:flex absolute top-4 right-4 flex-col space-y-2 z-10">
                             <div
+                                title="Copiar Link"
+                                onClick={handleCopyLink}
+                                className="cursor-pointer p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+                            >
+                                <FaLink className="text-green-600 dark:text-green-400 text-lg" />
+                            </div>
+                            <div
                                 title="Minimizar"
                                 onClick={minimizeModal}
                                 className="cursor-pointer p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
@@ -231,13 +256,20 @@ export const PdfViewer: React.FC = () => {
 
                         <iframe
                             id="pdfIframe"
-                            src={((isMobileDocListOpen) ? "https://docs.google.com/gview?url=" : "") + urlServer + selectedDocument?.uri + ((isMobileDocListOpen) ? '&embedded=true' : '#navpanes=0&scrollbar=0')}
+                            src={"https://docs.google.com/gview?url=" + urlServer + selectedDocument?.uri + '&embedded=true'}
                             className={`w-full flex-grow border-none ${isLoadingIframe ? 'invisible' : 'visible'}`}
                             title={selectedDocument?.name}
                             onLoad={() => setIsLoadingIframe(false)}
                         ></iframe>
                     </div>
                 </div>
+                {toast && (
+                    <ToastMessage
+                        message={toast.message}
+                        type={toast.type}
+                        onClose={() => setToast(null)}
+                    />
+                )}
             </Modal>
 
             {isDocumentMinimized && (
@@ -259,6 +291,31 @@ export const PdfViewer: React.FC = () => {
                     />
                 </div>
             )}
+        </div>
+    );
+};
+
+type ToastProps = {
+    message: string;
+    type?: "success" | "error" | "info";
+    onClose: () => void;
+};
+
+export const ToastMessage: React.FC<ToastProps> = ({ message, type = "info", onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(onClose, 3000); // Fecha após 3s
+        return () => clearTimeout(timer);
+    }, [onClose]);
+
+    const bgColors = {
+        success: "bg-green-500",
+        error: "bg-red-500",
+        info: "bg-blue-500"
+    };
+
+    return (
+        <div className={`fixed bottom-6 right-6 z-[3000] px-4 py-2 text-white rounded shadow-lg ${bgColors[type]}`}>
+            {message}
         </div>
     );
 };
