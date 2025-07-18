@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import {useRouter} from "next/navigation";
 import {usePdfViewer} from "@/components/contexts/pdf-viewer";
