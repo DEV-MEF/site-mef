@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primeicons/primeicons.css";
@@ -48,12 +48,12 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   const { openNewDocument } = usePdfViewer();
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
-  const {folders, foldersSelected, setFoldersSelected} = useHookFolders("legislation", documentId);
+  const {folders, foldersSelected, setFoldersSelected, goBack} = useHookFolders("legislation", documentId);
   const searchParams = useSearchParams();
 
   useEffect(() => {
       const page = Number(searchParams.get("page")) || 1;
-      const pageSize = 15;
+      const pageSize = 18;
 
       AxiosHttpClient.get(
         `/legislations?filters[folder][documentId][$eq]=${documentId}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`
@@ -65,11 +65,18 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
   }, [documentId, searchParams]);
 
     useEffect(() => {
-        if(files.length && !foldersSelected.length){
-            const {folder: {path}} = files[0];
-            setFoldersSelected(path.trim().split("/").map((name) => ({name})));
+        if(!foldersSelected.length){
+            AxiosHttpClient.get(
+                `/legislation-folders?filters[documentId][$eq]=${documentId}&populate=*`
+            ).then(({ data: { data } }) => {
+                const {path, path_contentid} = data[0];
+                setFoldersSelected(path.trim().split("/").map((name: string, index: number) => ({
+                    name,
+                    documentId: path_contentid[index],
+                })));
+            });
         }
-    }, [files, setFoldersSelected, foldersSelected]);
+    }, [setFoldersSelected, foldersSelected, documentId]);
 
   if (files && (files.length+folders.length) === 0 && !loading) {
     return (
@@ -86,6 +93,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           onItemClick={(index) => {
               const updated = foldersSelected.slice(0, index + 1);
               setFoldersSelected(updated);
+              setTimeout(() => {
+                  router.replace(`./${updated?.[updated.length - 1]?.documentId}`);
+              })
           }}
         />
         <div className="w-full container max-w-[88rem] mx-auto px-4 py-10">
@@ -94,9 +104,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
                 <CornerUpLeft
                     className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
                     onClick={() => {
-                        foldersSelected.pop();
-                        setFoldersSelected(foldersSelected)
-                        router.back()
+                        goBack()
                     }}
                     xlinkTitle="Voltar"
                 />
@@ -127,8 +135,11 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
               link: "#"
           }))}
           onItemClick={(index) => {
-              const updated = foldersSelected.slice(0, index + 1);
+              const updated = foldersSelected.slice(0, index + 2);
               setFoldersSelected(updated);
+              setTimeout(() => {
+                  router.replace(`./${updated?.[updated.length - 1]?.documentId}`);
+              })
           }}
         />
         <RepositoryDocumentsSkeleton />
@@ -162,6 +173,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
         onItemClick={(index) => {
             const updated = foldersSelected.slice(0, index + 1);
             setFoldersSelected(updated);
+            setTimeout(() => {
+                router.replace(`./${updated?.[updated.length - 1]?.documentId}`);
+            })
         }}
       />
       <div className="w-full container px-4 max-w-[88rem] mx-auto py-10">
@@ -170,9 +184,7 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
           <CornerUpLeft
             className="text-primary-blue/80 hover:text-primary-blue/90 cursor-pointer"
             onClick={() => {
-                foldersSelected.pop();
-                setFoldersSelected(foldersSelected)
-                router.back()
+                goBack()
             }}
             xlinkTitle="Voltar"
           />
@@ -252,7 +264,7 @@ const FolderChildren = ({documentId}: {documentId: string}) => {
                     <div
                         key={index}
                         onClick={() => {
-                            onClickFolder(folder);
+                            onClickFolder(folder, true);
                         }}
                         className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
                     >

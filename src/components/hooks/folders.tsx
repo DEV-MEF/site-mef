@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { AxiosHttpClient } from "@/settings/axios";
 import {useRouter} from "next/navigation";
 import {usePdfViewer} from "@/components/contexts/pdf-viewer";
@@ -46,9 +46,27 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     children: number
   }
 
-  const onClickFolder = (folder: Folders) => {
+  // Função para simular o router.back() (para teste)
+  const goBack = () => {
+    if (foldersSelected.length > 1) {
+      const newFoldersSelected = [...foldersSelected];
+      newFoldersSelected.pop();
+      setFoldersSelected(newFoldersSelected);
+      setTimeout(() => {
+        router.replace(`./${newFoldersSelected?.[newFoldersSelected.length - 1]?.documentId}`);
+      })
+    } else {
+      router.back();
+    }
+  };
+
+  const onClickFolder = (folder: Folders, isChildren: boolean) => {
     foldersSelected.push(folder);
     setFoldersSelected(foldersSelected);
+    if(isChildren){
+      router.replace(`/${linkToFiles}/${folder.documentId}`);
+      return
+    }
     router.push(`/${linkToFiles}/${folder.documentId}`);
   };
 
@@ -61,6 +79,7 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
     setFolders,
     onClickFolder,
     foldersSelected,
-    setFoldersSelected
+    setFoldersSelected,
+    goBack
   };
 };

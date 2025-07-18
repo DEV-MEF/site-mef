@@ -51,7 +51,7 @@ const AllFolders = () => {
               key={index}
               className="p-4 border border-[#D6DDEB] rounded-lg text-center flex flex-col items-center cursor-pointer efects hover:border-[#5151F8]"
               onClick={() => {
-                onClickFolder(folder);
+                onClickFolder(folder, false);
               }}
             >
               <i
