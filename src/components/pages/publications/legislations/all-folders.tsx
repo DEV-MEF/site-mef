@@ -45,7 +45,7 @@ const AllFolders = () => {
       {/* Grid of Folders */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
         {folders.map((folder, index) => {
-          const count = folder.docs+folder.children;
+          const count = folder.docs;
           return (
             <div
               key={index}

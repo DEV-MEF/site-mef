@@ -44,7 +44,7 @@ const AllFolders = () => {
       {/* Grid of Folders */}
       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
         {folders.map((folder, index) => {
-            const count = folder.docs+folder.children;
+            const count = folder.docs;
           return (
             <div
               key={index}
@@ -64,7 +64,7 @@ const AllFolders = () => {
                 className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                 style={{ fontSize: "12px" }}
               >
-                {count ?? "--"} Ite{count === 1 ? "m" : "ns"}
+                {count ?? "--"} Documento{count === 1 ? "" : "s"}
               </div>
             </div>
           );
