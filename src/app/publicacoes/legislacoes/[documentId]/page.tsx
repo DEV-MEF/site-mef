@@ -19,8 +19,8 @@ interface Folders {
     children: number
 }
 
-export async function generateMetadata({params}: {params: {documentId: string}}): Promise<Metadata> {
-    const {documentId} = params;
+export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
+    const {documentId} = await params;
     const {name: title, docs, children} = await new Promise<Folders>((resolve) => {
         AxiosHttpClient.get(`/legislation-folders?filters[documentId][$eq]=${documentId}`)
             .then(({ data: { data } }) => {
