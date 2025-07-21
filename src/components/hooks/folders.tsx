@@ -56,6 +56,12 @@ export const useHookFolders = (api: "document" | "legislation", superfolder: str
         router.replace(`./${newFoldersSelected?.[newFoldersSelected.length - 1]?.documentId}`);
       })
     } else {
+      const link = location.href.split("/");
+      if(link.length === 6) {
+        const page = link[4];
+        router.replace(`../${page}`);
+        return
+      }
       router.back();
     }
   };
