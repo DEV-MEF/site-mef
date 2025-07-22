@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
     const { documentId } = await params;
 
     const { name, docs, children } = await new Promise<Folders>((resolve) => {
-        AxiosHttpClient.get(`/docs-categories?filters[documentId][$eq]=${documentId}&populate=*`)
+        AxiosHttpClient.get(`/docs-categories?filters[documentId][$eq]=${documentId}`)
             .then(({ data: { data } }) => {
                 resolve(data[0]);
             });

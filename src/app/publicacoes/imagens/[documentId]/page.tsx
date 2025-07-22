@@ -1,5 +1,8 @@
 import "primeicons/primeicons.css";
 import ImagesGallery from "@/components/pages/publications/images/gallery";
+import {Metadata} from "next";
+import {AxiosHttpClient} from "@/settings/axios";
+import {imageURLServer} from "@/lib/utils";
 
 export default function Galeria({ params }: never) {
   return (
@@ -7,4 +10,38 @@ export default function Galeria({ params }: never) {
       <ImagesGallery params={params} />
     </main>
   );
+}
+
+type ImageType = {
+    name: string;
+    documentId: string;
+    url: string;
+    alternativeText: string;
+    formats: { [k in "large" | "medium" | "small"]: ImageType };
+};
+
+type TImageApi = {
+    documentId: string;
+    description: string;
+    medias: ImageType[];
+    cover: ImageType;
+};
+export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
+    const { documentId } = await params;
+    const query = `filters[documentId][$eq]=${documentId}&populate=*`;
+    const { data: { data: {0: video}}} : { data: {data: {0: TImageApi}}}= await AxiosHttpClient.get(`/towatches?${query}`);
+    const description = "";
+    const images = [`${imageURLServer}${video?.cover?.formats?.large?.url || video?.cover?.formats?.medium?.url || video?.cover?.url}`];
+    const title = `${video.description} - Galeria de Imagens - Ministério das Finanças`;
+    const type = "website";
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            images,
+            description,
+            type,
+        }
+    };
 }
