@@ -19,6 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
     const images = ["/images/logo_governo.png"];
     const title = "Galeria de Vídeos - Ministério das Finanças";
     const type = "website";
+    const url = location.href;
+    const siteName = "mef.gov.st";
     return {
         title,
         description,
@@ -27,6 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
             images,
             description,
             type,
+            url,
+            siteName,
         },
     };
 }

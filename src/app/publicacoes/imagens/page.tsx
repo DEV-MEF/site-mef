@@ -16,6 +16,8 @@ export default function Galeria() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+    const url = location.href;
+    const siteName = "mef.gov.st";
     const description = `Explora a galeria de imagens do Ministério das Finanças, com registos fotográficos de eventos oficiais, actividades institucionais, cerimónias e outras iniciativas relevantes.`;
     const images = ["/images/logo_governo.png"];
     const title = "Galeria de Imagens - Ministério das Finanças";
@@ -28,6 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
             images,
             description,
             type,
+            url,
+            siteName
         },
     };
 }

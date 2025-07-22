@@ -50,6 +50,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
   const images = [`${imageURLServer}${video?.cover?.formats?.large?.url || video?.cover?.formats?.medium?.url || video?.cover?.url}`];
   const title = `${video.description} - Galeria de Videos - Ministério das Finanças`;
   const type = "website";
+  const url = location.href;
+  const siteName = "mef.gov.st";
   return {
     title,
     description,
@@ -58,6 +60,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
       images,
       description,
       type,
+      url,
+      siteName,
     }
   };
 }

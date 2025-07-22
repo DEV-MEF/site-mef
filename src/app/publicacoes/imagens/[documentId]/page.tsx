@@ -27,6 +27,8 @@ type TImageApi = {
     cover: ImageType;
 };
 export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
+    const url = location.href;
+    const siteName = "mef.gov.st";
     const { documentId } = await params;
     const query = `filters[documentId][$eq]=${documentId}&populate=*`;
     const { data: { data: {0: image}}} : { data: {data: {0: TImageApi}}}= await AxiosHttpClient.get(`/galleries?${query}`);
@@ -41,7 +43,9 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
             title,
             images,
             description,
+            siteName,
             type,
+            url,
         }
     };
 }

@@ -20,6 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
     const title = `${notice.title} - Notícias - Ministério das Finanças`;
     const keywords = notice?.tags?.map((tag) => tag.name);
     const type = "website";
+    const url = location.href;
+    const siteName = "mef.gov.st";
     return {
         title,
         description,
@@ -29,6 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
             images,
             description,
             type,
+            url,
+            siteName,
         }
     };
 }

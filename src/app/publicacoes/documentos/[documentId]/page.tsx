@@ -21,7 +21,8 @@ interface Folders {
 
 export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
     const { documentId } = await params;
-
+    const url = location.href;
+    const siteName = "mef.gov.st";
     const { name, docs, children } = await new Promise<Folders>((resolve) => {
         AxiosHttpClient.get(`/docs-categories?filters[documentId][$eq]=${documentId}`)
             .then(({ data: { data } }) => {
@@ -43,6 +44,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
             description,
             type,
             images,
+            url,
+            siteName,
         },
     };
 }
