@@ -10,7 +10,7 @@ const APIS = {
   },
   legislation: {
     categoriesApi: "legislation-folders",
-    linkToFiles: "publicacoes/legislacoes",
+    linkToFiles: "publicacoes/legislacao",
   },
 };
 export const useHookFolders = (api: "document" | "legislation", superfolder: string | null = null) => {

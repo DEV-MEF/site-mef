@@ -20,17 +20,21 @@ interface Folders {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
-    const {documentId} = await params;
-    const {name: title, docs, children} = await new Promise<Folders>((resolve) => {
+    const { documentId } = await params;
+
+    const { name, docs, children } = await new Promise<Folders>((resolve) => {
         AxiosHttpClient.get(`/docs-categories?filters[documentId][$eq]=${documentId}&populate=*`)
             .then(({ data: { data } }) => {
                 resolve(data[0]);
             });
     });
 
-    const description =`A pasta contém ${docs} documento${docs !== 1 ? "s" : ""} e ${children} pasta${children !== 1 ? "s" : ""}`;
-    const images =  ["/images/logo_governo.png"];
-    const type = 'website';
+    const description = `Consulta a pasta "${name}", que contém ${docs} documento${docs !== 1 ? "s" : ""} e ${children} subpasta${children !== 1 ? "s" : ""}, com conteúdos institucionais do Ministério das Finanças organizados por tema.`;
+
+    const images = ["/images/logo_governo.png"];
+    const type = "website";
+    const title = `${name} - Documentos - Ministério das Finanças`;
+
     return {
         title,
         description,

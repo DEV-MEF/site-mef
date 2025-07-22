@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import Image from "next/image";
 import moment from "moment";
 import { imageURLServer, NewsItem } from "@/lib/utils";
@@ -26,7 +26,7 @@ type Meta = {
   };
 };
 
-export default function AllNews() {
+function AllNewsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [search, setSearch] = useState<string>("");
@@ -194,4 +194,8 @@ export default function AllNews() {
       )}
     </section>
   );
+}
+
+export default function  AllNews(){
+  return <Suspense><AllNewsPage /></Suspense>;
 }

@@ -115,7 +115,7 @@ export function Header() {
         { label: "iMAGENS", href: "/publicacoes/imagens" },
         { label: "VÍDEOS", href: "/publicacoes/videos" },
         { label: "DOCUMENTOS", href: "/publicacoes/documentos" },
-        { label: "LEGISLAÇÕES", href: "/publicacoes/legislacoes" },
+        { label: "LEGISLAÇÃO", href: "/publicacoes/legislacao" },
       ],
     },
     {

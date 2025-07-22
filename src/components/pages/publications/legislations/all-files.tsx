@@ -83,9 +83,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
       <section className="w-full">
         <Banner
           text_1="Publicaçoes"
-          text_2="Legislações"
+          text_2="Legislação"
           link_1="#"
-          link_2="/publicacoes/legislacoes"
+          link_2="/publicacoes/legislacao"
           items={foldersSelected.map((folder) => ({
               name: folder.name || documentId,
               link: "#"
@@ -127,9 +127,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
       <section className=" w-full">
         <Banner
           text_1="Publicaçoes"
-          text_2="Legislações"
+          text_2="Legislaçao"
           link_1="#"
-          link_2="/publicacoes/legislacoes"
+          link_2="/publicacoes/legislacao"
           items={foldersSelected.map((folder) => ({
               name: folder.name || documentId,
               link: "#"
@@ -163,9 +163,9 @@ const AllFiles = ({ params }: { params: Promise<{ documentId: string }> }) => {
     <section className="w-full">
       <Banner
         text_1="Publicaçoes"
-        text_2="Legislações"
+        text_2="Legislação"
         link_1="#"
-        link_2="/publicacoes/legislacoes"
+        link_2="/publicacoes/legislacao"
         items={foldersSelected.map((folder) => ({
             name: folder.name || documentId,
             link: "#"
@@ -284,7 +284,7 @@ const FolderChildren = ({documentId}: {documentId: string}) => {
                             className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                             style={{fontSize: "12px"}}
                         >
-                            {count} Documento{count === 1 ? "" : "s"}
+                            {count} instrumento{count !== 1 ? "s legais" : " legal"}
                         </div>
                     </div>
                 );

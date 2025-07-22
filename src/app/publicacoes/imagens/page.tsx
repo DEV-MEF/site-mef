@@ -2,6 +2,7 @@ import "primeicons/primeicons.css";
 
 import Banner from "@/components/pages/banner";
 import GaleriesSection from "@/components/pages/publications/images/images-galleries-section";
+import {Metadata} from "next";
 
 export default function Galeria() {
   return (
@@ -12,4 +13,21 @@ export default function Galeria() {
       </div>
     </main>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const description = `Explora a galeria de imagens do Ministério das Finanças, com registos fotográficos de eventos oficiais, actividades institucionais, cerimónias e outras iniciativas relevantes.`;
+    const images = ["/images/logo_governo.png"];
+    const title = "Galeria de Imagens - Ministério das Finanças";
+    const type = "website";
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            images,
+            description,
+            type,
+        },
+    };
 }

@@ -1,6 +1,7 @@
 import "primeicons/primeicons.css";
 import Banner from "@/components/pages/banner";
 import VideoGalleriesContainer from "@/components/pages/publications/videos/video-galleries-container";
+import {Metadata} from "next";
 
 export default function ministerio() {
   return (
@@ -11,4 +12,21 @@ export default function ministerio() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const description = `Assiste a vídeos institucionais, coberturas de eventos, entrevistas e campanhas informativas do Ministério das Finanças, disponíveis nesta galeria organizada.`;
+    const images = ["/images/logo_governo.png"];
+    const title = "Galeria de Vídeos - Ministério das Finanças";
+    const type = "website";
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            images,
+            description,
+            type,
+        },
+    };
 }

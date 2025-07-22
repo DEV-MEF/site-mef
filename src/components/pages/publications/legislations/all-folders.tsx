@@ -65,7 +65,7 @@ const AllFolders = () => {
                 className="py-1 text-[#5151F8] bg-[#F8F8FD] rounded text-xs px-3"
                 style={{ fontSize: "12px" }}
               >
-                {count ?? "--"} Lesgislaç{count === 1 ? "ão" : "ões"}
+                {count ?? "--"} instrumento{count !== 1 ? "s legais" : " legal"}
               </div>
             </div>
           );

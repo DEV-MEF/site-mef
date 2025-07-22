@@ -20,17 +20,21 @@ interface Folders {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
-    const {documentId} = await params;
-    const {name: title, docs, children} = await new Promise<Folders>((resolve) => {
+    const { documentId } = await params;
+
+    const { name, docs, children } = await new Promise<Folders>((resolve) => {
         AxiosHttpClient.get(`/legislation-folders?filters[documentId][$eq]=${documentId}`)
             .then(({ data: { data } }) => {
                 resolve(data[0]);
             });
     });
 
-    const description =`A pasta contém ${docs} legislaç${docs !== 1 ? "ão" : "ões"} e ${children} pasta${children !== 1 ? "s" : ""}`;
-    const images =  ["/images/logo_governo.png"];
-    const type = 'website';
+    const description = `Consulta a pasta "${name}", que contém ${docs} instrumento${docs !== 1 ? "s legais" : " legal"} e ${children} subpasta${children !== 1 ? "s" : ""}, reunindo legislação relevante do Ministério das Finanças organizada por tema.`;
+
+    const images = ["/images/logo_governo.png"];
+    const type = "website";
+    const title = `${name} - Legislação - Ministério das Finanças`;
+
     return {
         title,
         description,
@@ -42,3 +46,4 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
         },
     };
 }
+
