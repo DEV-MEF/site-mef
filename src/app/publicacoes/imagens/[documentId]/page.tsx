@@ -29,10 +29,10 @@ type TImageApi = {
 export async function generateMetadata({ params }: { params: Promise<{ documentId: string }> }): Promise<Metadata> {
     const { documentId } = await params;
     const query = `filters[documentId][$eq]=${documentId}&populate=*`;
-    const { data: { data: {0: video}}} : { data: {data: {0: TImageApi}}}= await AxiosHttpClient.get(`/towatches?${query}`);
+    const { data: { data: {0: image}}} : { data: {data: {0: TImageApi}}}= await AxiosHttpClient.get(`/galleries?${query}`);
     const description = "";
-    const images = [`${imageURLServer}${video?.cover?.formats?.large?.url || video?.cover?.formats?.medium?.url || video?.cover?.url}`];
-    const title = `${video.description} - Galeria de Imagens - Ministério das Finanças`;
+    const images = [`${imageURLServer}${image?.cover?.formats?.large?.url || image?.cover?.formats?.medium?.url || image?.cover?.url}`];
+    const title = `${image.description} - Galeria de Imagens - Ministério das Finanças`;
     const type = "website";
     return {
         title,
