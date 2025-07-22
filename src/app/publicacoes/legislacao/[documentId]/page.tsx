@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ documentI
     const type = "website";
     const title = `${name} - Legislação - Ministério das Finanças`;
 
-    const url = location.href;
     const siteName = "mef.gov.st";
+    const url = `https://${siteName}/legislacao/${documentId}`;
 
     return {
         title,
